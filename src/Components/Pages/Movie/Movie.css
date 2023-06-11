@@ -1,0 +1,13 @@
+.movie {
+    height: var(--height)
+}
+
+.movie-wrapper {
+    position: relative;
+    top: 300px;
+    display: flex;
+    justify-content: center;
+    
+
+    font-size: 40px;
+}

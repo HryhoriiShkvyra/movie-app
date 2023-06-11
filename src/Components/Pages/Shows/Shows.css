@@ -1,0 +1,13 @@
+.shows {
+    height: var(--height)
+}
+
+.shows-wrapper {
+    position: relative;
+    top: 300px;
+    display: flex;
+    justify-content: center;
+    
+
+    font-size: 40px;
+}

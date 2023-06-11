@@ -1,0 +1,124 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* -------------------------------//-------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+/* --lt-color-gray-200:  #f1f3f9;
+--lt-color-gray-300:  #dee3ed;
+--lt-color-gray-400:  #c2c9d6;
+--lt-color-gray-500:  #8f96a3;
+--lt-color-gray-600:  #5e636e;
+--lt-color-gray-700:  #2f3237;
+--lt-color-gray-800:  #1d1e20;
+--lt-color-gray-900:  #111213; */
+
+
+/* 
+--lt-color-blue-100: #f0f4fc;
+--lt-color-blue-200: #d9e2f9;
+--lt-color-blue-300: #a8c2ed;
+--lt-color-blue-400: #6c9ad6;
+--lt-color-blue-500: #4075a3;
+--lt-color-blue-600: #254c6e;
+--lt-color-blue-700: #122837;
+--lt-color-blue-800: #0b1a20;
+--lt-color-blue-900: #060b13; */
+
+:root {
+
+    --lt-color-gray-200:  #f1f3f9;
+    --lt-color-gray-300:  #dee3ed;
+    --lt-color-gray-400:  #c2c9d6;
+    --lt-color-gray-500:  #8f96a3;
+    --lt-color-gray-600:  #5e636e;
+    --lt-color-gray-700:  #2f3237;
+    --lt-color-gray-800:  #1d1e20;
+    --lt-color-gray-900:  #111213; 
+
+
+        
+    --lt-color-blue-100: #f0f4fc;
+    --lt-color-blue-200: #d9e2f9;
+    --lt-color-blue-300: #a8c2ed;
+    --lt-color-blue-400: #6c9ad6;
+    --lt-color-blue-500: #4075a3;
+    --lt-color-blue-600: #254c6e;
+    --lt-color-blue-700: #122837;
+    --lt-color-blue-800: #0b1a20;
+    --lt-color-blue-900: #060b13;
+
+    --lt-color-orange-100: #FAE2CB;
+    --lt-color-orange-200: #F9CC97;
+    --lt-color-orange-300: #F6B066;
+    --lt-color-orange-400: #F49335;
+    --lt-color-orange-500: #F17D0D;
+    --lt-color-orange-600: #C8620A;
+    --lt-color-orange-700: #944E07;
+    --lt-color-orange-800: #623804;
+    --lt-color-orange-900: #3D2102;
+
+    /* ------------------------------//------------------------------------ */
+
+    --height: 82.7vh;
+}
+
+body {
+    font-family: 'Courier Prime', monospace;
+    color: var(--lt-color-blue-700);
+
+    background-color: var(--lt-color-gray-300);
+}
+
+.container {
+    width: 1400px;
+    margin: 0 auto;
+}

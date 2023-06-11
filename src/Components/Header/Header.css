@@ -1,0 +1,51 @@
+.header {
+    background-color: var(--lt-color-gray-400);
+}
+
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-left, .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    padding: 20px 0;
+
+    font-size: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    
+}
+
+.header-col {
+    color: var(--lt-color-blue-700);
+    text-decoration: none;
+    transition: all ease .5s;
+
+}
+
+.header-col:hover:first-child {
+    color: var(--lt-color-blue-700);
+}
+
+.header-col-lang {
+    padding: 8px;
+    border: 1px solid;
+    font-size: 20px;
+
+    transition: all ease .5s;
+}
+
+
+
+.header-col:hover {
+    color: var(--lt-color-orange-600);
+    transition: all ease .5s;
+}
+
+

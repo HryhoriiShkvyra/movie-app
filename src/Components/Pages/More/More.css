@@ -1,0 +1,13 @@
+.more {
+    height: var(--height)
+}
+
+.more-wrapper {
+    position: relative;
+    top: 300px;
+    display: flex;
+    justify-content: center;
+    
+
+    font-size: 40px;
+}
