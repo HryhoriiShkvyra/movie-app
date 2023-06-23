@@ -1,0 +1,28 @@
+.searchItem {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.searchItem-poster {
+    width: 90px;
+}
+
+.searchItem-text {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 15px;
+}
+
+.searchItem-title {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.searchItem-release-date {
+    color: var(--lt-color-gray-500);
+}

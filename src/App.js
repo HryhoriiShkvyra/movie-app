@@ -12,6 +12,7 @@ import Movie from "./Components/Pages/Movie/Movie"
 import Shows from './Components/Pages/Shows/Shows';
 import People from './Components/Pages/People/People';
 import More from './Components/Pages/More/More';
+import SearchPage from "./Components/Search/SearchPage/SearchPage";
 
 
 
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/more",
         element: <More/>
+      },
+      {
+        path: "/search/:id",
+        element: <SearchPage/>
       }
     ])
   }

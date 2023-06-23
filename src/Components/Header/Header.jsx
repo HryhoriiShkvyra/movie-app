@@ -14,11 +14,10 @@ const Header = () => {
 
     function handleInputDown (event) {
         if (event.key === "Enter") {
-            fetch(process.env.REACT_APP_BASE_URL + `movie/157336?api_key=` + process.env.REACT_APP_TOKEN)
+            fetch(process.env.REACT_APP_BASE_URL + `movie/157336?api_key=` + process.env.REACT_APP_TOKEN_v3)
             .then(response => (response.json()))
             .then(data => console.log(data))
         }
-        // setInputValue(event.target.value)
     }
 
     return(

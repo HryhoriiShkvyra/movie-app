@@ -113,7 +113,7 @@ table {
 
 body {
     font-family: 'Courier Prime', monospace;
-    color: var(--lt-color-gray-200);
+    color: var(--lt-color-gray-900);
 
     background-color: var(--lt-color-gray-300);
 }
@@ -121,4 +121,17 @@ body {
 .container {
     width: 1300px;
     margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color:var(--lt-color-gray-300);
+    border-radius: 10px;
+    
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--lt-color-gray-500);
+    border-radius: 10px;
 }

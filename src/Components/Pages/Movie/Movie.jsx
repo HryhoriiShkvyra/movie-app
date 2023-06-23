@@ -5,26 +5,6 @@ export default function Movie() {
 
 const [trendingItems, setTrendingItems] = React.useState([])
 
-// React.useEffect(() => {
-//   const url = process.env.REACT_APP_BASE_URL + "trending/all/day?language=en-US";
-//   const options = {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: 'Bearer YourTokenHere'
-//     }
-//   };
-
-//   fetch(url, options)
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log(data);
-//       setTrendingItems(data.results);
-//     })
-//     .catch(err => console.error('Error:', err));
-// }, []);
-
-
 const fetch = require('node-fetch');
 
 const url = process.env.REACT_APP_BASE_URL + 'trending/all/day?language=en-US';

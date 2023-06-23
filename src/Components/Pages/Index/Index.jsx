@@ -1,41 +1,36 @@
 import React from "react";
 import "./Index.css";
+import { useNavigate } from "react-router-dom";
+import ScrollBar from "../../ScrollBar/ScrollBar";
+
 
 export default function Index() {
 
-const [trendingItems, setTrendingItems] = React.useState([])
 const [searchValue, setSearchValue] = React.useState([])
 
-const fetch = require('node-fetch');
-
-const url = process.env.REACT_APP_BASE_URL + 'trending/all/day?language=en-US';
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer ' + process.env.REACT_APP_TOKEN_v4
-  }
-};
-
-React.useEffect(() => {
-  fetch(url, options)
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-    setTrendingItems(data.results)
-  })
-  .catch(err => console.error('error:' + err));
-
-}, [])
 
 
+const navigate = useNavigate();
 function handleInputDown (event) {
   if (event.key === "Enter") {
-    // console.log(event.target.value)
       fetch("https://api.themoviedb.org/3/search/movie?query=" + searchValue + "&api_key=f164cbb41dc7c82862fe2a087be89aa9")
       .then(response => (response.json()))
-      .then(data => console.log(data))
+      .then(data => console.log(data))    
+      return(
+        navigate(`/search/:id?${searchValue}`)
+        )
   }
+}
+
+  console.log(searchValue)
+
+function handleClickSearch () {
+  fetch("https://api.themoviedb.org/3/search/movie?query=" + searchValue + "&api_key=f164cbb41dc7c82862fe2a087be89aa9")
+  .then(response => (response.json()))
+  .then(data => console.log(data))    
+  return(
+    navigate("/search-page/")
+  )
 }
 
   return (
@@ -53,12 +48,15 @@ function handleInputDown (event) {
                       onKeyDown={handleInputDown} 
                       className="searching" 
                       placeholder="Search for a movie, tv show, person ..."/>
-                    <button className="searching-btn">Search</button>
+                    <button 
+                      onClick={handleClickSearch}
+                      className="searching-btn"
+                    >
+                      Search
+                    </button>
                   </div>
                 </div>
-                <div className="trending bar">
-
-                </div>
+                <ScrollBar/>
                 <div className="latest-trailers"></div>
             </div> 
         </div>
