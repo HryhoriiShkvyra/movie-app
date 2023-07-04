@@ -13,7 +13,7 @@ import Shows from './Components/Pages/Shows/Shows';
 import People from './Components/Pages/People/People';
 import More from './Components/Pages/More/More';
 import SearchPage from "./Components/Search/SearchPage/SearchPage";
-
+import CardPage from "./Components/Card/CardPage/CardPage";
 
 
 function App() {
@@ -58,8 +58,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/search/:id",
-        element: <SearchPage/>
-      }
+        element: <SearchPage/>,
+      },
+      {
+        path: "/search/:id/item/:id",
+        element: <CardPage/>
+      },
     ])
   }
 ])

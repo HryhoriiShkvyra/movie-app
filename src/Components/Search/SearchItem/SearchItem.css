@@ -5,6 +5,8 @@
     border: 1px solid;
     border-radius: 10px;
     overflow: hidden;
+
+    cursor: pointer;
 }
 
 .searchItem-poster {
@@ -25,4 +27,19 @@
 
 .searchItem-release-date {
     color: var(--lt-color-gray-500);
+}
+
+
+.searchItem-null-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 135px;
+    background-color: var(--lt-color-gray-500);
+    color: var(--lt-color-gray-200);
+}
+
+.searchItem-null-icon {
+    transform: scale(2);
 }

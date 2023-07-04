@@ -1,0 +1,46 @@
+.cast-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cast {
+    display: flex;
+    flex-direction: row;
+}
+
+.cast-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 138px;
+    height: 243px;
+    margin: 10px 4px 10px 10px;
+    padding-bottom: 10px;
+
+    border: 1px solid var(--lt-color-gray-400);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cast-photo {
+    width: 138px;
+    height: 175px;
+}
+
+.cast-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 12px;
+
+}
+
+.cast-name {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.cast-character {
+    font-size: 13px;
+    font-style: italic;
+}

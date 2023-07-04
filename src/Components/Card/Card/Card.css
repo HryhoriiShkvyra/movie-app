@@ -1,0 +1,168 @@
+.card {
+    display: flex;
+    justify-content: center;
+    background-color: var(--lt-color-blue-700);
+    padding: 25px 0 25px 0;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-poster {
+    border-radius: 10px;
+}
+
+.card-header-poster {
+    padding: 70px 0 0 40px;
+    color: var(--lt-color-gray-200);
+}
+
+
+.card-title {
+    margin-bottom: 30px;
+}
+
+.card-title-cols {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.card-release-year {
+    color: var(--lt-color-gray-500);
+}
+
+
+.card-facts {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    font-size: 14px;
+}
+
+.card-genres {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.card-chart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-chart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+
+    background-color: var(--lt-color-gray-600);
+    border-radius: 50px;
+}
+
+.card-chart-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    border: 4px solid var(--lt-color-orange-500);
+    border-radius: 30px;
+}
+
+.card-chart-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: left;
+}
+
+.card-add-to-value{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+
+    transform: scale(0.75);
+    background-color: var(--lt-color-blue-600);
+
+    border-radius: 50px;
+}
+
+.card-trailer {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.card-header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.card-tagline {
+    color: var(--lt-color-gray-500);
+    font-style: italic;
+}
+
+.card-overview-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-overview-title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.card-overview-text {
+    font-size: 16px;
+}
+
+.card-no-image {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-profile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    font-weight: 700;
+}
+
+.card-character {
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+}

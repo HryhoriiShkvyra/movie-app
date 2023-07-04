@@ -1,10 +1,14 @@
 import React from "react";
 import "./SearchItem.css";
+import LandscapeIcon from '@mui/icons-material/Landscape';
+import { useNavigate } from "react-router-dom";
 
-export default function SearchItem({item}) {
+
+export default function SearchItem({item, id}) {
 
   const [data, setData] = React.useState([])
   const [isLoading, setIsLoading] = React.useState()
+  const navigate = useNavigate()
 
   const fetch = require('node-fetch');
 
@@ -22,21 +26,33 @@ export default function SearchItem({item}) {
     setIsLoading(true)
     const request = fetch(url, options)
     .then(res => res.json())
-    // .then(data => console.log(data))
     .then(data => setData(data))
     .catch(err => console.error('error:' + err));
     setIsLoading(false)
     
   }, [])
 
+  function redirectToItem () {
+    return(
+      navigate(`/search/${id}/item/${item.id}`)
+    )
+  }
+
   return (
-    <div className="searchItem">
+    <div className="searchItem" onClick={redirectToItem}>
       {
         isLoading === true ?
         null
         :
         <>
+        {
+          item.poster_path === null ?
+          <div className="searchItem-null-wrapper">
+            <LandscapeIcon className="searchItem-null-icon"/>
+          </div>
+          :
           <img className="searchItem-poster" src={process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path} alt=""/>
+        }
           <div className="searchItem-text">
             <div className="searchItem-text-main">
               <div className="searchItem-title">{item.title}</div>

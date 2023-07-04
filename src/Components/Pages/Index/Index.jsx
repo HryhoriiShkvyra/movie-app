@@ -17,7 +17,7 @@ function handleInputDown (event) {
       .then(response => (response.json()))
       .then(data => console.log(data))    
       return(
-        navigate(`/search/:id?${searchValue}`)
+        navigate(`/search/${searchValue}`)
         )
   }
 }
@@ -29,7 +29,7 @@ function handleClickSearch () {
   .then(response => (response.json()))
   .then(data => console.log(data))    
   return(
-    navigate("/search-page/")
+    navigate(`/search/${searchValue}`)
   )
 }
 

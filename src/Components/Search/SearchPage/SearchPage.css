@@ -88,3 +88,10 @@
     flex-direction: column;
     gap: 20px;
 }
+
+
+.search-pages {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
