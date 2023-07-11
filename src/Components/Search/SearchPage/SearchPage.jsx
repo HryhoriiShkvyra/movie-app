@@ -5,14 +5,13 @@ import { useParams } from "react-router-dom";
 import ErrorIcon from '@mui/icons-material/Error';
 export default function SearchPage() {
 
-    const {id} = useParams();
-    console.log(id)
+    const {searchValue} = useParams();
     const [searchBtn, setSearchBtn] = React.useState("movie")
     const [searchArray, setSearchArray] = React.useState([])
 
     const fetch = require('node-fetch');
 
-    const url = `https://api.themoviedb.org/3/search/movie?query=${id}&include_adult=false&language=en-US&page=1`;
+    const url = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`;
     const options = {
       method: 'GET',
       headers: {
@@ -91,7 +90,7 @@ export default function SearchPage() {
                 </div>
                 <div className="search-page-result">
                     {searchArray.map(item => 
-                        <SearchItem key={item.id} item={item} id={id}/>
+                        <SearchItem key={item.id} item={item} searchValue={searchValue}/>
                     )}
                 </div>
             </div>

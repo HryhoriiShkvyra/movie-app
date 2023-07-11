@@ -3,6 +3,7 @@ import "./CardPage.css";
 import Card from "../Card/Card";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CardCast from "../CardCast/CardCast";
+import CardAdditionalInfo from "../CardAdditionalInfo/CardAdditionalInfo";
 
 
 export default function CardPage() {
@@ -28,7 +29,20 @@ export default function CardPage() {
         </div>
         
         <Card/>
-        <CardCast/>
+        <div className="container">
+            <div className="about-card">
+                <div className="about-main">
+                    <CardCast/>
+                </div>
+                <div className="about-else">
+                    <CardAdditionalInfo/>
+                </div>
+            </div>
+        </div>
+       
+
+
+
     </div>
   )
 }

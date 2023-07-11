@@ -10,6 +10,7 @@
 }
 
 .searchItem-poster {
+    height: 135px;
     width: 90px;
 }
 
@@ -35,6 +36,7 @@
     justify-content: center;
     align-items: center;
     width: 90px;
+    min-width: 90px;
     height: 135px;
     background-color: var(--lt-color-gray-500);
     color: var(--lt-color-gray-200);

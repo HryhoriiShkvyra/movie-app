@@ -1,7 +1,8 @@
 import React from "react";
 import "./CardCast.css";
 import Loading from "../../Loading/Loading";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+// import CrewPage from "../../Crew/CastPage/CastPage";
 
 
 
@@ -10,8 +11,9 @@ export default function CardCast() {
     const [isLoading, setIsLoading] = React.useState();
     const [castValue, setCastValue] = React.useState([]);
 
-    const {id} = useParams()
-
+    const {searchValue} = useParams();
+    const {id} = useParams();
+    console.log(searchValue)
     const fetch = require('node-fetch');
 
     const url = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
@@ -29,8 +31,8 @@ export default function CardCast() {
             .then(res => res.json())
             .then(data => {
                 setCastValue(data.cast)
-                console.log(data.cast)
                 setIsLoading(prev => (!prev))
+                console.log(data.cast)
             })
             .catch(err => console.error('error:' + err));        
         }
@@ -39,7 +41,9 @@ export default function CardCast() {
     }, [])
     
   return (
-        <div className="container">
+        <div>
+
+        {/* <div className="container"> */}
             {
                 isLoading === true ?
 
@@ -51,7 +55,7 @@ export default function CardCast() {
                         {
                             castValue.map( item => (
                                 <div className="cast-item" key={item.id}>
-                                    <img className="cast-photo" src={process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path} alt=""/>
+                                    <img className="cast-photo" src={process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path} alt=""></img>
                                     <div className="cast-text">
                                         <div className="cast-name">{item.name}</div>
                                         <div className="cast-character">{item.character}</div>
@@ -76,6 +80,9 @@ export default function CardCast() {
                         </div>
                 </div>
             }
+
+            {/* <Link to="/search/:searchValue/:id/castAndCrew/" className="full-cast-and-crew-link">full cast & crew</Link> */}
+            <Link to={`/search/${searchValue}/${id}/cast`} className="full-cast-and-crew-link">full cast & crew</Link>
             
         </div>
   )

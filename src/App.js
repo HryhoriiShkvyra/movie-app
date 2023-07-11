@@ -14,6 +14,7 @@ import People from './Components/Pages/People/People';
 import More from './Components/Pages/More/More';
 import SearchPage from "./Components/Search/SearchPage/SearchPage";
 import CardPage from "./Components/Card/CardPage/CardPage";
+import CastPage from "./Components/Cast/CastPage/CastPage";
 
 
 function App() {
@@ -57,12 +58,16 @@ const router = createBrowserRouter([
         element: <More/>
       },
       {
-        path: "/search/:id",
+        path: "/search/:searchValue",
         element: <SearchPage/>,
       },
       {
-        path: "/search/:id/item/:id",
+        path: "/search/:searchValue/:id",
         element: <CardPage/>
+      },
+      {
+        path: "/search/:searchValue/:id/cast",
+        element:<CastPage/>
       },
     ])
   }

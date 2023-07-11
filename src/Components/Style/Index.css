@@ -49,8 +49,7 @@ table {
 
 /* -------------------------------//-------------------------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;400&display=swap');
 
 /* --lt-color-gray-200:  #f1f3f9;
 --lt-color-gray-300:  #dee3ed;
@@ -118,9 +117,25 @@ body {
     background-color: var(--lt-color-gray-300);
 }
 
+h4 {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+h6 {
+    font-size: 12px;
+    text-transform: capitalize;
+}
+
 .container {
-    width: 1300px;
+    width: 1335px;
     margin: 0 auto;
+}
+
+.plank {
+    height: 10px;
+    border-left: 1px solid var(--lt-color-orange-500);
 }
 
 ::-webkit-scrollbar {

@@ -38,8 +38,6 @@ export default function Card() {
             setCardGenres(data.genres)
             setCardReleaseDate(data.release_date)
             setCardOverview(data.overview)
-            console.log(data)
-            console.log(isLoading)
             setIsLoading(prev => (!prev))
         })
         .catch(err => console.error('error:' + err));
