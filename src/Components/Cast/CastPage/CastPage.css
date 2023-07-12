@@ -1,0 +1,126 @@
+.cast-page-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.cast-up {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    background-color: var(--lt-color-orange-300);
+}
+
+.cast-poster {
+    display: block;
+    width: 60px;
+    margin: 10px 0px 10px 300px;
+    border-radius: 5px;
+}
+
+.cast-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.cast-page-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+    padding-left: 15px;
+    font-size: 27px;
+}
+
+.cast-title {
+    font-weight: 800;
+}
+
+.cast-btn {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    color: var(--lt-color-gray-900);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+}
+
+.cast-btn-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.cast-btn-text {
+    height: 18px;
+}
+
+/* ----------------------------------------------------------------- */
+
+
+.cast-down {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+.cast-peoples-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cast-peoples {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cast-peoples-label {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.cast-people-photo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 66px;
+    height: 66px;
+
+    background-color: var(--lt-color-gray-400);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.cast-people-photo-icon {
+    transform: scale(1.5);
+}
+
+.cast-people {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+
+.cast-people-photo {
+    width: 66px;
+    margin-top: -10px;
+}
+
+/* .cast-people {} */
+
+.cast-people-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.cast-people-name {
+    font-weight: 700;
+}

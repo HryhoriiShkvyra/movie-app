@@ -2,6 +2,7 @@ import React from "react";
 import "./CardCast.css";
 import Loading from "../../Loading/Loading";
 import { Link, useParams } from "react-router-dom";
+import Navbar from "../../Navbar/Navbar";
 // import CrewPage from "../../Crew/CastPage/CastPage";
 
 
@@ -42,8 +43,7 @@ export default function CardCast() {
     
   return (
         <div>
-
-        {/* <div className="container"> */}
+            <Navbar/>
             {
                 isLoading === true ?
 
@@ -81,7 +81,6 @@ export default function CardCast() {
                 </div>
             }
 
-            {/* <Link to="/search/:searchValue/:id/castAndCrew/" className="full-cast-and-crew-link">full cast & crew</Link> */}
             <Link to={`/search/${searchValue}/${id}/cast`} className="full-cast-and-crew-link">full cast & crew</Link>
             
         </div>
