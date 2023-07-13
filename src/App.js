@@ -15,6 +15,7 @@ import More from './Components/Pages/More/More';
 import SearchPage from "./Components/Search/SearchPage/SearchPage";
 import CardPage from "./Components/Card/CardPage/CardPage";
 import CastPage from "./Components/Cast/CastPage/CastPage";
+import PersonPage from "./Components/Person/PersonPage/PersonPage";
 
 
 function App() {
@@ -67,7 +68,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/search/:searchValue/:id/cast",
-        element:<CastPage/>
+        element: <CastPage/>
+      },
+      {
+        path: "/person/:id",
+        element: <PersonPage/>
       },
     ])
   }

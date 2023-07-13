@@ -5,7 +5,8 @@ import Loading from "../../Loading/Loading";
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import Navbar from "../../Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import PersonPage from "../../Person/PersonPage/PersonPage";
 
 
 export default function CrewPage() {
@@ -16,7 +17,12 @@ export default function CrewPage() {
   const [releasedDate, setReleasedDate] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
   const {id} = useParams();
-  console.log(id)
+  const {searchValue} = useParams();
+  const navigate = useNavigate();
+
+  const [personId, setPersonId] = React.useState();
+  // console.log(id)
+  // console.log(searchValue)
 
   const fetch = require('node-fetch');
 
@@ -66,6 +72,14 @@ export default function CrewPage() {
   }, [])
 
 
+     
+  const handleRedirectToPerson = (e) => {
+    const itemId = e.target.getAttribute("value")
+    return(
+      navigate(<PersonPage/>)
+    )
+  }
+
 
   return (
     <>
@@ -74,49 +88,73 @@ export default function CrewPage() {
         {isLoading === true? 
         <div className="cast-page-wrapper">
 
-          <div className="cast-up">
-            <img src={process.env.REACT_APP_IMAGE_URL + "/w200" + itemValue.poster_path} alt="" className="cast-poster"/>
-            <div className="cast-page-text">
-              <div className="cast-title-wrapper">
-                <div className="cast-title">
-                  {itemValue.name? 
-                    itemValue.name
-                    :
-                    itemValue.title
-                  }
-                </div>
-                <div className="cast-year">
-                 ({releasedDate.slice(0,4)})
+          <div className="cast-up-wrapper">
+            <div className="container">
+              <div className="cast-up">
+                <img src={process.env.REACT_APP_IMAGE_URL + "/w200" + itemValue.poster_path} alt="" className="cast-poster"/>
+                <div className="cast-page-text">
+                  <div className="cast-title-wrapper">
+                    <div className="cast-title">
+                      {itemValue.name? 
+                        itemValue.name
+                        :
+                        itemValue.title
+                      }
+                    </div>
+                    <div className="cast-year">
+                    ({releasedDate.slice(0,4)})
+                    </div>
+                  </div>
+                  <Link className="cast-btn" to={`/search/${searchValue}/${id}`}>
+                      <div className="cast-btn-icon">
+                        <ArrowBackRoundedIcon/>
+                      </div>
+                      <div className="cast-btn-text">Back to main</div>
+                  </Link>
                 </div>
               </div>
-              <Link className="cast-btn">
-                  <div className="cast-btn-icon">
-                    <ArrowBackRoundedIcon/>
-                  </div>
-                  <div className="cast-btn-text">Back to main</div>
-              </Link>
             </div>
+           
           </div>
 
           <div className="container">
             <div className="cast-down">
 
               <div className="cast-peoples-wrapper">
-                <div className="cast-peoples-label">Cast {actors.length}</div>
+                <div className="cast-peoples-label">Cast </div>
+                {/* <div className="cast-peoples-label">Cast {actors.length}</div> */}
                 <div className="cast-peoples">
                 {actors.map( item => (
                   <div className="cast-people" key={item.id}>
                     { item.profile_path === null ? 
-                      <div className="cast-people-photo-wrapper">
+                      <Link 
+                        to={`/person/${item.id}-${item.name}`} 
+                        value={item.id} 
+                        onClick={handleRedirectToPerson}  
+                        className="cast-people-photo-wrapper-icon">
                         <PersonRoundedIcon className="cast-people-photo-icon"/>
-                      </div>
+                      </Link>
                       :
-                      <div className="cast-people-photo-wrapper">
-                        <img src={process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path} alt="" className="cast-people-photo"/>
-                      </div>
+                      <Link 
+                        to={`/person/${item.id}-${item.name}`} 
+                        value={item.id} 
+                        onClick={handleRedirectToPerson}  
+                        className="cast-people-photo-wrapper"
+                      >
+                        <img src={process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path} 
+                          className="cast-people-photo"
+                        />
+                      </Link>
                     }
                     <div className="cast-people-text">
-                      <div className="cast-people-name">{item.name}</div>
+                      <Link 
+                        to={`/person/${item.id}-${item.name}`} 
+                        value={item.id} 
+                        onClick={handleRedirectToPerson}  
+                        className="cast-people-name"
+                      >
+                        {item.name}
+                      </Link>
                       <div className="cast-people-character">{item.character}</div>
                     </div>
                   </div>
@@ -129,17 +167,26 @@ export default function CrewPage() {
               <div className="crew">
 
               <div className="cast-peoples-wrapper">
-                  <div className="cast-peoples-label">Crew {crew.length}</div>
+                  <div className="cast-peoples-label">Crew</div>
+                  {/* <div className="cast-peoples-label">Crew {crew.length}</div> */}
                   <div className="cast-peoples">
                   {crew.map( item => (
                     <div className="cast-people" key={item.id}>
                       { item.profile_path === null ? 
-                        <div className="cast-people-photo-wrapper">
-                          <PersonRoundedIcon className="cast-people-photo-icon"/>
+                        <div className="cast-people-photo-wrapper-icon">
+                          <PersonRoundedIcon className="cast-people-photo-icon"
+                            value={item.id} 
+                            onClick={handleRedirectToPerson} 
+                          />
                         </div>
                         :
                         <div className="cast-people-photo-wrapper">
-                          <img src={process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path} alt="" className="cast-people-photo"/>
+                          <img src={process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path} 
+                            alt="" 
+                            className="cast-people-photo"
+                            value={item.id} 
+                            onClick={handleRedirectToPerson} 
+                          />
                         </div>
                       }
                       <div className="cast-people-text">
@@ -158,7 +205,7 @@ export default function CrewPage() {
         :
         <Loading/>
           }
-    </div>
+      </div>
     </>
   )
 }
