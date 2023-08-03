@@ -1,13 +1,12 @@
 .card-page {
-
 }
 
 .about-card {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .about-else {
-    width: 100%;
-    padding-left: 30px;
+  width: 100%;
+  padding-left: 30px;
 }

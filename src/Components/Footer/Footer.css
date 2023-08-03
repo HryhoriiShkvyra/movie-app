@@ -1,12 +1,12 @@
 .footer {
-    position: relative;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  position: relative;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 
-    padding: 20px 0;
+  padding: 20px 0;
 
-    background-color: var(--lt-color-gray-400);
+  background-color: var(--lt-color-gray-400);
 }

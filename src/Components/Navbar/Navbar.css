@@ -1,29 +1,29 @@
-
 .nav-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-    gap: 20px;
-    padding: 10px 15px 0;
+  gap: 20px;
+  padding: 12px 15px 0;
+  border-bottom: 1px solid var(--lt-color-gray-500);
 }
 
 .nav-col {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
 .nav-col-active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
 
-    border-bottom: 4px solid var(--lt-color-gray-800);
+  border-bottom: 4px solid var(--lt-color-gray-800);
 }
 
 .nav-icon {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }

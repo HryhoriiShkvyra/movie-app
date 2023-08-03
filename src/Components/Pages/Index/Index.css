@@ -1,9 +1,9 @@
 .index {
-    /* height: var(--height) */
+  /* height: var(--height) */
 }
 
 .index-wrapper {
-    /* position: relative;
+  /* position: relative;
     top: 300px;
     display: flex;
     justify-content: center;
@@ -13,69 +13,65 @@
 }
 
 .index-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 105px;
-    /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 105px;
+  /* width: 100%; */
 }
 
 /* --------------------------------//----------------------------- */
 
 .searching-bar-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding: 75px 0 80px 40px;
-    background-color: var(--lt-color-blue-300);
-
+  display: flex;
+  flex-direction: column;
+  padding: 75px 0 80px 40px;
+  background-color: var(--lt-color-blue-300);
 }
 
 .searching-bar-title {
-    font-size: 40px;
-    font-weight: 700;
-    color: var(--lt-color-gray-200);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--lt-color-gray-200);
 }
 
 .searching-bar-sub-title {
-    font-size: 30px;
-    font-weight: 700;
+  font-size: 30px;
+  font-weight: 700;
 
-    margin-bottom: 70px;
-    color: var(--lt-color-gray-200);
-
+  margin-bottom: 70px;
+  color: var(--lt-color-gray-200);
 }
 
-
-.searching-bar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.searching-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .searching {
-    position: relative;
-    width: 1150px;
-    /* margin-top: 60px; */
-    padding: 10px 15px;
+  position: relative;
+  width: 1150px;
+  /* margin-top: 60px; */
+  padding: 10px 15px;
 
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 20px;
-    border: none;
-    outline: none;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 20px;
+  border: none;
+  outline: none;
 }
 
 .searching-btn {
-    position: relative;
-    right: 40px;
-    padding: 10px 15px;
+  position: relative;
+  right: 40px;
+  padding: 10px 15px;
 
-    font-family: 'Courier Prime', monospace;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--lt-color-gray-200);
-    background-color: var(--lt-color-orange-400);
+  font-family: "Courier Prime", monospace;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--lt-color-gray-200);
+  background-color: var(--lt-color-orange-400);
 
-    border-radius: 20px;
-    border: none;
-
+  border-radius: 20px;
+  border: none;
 }

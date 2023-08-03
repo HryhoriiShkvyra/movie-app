@@ -1,9 +1,9 @@
 .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    padding: 25px 0;
+  padding: 25px 0;
 
-    font-size: 25px;
+  font-size: 25px;
 }

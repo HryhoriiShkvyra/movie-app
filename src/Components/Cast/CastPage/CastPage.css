@@ -1,150 +1,145 @@
 .cast-page-wrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .cast-up-wrapper {
-    background-color: var(--lt-color-orange-300);
-
+  background-color: var(--lt-color-orange-300);
 }
 
 .cast-up {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-
+  position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 .cast-poster {
-    display: block;
-    width: 60px;
-    margin: 15px 0px 15px 0px;
-    border-radius: 5px;
+  display: block;
+  width: 60px;
+  margin: 15px 0px 15px 0px;
+  border-radius: 5px;
 }
 
 .cast-title-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .cast-page-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 10px;
-    padding-left: 15px;
-    font-size: 27px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  padding-left: 15px;
+  font-size: 27px;
 }
 
 .cast-title {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 .cast-btn {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 700;
-    border: none;
-    color: var(--lt-color-gray-900);
-    text-decoration: none;
-    background-color: rgba(255, 255, 255, 0);
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  color: var(--lt-color-gray-900);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
 }
 
 .cast-btn-icon {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
 .cast-btn-text {
-    height: 18px;
+  height: 18px;
 }
 
 /* ----------------------------------------------------------------- */
 
-
 .cast-down {
-    display: flex;
-    flex-direction: row;
-    margin: 40px 290px 30px 10px;
+  display: flex;
+  flex-direction: row;
+  margin: 40px 290px 30px 10px;
 }
 
 .cast-peoples-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .cast-peoples {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .cast-peoples-label {
-    font-size: 22px;
-    font-weight: 700;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .cast-people-photo-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 66px;
-    height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 66px;
+  height: 66px;
 
-    background-color: var(--lt-color-gray-400);
-    border-radius: 5px;
-    overflow: hidden;
+  background-color: var(--lt-color-gray-400);
+  border-radius: 5px;
+  overflow: hidden;
 
-    z-index: 10;
+  z-index: 10;
 }
 
 .cast-people-photo-wrapper-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 66px;
-    height: 66px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 66px;
+  height: 66px;
 
-    background-color: var(--lt-color-gray-400);
-    border: 1px solid var(--lt-color-gray-500);
-    border-radius: 5px;
-    overflow: hidden;
+  background-color: var(--lt-color-gray-400);
+  border: 1px solid var(--lt-color-gray-500);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
-
-
 .cast-people-photo-icon {
-    transform: scale(1.5);
-    color: var(--lt-color-gray-900);
+  transform: scale(1.5);
+  color: var(--lt-color-gray-900);
 }
 
 .cast-people {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 }
 
 .cast-people-photo {
-    width: 66px;
-    margin-top: -10px;
+  width: 66px;
+  margin-top: -10px;
 }
 
 /* .cast-people {} */
 
 .cast-people-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
 }
 
 .cast-people-name {
-    color: var(--lt-color-gray-900);
-    font-weight: 700;
-    text-decoration: none;
+  color: var(--lt-color-gray-900);
+  font-weight: 700;
+  text-decoration: none;
 }
