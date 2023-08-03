@@ -3,14 +3,30 @@ import "./SearchPage.css";
 import SearchItem from "../SearchItem/SearchItem";
 import { useParams } from "react-router-dom";
 import ErrorIcon from "@mui/icons-material/Error";
+import Loading from "../../Loading/Loading";
+import SearchTab from "../SearchTab/SearchTab";
 export default function SearchPage() {
   const { searchValue } = useParams();
+  const [movieArray, setMovieArray] = React.useState([]);
+  const [tvArray, setTvArray] = React.useState([]);
+  const [collectionArray, setCollectionArray] = React.useState([]);
+  const [companyArray, setCompanyArray] = React.useState([]);
+  const [keywordsArray, setKeywordsArray] = React.useState([]);
+  const [multiArray, setMultiArray] = React.useState([]);
+  const [peopleArray, setPeopleArray] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [searchBtn, setSearchBtn] = React.useState("movie");
-  const [searchArray, setSearchArray] = React.useState([]);
 
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`;
+  const movie_url = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US`;
+  const tv_url = `https://api.themoviedb.org/3/search/tv?query=${searchValue}&include_adult=false&language=en-US`;
+  const collection_url = `https://api.themoviedb.org/3/search/collection?query=${searchValue}&include_adult=false&language=en-US`;
+  const company_url = `https://api.themoviedb.org/3/search/company?query=${searchValue}&page=1`;
+  const keywords_url = `https://api.themoviedb.org/3/search/keyword?query=${searchValue}&page=1`;
+  const multi_url = `https://api.themoviedb.org/3/search/multi?query=${searchValue}&include_adult=false&language=en-US&page=1`;
+  const person_url = `https://api.themoviedb.org/3/search/person?query=${searchValue}&include_adult=false&language=en-US&page=1`;
+
   const options = {
     method: "GET",
     headers: {
@@ -20,229 +36,162 @@ export default function SearchPage() {
     },
   };
 
+  const FetchData = async () => {
+    const movie_promise = fetch(movie_url, options).then((response) =>
+      response.json()
+    );
+    const tv_promise = fetch(tv_url, options).then((response) =>
+      response.json()
+    );
+    const collection_promise = fetch(collection_url, options).then((response) =>
+      response.json()
+    );
+    const company_promise = fetch(company_url, options).then((response) =>
+      response.json()
+    );
+    const keywords_promise = fetch(keywords_url, options).then((response) =>
+      response.json()
+    );
+    const multi_promise = fetch(multi_url, options).then((response) =>
+      response.json()
+    );
+    const person_promise = fetch(person_url, options).then((response) =>
+      response.json()
+    );
+
+    const request = await Promise.all([
+      movie_promise,
+      tv_promise,
+      collection_promise,
+      company_promise,
+      keywords_promise,
+      multi_promise,
+      person_promise,
+    ]);
+
+    const data = request;
+
+    console.log(data);
+
+    setMovieArray(data[0].results);
+    setTvArray(data[1].results);
+    setCollectionArray(data[2].results);
+    setCompanyArray(data[3].results);
+    setKeywordsArray(data[4].results);
+    setMultiArray(data[5].results);
+    setPeopleArray(data[6].results);
+    setIsLoading((prev) => !prev);
+  };
+
   React.useEffect(() => {
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setSearchArray(data.results);
-        console.log(data.results);
-      })
-      .catch((err) => console.error("error:" + err));
+    FetchData();
   }, []);
+
+  const SearchLogic = () => {
+    if (searchBtn === "movie") {
+      return (
+        <div className="search-page-result">
+          {movieArray.map((item) => (
+            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+          ))}
+        </div>
+      );
+    } else if (searchBtn === "tv") {
+      return (
+        <div className="search-page-result">
+          {tvArray.map((item) => (
+            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+          ))}
+        </div>
+      );
+    } else if (searchBtn === "collection") {
+      return (
+        <div className="search-page-result">
+          {collectionArray.map((item) => (
+            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+          ))}
+        </div>
+      );
+    } else if (searchBtn === "companies") {
+      return (
+        <div className="search-page-result">
+          {companyArray.map((item) => (
+            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+          ))}
+        </div>
+      );
+    } else if (searchBtn === "keywords") {
+      return (
+        <div className="search-page-result">
+          {keywordsArray.map((item) => (
+            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+          ))}
+        </div>
+      );
+    } else if (searchBtn === "people") {
+      return (
+        <div className="search-page-result">
+          {peopleArray.map((item) => (
+            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+          ))}
+        </div>
+      );
+    }
+  };
+
+  const SearchPage = () => {
+    const movieArrayLength = movieArray.length;
+    const tvArrayLength = tvArray.length;
+    const collectionArrayLength = collectionArray.length;
+    const companyArrayLength = companyArray.length;
+    const keywordsArrayLength = keywordsArray.length;
+    const multiArrayLength = multiArray.length;
+    const peopleArrayLength = peopleArray.length;
+
+    console.log(companyArray);
+
+    const dataArray = [
+      movieArrayLength,
+      tvArrayLength,
+      collectionArrayLength,
+      companyArrayLength,
+      keywordsArrayLength,
+      multiArrayLength,
+      peopleArrayLength,
+    ];
+
+    return (
+      <div className="container">
+        <SearchTab
+          dataArray={dataArray}
+          searchBtn={searchBtn}
+          setSearchBtn={setSearchBtn}
+        />
+
+        <SearchLogic />
+      </div>
+    );
+  };
 
   return (
     <div className="search-page">
+      {isLoading === true ? <SearchPage /> : <Loading />}
       <div className="container">
         <div className="search-page-wrapper">
           <div className="search-page-results-bar">
-            <div className="search-page-results">
-              <div className="search-page-results-title">Search Results</div>
-              <div className="search-page-results-cols">
-                <div
-                  onClick={(e) => setSearchBtn("movie")}
-                  className={
-                    searchBtn === "movie"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "movie"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    Movies
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "movie"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-                <div
-                  onClick={(e) => setSearchBtn("show")}
-                  className={
-                    searchBtn === "show"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "show"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    TV Shows
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "show"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-                <div
-                  onClick={(e) => setSearchBtn("people")}
-                  className={
-                    searchBtn === "people"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "people"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    People
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "people"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-                <div
-                  onClick={(e) => setSearchBtn("collections")}
-                  className={
-                    searchBtn === "collections"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "collections"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    Collections
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "collections"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-                <div
-                  onClick={(e) => setSearchBtn("companies")}
-                  className={
-                    searchBtn === "companies"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "companies"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    Companies
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "companies"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-                <div
-                  onClick={(e) => setSearchBtn("keywords")}
-                  className={
-                    searchBtn === "keywords"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "keywords"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    Keywords
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "keywords"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-                <div
-                  onClick={(e) => setSearchBtn("networks")}
-                  className={
-                    searchBtn === "networks"
-                      ? "search-page-results-col-active"
-                      : "search-page-results-col"
-                  }
-                >
-                  <span
-                    className={
-                      searchBtn === "networks"
-                        ? "search-page-results-col-title-active"
-                        : "search-page-results-col-title"
-                    }
-                  >
-                    Networks
-                  </span>
-                  <span
-                    className={
-                      searchBtn === "networks"
-                        ? "search-page-results-col-result-active"
-                        : "search-page-results-col-result"
-                    }
-                  >
-                    0
-                  </span>
-                </div>
-              </div>
-            </div>
             <div className="search-page-tip">
               <ErrorIcon />
-              {/* <span className="search-page-tip-icon"></span> */}
               <span className="search-page-tip-text">
                 Tip: You can use the 'y:' filter to narrow your results by year.
                 Example: 'star wars y:1977'.
               </span>
             </div>
           </div>
-          <div className="search-page-result">
-            {searchArray.map((item) => (
+          {/* <div className="search-page-result">
+            {movieArray.map((item) => (
               <SearchItem key={item.id} item={item} searchValue={searchValue} />
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="search-pages">pages</div>
       </div>

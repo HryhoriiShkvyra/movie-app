@@ -39,14 +39,22 @@ export default function SearchItem({ item, searchValue }) {
       )}
       <div className="searchItem-text">
         <div className="searchItem-text-main">
-          <div className="searchItem-title">{item.title}</div>
+          {item.title ? (
+            <div className="searchItem-title">{item.title}</div>
+          ) : (
+            <div className="searchItem-title">{item.name}</div>
+          )}
           <div className="searchItem-release-date">{item.release_date}</div>
         </div>
-        {item.overview.length > 230 ? (
-          <div>{overview} ...</div>
-        ) : (
-          <div className="searchItem-overview">{item.overview}</div>
-        )}
+        {item.overview ? (
+          <>
+            {item.overview.length > 230 ? (
+              <div>{overview} ...</div>
+            ) : (
+              <div className="searchItem-overview">{item.overview}</div>
+            )}
+          </>
+        ) : null}
       </div>
     </div>
   );
