@@ -9,6 +9,13 @@
   cursor: pointer;
 }
 
+.searchItem-company {
+  width: 1000px;
+  padding: 10px 15px;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
 .searchItem-poster {
   height: 135px;
   width: 90px;
@@ -19,6 +26,16 @@
   flex-direction: column;
   gap: 15px;
   padding: 15px 15px;
+}
+
+.searchItem-text-collectionType {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: start;
+  padding: 15px 15px;
+
 }
 
 .searchItem-title {

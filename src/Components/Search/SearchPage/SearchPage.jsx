@@ -15,7 +15,7 @@ export default function SearchPage() {
   const [multiArray, setMultiArray] = React.useState([]);
   const [peopleArray, setPeopleArray] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [searchBtn, setSearchBtn] = React.useState("movie");
+  const [searchType, setSearchType] = React.useState("tv");
 
   const fetch = require("node-fetch");
 
@@ -24,8 +24,8 @@ export default function SearchPage() {
   const collection_url = `https://api.themoviedb.org/3/search/collection?query=${searchValue}&include_adult=false&language=en-US`;
   const company_url = `https://api.themoviedb.org/3/search/company?query=${searchValue}&page=1`;
   const keywords_url = `https://api.themoviedb.org/3/search/keyword?query=${searchValue}&page=1`;
-  const multi_url = `https://api.themoviedb.org/3/search/multi?query=${searchValue}&include_adult=false&language=en-US&page=1`;
-  const person_url = `https://api.themoviedb.org/3/search/person?query=${searchValue}&include_adult=false&language=en-US&page=1`;
+  const multi_url = `https://api.themoviedb.org/3/search/multi?query=${searchValue}&include_adult=false&language=en-US`;
+  const person_url = `https://api.themoviedb.org/3/search/person?query=${searchValue}&include_adult=false&language=en-US`;
 
   const options = {
     method: "GET",
@@ -71,7 +71,7 @@ export default function SearchPage() {
 
     const data = request;
 
-    console.log(data);
+    // console.log(data);
 
     setMovieArray(data[0].results);
     setTvArray(data[1].results);
@@ -88,56 +88,90 @@ export default function SearchPage() {
   }, []);
 
   const SearchLogic = () => {
-    if (searchBtn === "movie") {
+    if (searchType === "movie") {
       return (
         <div className="search-page-result">
           {movieArray.map((item) => (
-            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+            <SearchItem
+              key={item.id}
+              item={item}
+              searchValue={searchValue}
+              searchType={searchType}
+            />
           ))}
         </div>
       );
-    } else if (searchBtn === "tv") {
+    } else if (searchType === "tv") {
       return (
         <div className="search-page-result">
           {tvArray.map((item) => (
-            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+            <SearchItem
+              key={item.id}
+              item={item}
+              searchValue={searchValue}
+              searchType={searchType}
+            />
           ))}
         </div>
       );
-    } else if (searchBtn === "collection") {
+    } else if (searchType === "collection") {
       return (
         <div className="search-page-result">
           {collectionArray.map((item) => (
-            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+            <SearchItem
+              key={item.id}
+              item={item}
+              searchValue={searchValue}
+              searchType={searchType}
+            />
           ))}
         </div>
       );
-    } else if (searchBtn === "companies") {
+    } else if (searchType === "company") {
       return (
         <div className="search-page-result">
           {companyArray.map((item) => (
-            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+            <SearchItem
+              key={item.id}
+              item={item}
+              searchValue={searchValue}
+              searchType={searchType}
+            />
           ))}
         </div>
       );
-    } else if (searchBtn === "keywords") {
+    } else if (searchType === "keywords") {
       return (
         <div className="search-page-result">
           {keywordsArray.map((item) => (
-            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+            <SearchItem
+              key={item.id}
+              item={item}
+              searchValue={searchValue}
+              searchType={searchType}
+            />
           ))}
         </div>
       );
-    } else if (searchBtn === "people") {
+    } else if (searchType === "people") {
       return (
         <div className="search-page-result">
           {peopleArray.map((item) => (
-            <SearchItem key={item.id} item={item} searchValue={searchValue} />
+            <SearchItem
+              key={item.id}
+              item={item}
+              searchValue={searchValue}
+              searchType={searchType}
+            />
           ))}
         </div>
       );
     }
   };
+
+  // React.useEffect(() => {
+  //   console.log(searchType);
+  // }, [searchType]);
 
   const SearchPage = () => {
     const movieArrayLength = movieArray.length;
@@ -162,13 +196,15 @@ export default function SearchPage() {
 
     return (
       <div className="container">
-        <SearchTab
-          dataArray={dataArray}
-          searchBtn={searchBtn}
-          setSearchBtn={setSearchBtn}
-        />
+        <div className="search-page-wrapper">
+          <SearchTab
+            dataArray={dataArray}
+            searchType={searchType}
+            setSearchType={setSearchType}
+          />
 
-        <SearchLogic />
+          <SearchLogic />
+        </div>
       </div>
     );
   };
@@ -176,25 +212,7 @@ export default function SearchPage() {
   return (
     <div className="search-page">
       {isLoading === true ? <SearchPage /> : <Loading />}
-      <div className="container">
-        <div className="search-page-wrapper">
-          <div className="search-page-results-bar">
-            <div className="search-page-tip">
-              <ErrorIcon />
-              <span className="search-page-tip-text">
-                Tip: You can use the 'y:' filter to narrow your results by year.
-                Example: 'star wars y:1977'.
-              </span>
-            </div>
-          </div>
-          {/* <div className="search-page-result">
-            {movieArray.map((item) => (
-              <SearchItem key={item.id} item={item} searchValue={searchValue} />
-            ))}
-          </div> */}
-        </div>
-        <div className="search-pages">pages</div>
-      </div>
+      <div className="search-pages">pages</div>
     </div>
   );
 }

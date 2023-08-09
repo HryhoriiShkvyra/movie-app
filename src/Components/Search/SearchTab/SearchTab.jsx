@@ -1,22 +1,23 @@
 import React from "react";
+import ErrorIcon from "@mui/icons-material/Error";
 
-export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
+export default function SearchTab({ dataArray, searchType, setSearchType }) {
   return (
     <div className="search-tab">
       <div className="search-page-results">
         <div className="search-page-results-title">Search Results</div>
         <div className="search-page-results-cols">
           <div
-            onClick={(e) => setSearchBtn("tv")}
+            onClick={(e) => setSearchType("tv")}
             className={
-              searchBtn === "tv"
+              searchType === "tv"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchBtn === "tv"
+                searchType === "tv"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -25,7 +26,7 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
             <span
               className={
-                searchBtn === "tv"
+                searchType === "tv"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -34,16 +35,16 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchBtn("movie")}
+            onClick={(e) => setSearchType("movie")}
             className={
-              searchBtn === "movie"
+              searchType === "movie"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchBtn === "movie"
+                searchType === "movie"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -52,7 +53,7 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
             <span
               className={
-                searchBtn === "movie"
+                searchType === "movie"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -60,71 +61,18 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
               {dataArray[0]}
             </span>
           </div>
+
           <div
-            onClick={(e) => setSearchBtn("collection")}
+            onClick={(e) => setSearchType("people")}
             className={
-              searchBtn === "collection"
+              searchType === "people"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchBtn === "collection"
-                  ? "search-page-results-col-title-active"
-                  : "search-page-results-col-title"
-              }
-            >
-              Collections
-            </span>
-            <span
-              className={
-                searchBtn === "collection"
-                  ? "search-page-results-col-result-active"
-                  : "search-page-results-col-result"
-              }
-            >
-              {dataArray[2]}
-            </span>
-          </div>
-          <div
-            onClick={(e) => setSearchBtn("companies")}
-            className={
-              searchBtn === "companies"
-                ? "search-page-results-col-active"
-                : "search-page-results-col"
-            }
-          >
-            <span
-              className={
-                searchBtn === "companies"
-                  ? "search-page-results-col-title-active"
-                  : "search-page-results-col-title"
-              }
-            >
-              Companies
-            </span>
-            <span
-              className={
-                searchBtn === "companies"
-                  ? "search-page-results-col-result-active"
-                  : "search-page-results-col-result"
-              }
-            >
-              {dataArray[3]}
-            </span>
-          </div>
-          <div
-            onClick={(e) => setSearchBtn("people")}
-            className={
-              searchBtn === "people"
-                ? "search-page-results-col-active"
-                : "search-page-results-col"
-            }
-          >
-            <span
-              className={
-                searchBtn === "people"
+                searchType === "people"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -133,7 +81,7 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
             <span
               className={
-                searchBtn === "people"
+                searchType === "people"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -142,16 +90,44 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchBtn("keywords")}
+            onClick={(e) => setSearchType("collection")}
             className={
-              searchBtn === "keywords"
+              searchType === "collection"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchBtn === "keywords"
+                searchType === "collection"
+                  ? "search-page-results-col-title-active"
+                  : "search-page-results-col-title"
+              }
+            >
+              Collections
+            </span>
+            <span
+              className={
+                searchType === "collection"
+                  ? "search-page-results-col-result-active"
+                  : "search-page-results-col-result"
+              }
+            >
+              {dataArray[2]}
+            </span>
+          </div>
+
+          <div
+            onClick={(e) => setSearchType("keywords")}
+            className={
+              searchType === "keywords"
+                ? "search-page-results-col-active"
+                : "search-page-results-col"
+            }
+          >
+            <span
+              className={
+                searchType === "keywords"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -160,7 +136,7 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
             <span
               className={
-                searchBtn === "keywords"
+                searchType === "keywords"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -169,16 +145,43 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchBtn("networks")}
+            onClick={(e) => setSearchType("company")}
             className={
-              searchBtn === "networks"
+              searchType === "company"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchBtn === "networks"
+                searchType === "company"
+                  ? "search-page-results-col-title-active"
+                  : "search-page-results-col-title"
+              }
+            >
+              Companies
+            </span>
+            <span
+              className={
+                searchType === "company"
+                  ? "search-page-results-col-result-active"
+                  : "search-page-results-col-result"
+              }
+            >
+              {dataArray[3]}
+            </span>
+          </div>
+          <div
+            onClick={(e) => setSearchType("networks")}
+            className={
+              searchType === "networks"
+                ? "search-page-results-col-active"
+                : "search-page-results-col"
+            }
+          >
+            <span
+              className={
+                searchType === "networks"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -187,7 +190,7 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
             </span>
             <span
               className={
-                searchBtn === "networks"
+                searchType === "networks"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -197,9 +200,15 @@ export default function SearchTab({ dataArray, searchBtn, setSearchBtn }) {
           </div>
         </div>
       </div>
-      {/* {movieArray.map((item) => (
-          <div key={item.id}>{item.id}</div>
-        ))} */}
+      <div className="search-page-results-bar">
+        <div className="search-page-tip">
+          <ErrorIcon />
+          <span className="search-page-tip-text">
+            Tip: You can use the 'y:' filter to narrow your results by year.
+            Example: 'star wars y:1977'.
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,59 @@
+
+.cast-people-photo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 66px;
+    height: 66px;
+  
+    background-color: var(--lt-color-gray-400);
+    border-radius: 5px;
+    overflow: hidden;
+  
+    z-index: 10;
+  }
+  
+  .cast-people-photo-wrapper-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 66px;
+    height: 66px;
+  
+    background-color: var(--lt-color-gray-400);
+    border: 1px solid var(--lt-color-gray-500);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .cast-people-photo-icon {
+    transform: scale(1.5);
+    color: var(--lt-color-gray-900);
+  }
+  
+  .cast-people {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+  }
+  
+  .cast-people-photo {
+    width: 66px;
+    margin-top: -10px;
+  }
+  
+  /* .cast-people {} */
+  
+  .cast-people-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .cast-people-name {
+    color: var(--lt-color-gray-900);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
