@@ -1,23 +1,27 @@
 import React from "react";
 import ErrorIcon from "@mui/icons-material/Error";
 
-export default function SearchTab({ dataArray, searchType, setSearchType }) {
+export default function SearchTab({
+  dataArray,
+  stateTypeRequest,
+  setStateTypeRequest,
+}) {
   return (
     <div className="search-tab">
       <div className="search-page-results">
         <div className="search-page-results-title">Search Results</div>
         <div className="search-page-results-cols">
           <div
-            onClick={(e) => setSearchType("tv")}
+            onClick={(e) => setStateTypeRequest("tv")}
             className={
-              searchType === "tv"
+              stateTypeRequest === "tv"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "tv"
+                stateTypeRequest === "tv"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -26,7 +30,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "tv"
+                stateTypeRequest === "tv"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -35,16 +39,16 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchType("movie")}
+            onClick={(e) => setStateTypeRequest("movie")}
             className={
-              searchType === "movie"
+              stateTypeRequest === "movie"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "movie"
+                stateTypeRequest === "movie"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -53,7 +57,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "movie"
+                stateTypeRequest === "movie"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -63,16 +67,16 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
           </div>
 
           <div
-            onClick={(e) => setSearchType("people")}
+            onClick={(e) => setStateTypeRequest("people")}
             className={
-              searchType === "people"
+              stateTypeRequest === "people"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "people"
+                stateTypeRequest === "people"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -81,7 +85,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "people"
+                stateTypeRequest === "people"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -90,16 +94,16 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchType("collection")}
+            onClick={(e) => setStateTypeRequest("collection")}
             className={
-              searchType === "collection"
+              stateTypeRequest === "collection"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "collection"
+                stateTypeRequest === "collection"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -108,7 +112,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "collection"
+                stateTypeRequest === "collection"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -118,16 +122,16 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
           </div>
 
           <div
-            onClick={(e) => setSearchType("keywords")}
+            onClick={(e) => setStateTypeRequest("keywords")}
             className={
-              searchType === "keywords"
+              stateTypeRequest === "keywords"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "keywords"
+                stateTypeRequest === "keywords"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -136,7 +140,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "keywords"
+                stateTypeRequest === "keywords"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -145,16 +149,16 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchType("company")}
+            onClick={(e) => setStateTypeRequest("company")}
             className={
-              searchType === "company"
+              stateTypeRequest === "company"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "company"
+                stateTypeRequest === "company"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -163,7 +167,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "company"
+                stateTypeRequest === "company"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }
@@ -172,16 +176,16 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
           </div>
           <div
-            onClick={(e) => setSearchType("networks")}
+            onClick={(e) => setStateTypeRequest("networks")}
             className={
-              searchType === "networks"
+              stateTypeRequest === "networks"
                 ? "search-page-results-col-active"
                 : "search-page-results-col"
             }
           >
             <span
               className={
-                searchType === "networks"
+                stateTypeRequest === "networks"
                   ? "search-page-results-col-title-active"
                   : "search-page-results-col-title"
               }
@@ -190,7 +194,7 @@ export default function SearchTab({ dataArray, searchType, setSearchType }) {
             </span>
             <span
               className={
-                searchType === "networks"
+                stateTypeRequest === "networks"
                   ? "search-page-results-col-result-active"
                   : "search-page-results-col-result"
               }

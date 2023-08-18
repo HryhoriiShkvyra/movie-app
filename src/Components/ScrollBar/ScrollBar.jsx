@@ -5,7 +5,7 @@ import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
 import { useNavigate } from "react-router-dom";
 import Movie from "../Pages/Movie/Movie";
 
-export default function ScrollBar({ type, id }) {
+export default function ScrollBar({ pageType, id }) {
   const [trendingItems, setTrendingItems] = React.useState([]);
   const [activeBtn, setActiveBtn] = React.useState("day");
   const [isLoading, setIsLoading] = React.useState(null);
@@ -66,7 +66,7 @@ export default function ScrollBar({ type, id }) {
   };
 
   const ScrollBarWrapper = () => {
-    if (type === "index-page") {
+    if (pageType === "index-page") {
       return (
         <div className="container">
           <div className="scroll-text">
@@ -125,7 +125,7 @@ export default function ScrollBar({ type, id }) {
           </div>
         </div>
       );
-    } else if (type === "person") {
+    } else if (pageType === "person") {
       return (
         <div className="scroll-bar">
           <div className="scroll-text">

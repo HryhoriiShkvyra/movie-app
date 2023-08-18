@@ -53,8 +53,16 @@ function App() {
           path: "/search/:searchValue",
           element: <SearchPage />,
         },
+        // {
+        //   path: "/search/:searchValue/:id",
+        //   element: <CardPage />,
+        // },
         {
-          path: "/search/:searchValue/:id",
+          path: "/:requestType/:id",
+          element: <CardPage />,
+        },
+        {
+          path: "/people/:searchValue/:id",
           element: <CardPage />,
         },
         {

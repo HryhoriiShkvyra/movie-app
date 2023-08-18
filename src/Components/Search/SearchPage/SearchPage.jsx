@@ -15,7 +15,7 @@ export default function SearchPage() {
   const [multiArray, setMultiArray] = React.useState([]);
   const [peopleArray, setPeopleArray] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [searchType, setSearchType] = React.useState("tv");
+  const [stateTypeRequest, setStateTypeRequest] = React.useState("tv");
 
   const fetch = require("node-fetch");
 
@@ -88,7 +88,7 @@ export default function SearchPage() {
   }, []);
 
   const SearchLogic = () => {
-    if (searchType === "movie") {
+    if (stateTypeRequest === "movie") {
       return (
         <div className="search-page-result">
           {movieArray.map((item) => (
@@ -96,12 +96,12 @@ export default function SearchPage() {
               key={item.id}
               item={item}
               searchValue={searchValue}
-              searchType={searchType}
+              stateTypeRequest={stateTypeRequest}
             />
           ))}
         </div>
       );
-    } else if (searchType === "tv") {
+    } else if (stateTypeRequest === "tv") {
       return (
         <div className="search-page-result">
           {tvArray.map((item) => (
@@ -109,12 +109,12 @@ export default function SearchPage() {
               key={item.id}
               item={item}
               searchValue={searchValue}
-              searchType={searchType}
+              stateTypeRequest={stateTypeRequest}
             />
           ))}
         </div>
       );
-    } else if (searchType === "collection") {
+    } else if (stateTypeRequest === "collection") {
       return (
         <div className="search-page-result">
           {collectionArray.map((item) => (
@@ -122,12 +122,12 @@ export default function SearchPage() {
               key={item.id}
               item={item}
               searchValue={searchValue}
-              searchType={searchType}
+              stateTypeRequest={stateTypeRequest}
             />
           ))}
         </div>
       );
-    } else if (searchType === "company") {
+    } else if (stateTypeRequest === "company") {
       return (
         <div className="search-page-result">
           {companyArray.map((item) => (
@@ -135,12 +135,12 @@ export default function SearchPage() {
               key={item.id}
               item={item}
               searchValue={searchValue}
-              searchType={searchType}
+              stateTypeRequest={stateTypeRequest}
             />
           ))}
         </div>
       );
-    } else if (searchType === "keywords") {
+    } else if (stateTypeRequest === "keywords") {
       return (
         <div className="search-page-result">
           {keywordsArray.map((item) => (
@@ -148,12 +148,12 @@ export default function SearchPage() {
               key={item.id}
               item={item}
               searchValue={searchValue}
-              searchType={searchType}
+              stateTypeRequest={stateTypeRequest}
             />
           ))}
         </div>
       );
-    } else if (searchType === "people") {
+    } else if (stateTypeRequest === "people") {
       return (
         <div className="search-page-result">
           {peopleArray.map((item) => (
@@ -161,17 +161,19 @@ export default function SearchPage() {
               key={item.id}
               item={item}
               searchValue={searchValue}
-              searchType={searchType}
+              stateTypeRequest={stateTypeRequest}
             />
           ))}
         </div>
       );
+    } else if (stateTypeRequest === "networks") {
+      return <div>api doest not have end point for this request</div>;
     }
   };
 
   // React.useEffect(() => {
-  //   console.log(searchType);
-  // }, [searchType]);
+  //   console.log(stateTypeRequest);
+  // }, [stateTypeRequest]);
 
   const SearchPage = () => {
     const movieArrayLength = movieArray.length;
@@ -182,7 +184,7 @@ export default function SearchPage() {
     const multiArrayLength = multiArray.length;
     const peopleArrayLength = peopleArray.length;
 
-    console.log(companyArray);
+    // console.log(companyArray);
 
     const dataArray = [
       movieArrayLength,
@@ -199,8 +201,8 @@ export default function SearchPage() {
         <div className="search-page-wrapper">
           <SearchTab
             dataArray={dataArray}
-            searchType={searchType}
-            setSearchType={setSearchType}
+            stateTypeRequest={stateTypeRequest}
+            setStateTypeRequest={setStateTypeRequest}
           />
 
           <SearchLogic />

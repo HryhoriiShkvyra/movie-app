@@ -10,7 +10,7 @@ import PanoramaFishEyeRoundedIcon from "@mui/icons-material/PanoramaFishEyeRound
 export default function PersonPage() {
   const { id } = useParams();
   const onlyId = id.slice(0, 3);
-  const type = "person";
+  const pageType = "person";
 
   const [personValue, setPersonValue] = React.useState([]);
   const [personKnownAs, setPersonKnownAs] = React.useState([]);
@@ -208,7 +208,7 @@ export default function PersonPage() {
             <div className="pp-biography-title">biography</div>
             <div className="pp-biography-text">{personValue.biography}</div>
           </div>
-          <ScrollBar type={type} id={personValue.id} />
+          <ScrollBar pageType={pageType} id={personValue.id} />
           <div className="pp-section">
             <div className="pp-section-controls">
               <span className="pp-section-title">Acting</span>

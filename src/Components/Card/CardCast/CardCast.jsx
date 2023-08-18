@@ -10,10 +10,12 @@ export default function CardCast() {
 
   const { searchValue } = useParams();
   const { id } = useParams();
-  console.log(searchValue);
+  const { requestType } = useParams();
+  console.log(requestType);
+  // console.log(searchValue);
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
+  const url = `https://api.themoviedb.org/3/${requestType}/${id}/credits?language=en-US`;
   const options = {
     method: "GET",
     headers: {

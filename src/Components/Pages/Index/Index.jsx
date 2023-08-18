@@ -5,7 +5,7 @@ import ScrollBar from "../../ScrollBar/ScrollBar";
 
 export default function Index() {
   const [searchValue, setSearchValue] = React.useState([]);
-  const type = "index-page";
+  const pageType = "index-page";
 
   const navigate = useNavigate();
   function handleInputDown(event) {
@@ -13,7 +13,7 @@ export default function Index() {
       fetch(
         "https://api.themoviedb.org/3/search/movie?query=" +
           searchValue +
-          "&api_key=f164cbb41dc7c82862fe2a087be89aa9",
+          "&api_key=f164cbb41dc7c82862fe2a087be89aa9"
       )
         .then((response) => response.json())
         .then((data) => console.log(data));
@@ -27,7 +27,7 @@ export default function Index() {
     fetch(
       "https://api.themoviedb.org/3/search/movie?query=" +
         searchValue +
-        "&api_key=f164cbb41dc7c82862fe2a087be89aa9",
+        "&api_key=f164cbb41dc7c82862fe2a087be89aa9"
     )
       .then((response) => response.json())
       .then((data) => console.log(data));
@@ -55,7 +55,7 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <ScrollBar type={type} />
+          <ScrollBar pageType={pageType} />
           <div className="latest-trailers"></div>
         </div>
       </div>

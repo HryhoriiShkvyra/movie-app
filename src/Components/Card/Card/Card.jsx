@@ -14,11 +14,14 @@ export default function Card() {
   const [cardReleaseDate, setCardReleaseDate] = React.useState();
   const [cardOverview, setCardOverview] = React.useState();
   const { id } = useParams();
+  const { requestType } = useParams();
   const [isLoading, setIsLoading] = React.useState(false);
+
+  React.useEffect(() => console.log(requestType), []);
 
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+  const url = `https://api.themoviedb.org/3/${requestType}/${id}?language=en-US`;
   const options = {
     method: "GET",
     headers: {
@@ -60,9 +63,14 @@ export default function Card() {
             <div className="card-header-poster">
               <div className="card-title">
                 <div className="card-title-cols">
-                  <span className="card-name">{cardValue.title}</span>
+                  {cardValue.title ? (
+                    <span className="card-name">{cardValue.title}</span>
+                  ) : (
+                    <span className="card-name">{cardValue.name}</span>
+                  )}
+                  {/* <span className="card-name">{cardValue.name}</span> */}
                   <span className="card-release-year">
-                    ({cardReleaseDate.slice(0, 4)})
+                    {/* ({cardReleaseDate.slice(0, 4)}) */}
                   </span>
                 </div>
                 <div className="card-facts">
@@ -70,11 +78,11 @@ export default function Card() {
                     {cardValue.release_date}
                   </span>
                   <div className="card-genres">
-                    {cardGenres.map((item) => (
+                    {/* {cardGenres.map((item) => (
                       <span className="card-genre" key={item.id}>
                         {item.name}
                       </span>
-                    ))}
+                    ))} */}
                   </div>
                   <span className="card-runtime">{cardValue.runtime} min</span>
                 </div>
