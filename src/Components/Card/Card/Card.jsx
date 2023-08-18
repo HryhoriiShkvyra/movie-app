@@ -17,7 +17,7 @@ export default function Card() {
   const { requestType } = useParams();
   const [isLoading, setIsLoading] = React.useState(false);
 
-  React.useEffect(() => console.log(requestType), []);
+  // React.useEffect(() => console.log(requestType), []);
 
   const fetch = require("node-fetch");
 
@@ -40,6 +40,7 @@ export default function Card() {
           setCardGenres(data.genres);
           setCardReleaseDate(data.release_date);
           setCardOverview(data.overview);
+          console.log(data);
           setIsLoading((prev) => !prev);
         })
         .catch((err) => console.error("error:" + err));
@@ -70,21 +71,31 @@ export default function Card() {
                   )}
                   {/* <span className="card-name">{cardValue.name}</span> */}
                   <span className="card-release-year">
-                    {/* ({cardReleaseDate.slice(0, 4)}) */}
+                    {cardReleaseDate === undefined ? (
+                      <>({cardValue.first_air_date.slice(0, 4)})</>
+                    ) : (
+                      <>({cardReleaseDate.slice(0, 4)})</>
+                    )}
                   </span>
                 </div>
                 <div className="card-facts">
-                  <span className="card-release-date">
-                    {cardValue.release_date}
-                  </span>
+                  {cardValue.release_date === undefined ? null : (
+                    <span className="card-release-date">
+                      {cardValue.release_date}
+                    </span>
+                  )}
                   <div className="card-genres">
-                    {/* {cardGenres.map((item) => (
+                    {cardGenres.map((item) => (
                       <span className="card-genre" key={item.id}>
                         {item.name}
                       </span>
-                    ))} */}
+                    ))}
                   </div>
-                  <span className="card-runtime">{cardValue.runtime} min</span>
+                  {cardValue.runtime === undefined ? null : (
+                    <span className="card-runtime">
+                      {cardValue.runtime} min
+                    </span>
+                  )}
                 </div>
               </div>
 

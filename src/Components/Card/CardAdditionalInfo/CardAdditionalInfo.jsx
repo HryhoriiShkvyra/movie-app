@@ -8,17 +8,19 @@ import {
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 
-export default function CardAdditionalInfo() {
+export default function CardAdditionalInfo({ requestType }) {
   const { id } = useParams();
+  // const { requestType } = useParams();
 
   const [cardValue, setCardValue] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [keywords, setKeywords] = React.useState();
+  const [networksArray, setNetworksArray] = React.useState();
+  const [keywordsArray, setKeywordsArray] = React.useState();
 
   const fetch = require("node-fetch");
 
-  const url_1 = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
-  const url_2 = `https://api.themoviedb.org/3/movie/${id}/keywords`;
+  const url_0 = `https://api.themoviedb.org/3/${requestType}/${id}?language=en-US`;
+  const url_1 = `https://api.themoviedb.org/3/${requestType}/${id}/keywords`;
   const options = {
     method: "GET",
     headers: {
@@ -28,31 +30,83 @@ export default function CardAdditionalInfo() {
     },
   };
 
+  // React.useEffect(() => {
+  //   function request_1() {
+  //     fetch(url_1, options)
+  //       .then((res) => res.json())
+  //       .then((data) => setCardValue(data))
+  //       .catch((err) => console.error("error" + err));
+  //   }
+
+  //   function request_2() {
+  //     fetch(url_2, options)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setKeywords(data.keywords);
+  //         setIsLoading((prev) => !prev);
+  //       })
+  //       .catch((err) => console.error("error" + err));
+  //   }
+
+  // request_1();
+  // request_2();
+
+  // console.log(cardValue);
+  // }, []);
+
+  const FetchData = async () => {
+    try {
+      const promise_0 = fetch(url_0, options).then((response) =>
+        response.json()
+      );
+      const promise_1 = fetch(url_1, options).then((response) =>
+        response.json()
+      );
+
+      const request = await Promise.all([promise_0, promise_1]);
+
+      const data = request;
+
+      setCardValue(data[0]);
+      setNetworksArray(data[0].networks);
+      setKeywordsArray(data[1].results);
+
+      console.log(data[1].results);
+      console.log(requestType);
+      setIsLoading(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const NetworksLength = () => {
+    if (networksArray.length > 1) {
+      return <div>1</div>;
+    } else {
+      return (
+        <div className="card-additional-info-col">
+          <h4>networks</h4>
+          {networksArray.map((item) => (
+            <img
+              key={item.id}
+              src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
+              alt=""
+            />
+          ))}
+        </div>
+      );
+    }
+  };
+
   React.useEffect(() => {
-    function request_1() {
-      fetch(url_1, options)
-        .then((res) => res.json())
-        .then((data) => setCardValue(data))
-        .catch((err) => console.error("error" + err));
-    }
-
-    function request_2() {
-      fetch(url_2, options)
-        .then((res) => res.json())
-        .then((data) => {
-          setKeywords(data.keywords);
-          setIsLoading((prev) => !prev);
-        })
-        .catch((err) => console.error("error" + err));
-    }
-
-    request_1();
-    request_2();
+    FetchData();
   }, []);
 
   return (
     <>
-      {isLoading === true ? (
+      {isLoading === false ? (
+        <Loading />
+      ) : (
         <div className="card-additional-info">
           <div className="card-additional-info-cols">
             <div className="card-additional-info-social">
@@ -63,36 +117,66 @@ export default function CardAdditionalInfo() {
               <WebAssetRounded />
             </div>
           </div>
-          <div className="card-additional-info-cols">
-            <div className="card-additional-info-col">
-              <h4>status</h4>
-              <div className="card-additional-info-second">
-                {cardValue.status}
+          {requestType === "movie" ? (
+            <div className="card-additional-info-cols">
+              <div className="card-additional-info-col">
+                <h4>status</h4>
+                <div className="card-additional-info-second">
+                  {cardValue.status}
+                </div>
+              </div>
+              <div className="card-additional-info-col">
+                <h4>original language</h4>
+                <div className="card-additional-info-second">
+                  {cardValue.original_language}
+                </div>
+              </div>
+              <div className="card-additional-info-col">
+                <h4>budget</h4>
+                <div className="card-additional-info-second">
+                  ${cardValue.budget}.00
+                </div>
+              </div>
+              <div className="card-additional-info-col">
+                <h4>revenue</h4>
+                <div className="card-additional-info-second">
+                  ${cardValue.revenue}.00
+                </div>
               </div>
             </div>
-            <div className="card-additional-info-col">
-              <h4>original language</h4>
-              <div className="card-additional-info-second">
-                {cardValue.original_language}
+          ) : (
+            <div className="card-additional-info-cols">
+              <div className="card-additional-info-col">
+                <h4>facts</h4>
+                <div className="card-additional-info-second">
+                  {/* {cardValue.status} */}
+                </div>
+              </div>
+              <div className="card-additional-info-col">
+                <h4>original name</h4>
+                <div className="card-additional-info-second">
+                  {cardValue.original_name}
+                </div>
+              </div>
+              <NetworksLength />
+              <div className="card-additional-info-col">
+                <h4>type</h4>
+                <div className="card-additional-info-second">
+                  {cardValue.type}
+                </div>
+              </div>
+              <div className="card-additional-info-col">
+                <h4>original language</h4>
+                <div className="card-additional-info-second">
+                  {cardValue.original_language}
+                </div>
               </div>
             </div>
-            <div className="card-additional-info-col">
-              <h4>budget</h4>
-              <div className="card-additional-info-second">
-                ${cardValue.budget}.00
-              </div>
-            </div>
-            <div className="card-additional-info-col">
-              <h4>revenue</h4>
-              <div className="card-additional-info-second">
-                ${cardValue.revenue}.00
-              </div>
-            </div>
-          </div>
+          )}
           <div className="card-additional-info-col">
             <h4>keywords</h4>
             <div className="card-additional-info-words">
-              {keywords.map((item) => (
+              {keywordsArray.map((item) => (
                 <div className="card-additional-info-word" key={item.id}>
                   {item.name}
                 </div>
@@ -100,8 +184,6 @@ export default function CardAdditionalInfo() {
             </div>
           </div>
         </div>
-      ) : (
-        <Loading />
       )}
 
       <div className="content-score-wrapper">

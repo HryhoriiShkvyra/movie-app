@@ -11,7 +11,7 @@ export default function CardCast() {
   const { searchValue } = useParams();
   const { id } = useParams();
   const { requestType } = useParams();
-  console.log(requestType);
+  // console.log(requestType);
   // console.log(searchValue);
   const fetch = require("node-fetch");
 
@@ -32,7 +32,7 @@ export default function CardCast() {
         .then((data) => {
           setCastValue(data.cast);
           setIsLoading((prev) => !prev);
-          console.log(data.cast);
+          // console.log(data.cast);
         })
         .catch((err) => console.error("error:" + err));
     }

@@ -8,10 +8,10 @@ import { useParams } from "react-router-dom";
 
 export default function CardPage() {
   const { requestType } = useParams();
-  console.log(requestType);
+  // console.log(requestType);
 
   const currentUrl = window.location.href;
-  console.log(currentUrl);
+  // console.log(currentUrl);
 
   return (
     <div className="card-page">
@@ -23,7 +23,7 @@ export default function CardPage() {
             <CardCast requestType={requestType} />
           </div>
           <div className="about-else">
-            <CardAdditionalInfo />
+            <CardAdditionalInfo requestType={requestType} />
           </div>
         </div>
       </div>
