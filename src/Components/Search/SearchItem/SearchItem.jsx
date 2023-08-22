@@ -3,7 +3,7 @@ import "./SearchItem.css";
 import LandscapeIcon from "@mui/icons-material/Landscape";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import CastItem from "../../Cast/CastItem/CastItem";
-import CardPage from "../../Card/CardPage/CardPage";
+import MTVPage from "../../MTV/MTVPage/MTVPage";
 
 export default function SearchItem({ item, stateTypeRequest }) {
   const [overview, setOverview] = React.useState([]);

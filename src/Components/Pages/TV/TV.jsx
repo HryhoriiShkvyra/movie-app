@@ -1,12 +1,12 @@
 import React from "react";
-import "./Movie.css";
+import "./TV.css";
 import MTVPage from "../../MTV/MTVPage/MTVPage";
 
-export default function Movie() {
+export default function TV() {
   return (
-    <div className="movie">
+    <div className="shows">
       <div className="container">
-        <div className="movie-wrapper">
+        <div className="shows-wrapper">
           <MTVPage />
         </div>
       </div>

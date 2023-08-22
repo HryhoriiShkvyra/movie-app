@@ -1,5 +1,5 @@
 import React from "react";
-import "./CardAdditionalInfo.css";
+import "./MTVAdditionalInfo.css";
 import {
   ChangeHistoryRounded,
   FacebookRounded,
@@ -8,7 +8,7 @@ import {
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 
-export default function CardAdditionalInfo({ requestType }) {
+export default function MTVAdditionalInfo({ requestType }) {
   const { id } = useParams();
   // const { requestType } = useParams();
 
@@ -72,7 +72,7 @@ export default function CardAdditionalInfo({ requestType }) {
       setKeywordsArray(data[1].results);
 
       console.log(data[1].results);
-      console.log(requestType);
+      // console.log(requestType);
       setIsLoading(true);
     } catch (error) {
       console.error(error);

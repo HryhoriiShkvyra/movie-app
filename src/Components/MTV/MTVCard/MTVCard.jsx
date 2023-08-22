@@ -1,5 +1,5 @@
 import React from "react";
-import "./Card.css";
+import "./MTVCard.css";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
@@ -8,7 +8,7 @@ import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 
-export default function Card() {
+export default function MTVCard() {
   const [cardValue, setCardValue] = React.useState();
   const [cardGenres, setCardGenres] = React.useState([]);
   const [cardReleaseDate, setCardReleaseDate] = React.useState();
@@ -40,7 +40,7 @@ export default function Card() {
           setCardGenres(data.genres);
           setCardReleaseDate(data.release_date);
           setCardOverview(data.overview);
-          console.log(data);
+          // console.log(data);
           setIsLoading((prev) => !prev);
         })
         .catch((err) => console.error("error:" + err));
