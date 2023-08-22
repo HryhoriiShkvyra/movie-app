@@ -4,15 +4,18 @@
   flex-direction: column;
   justify-content: start;
   align-items: left;
-  gap: 25px;
+  gap: 15px;
   padding-top: 30px;
 }
 
-.card-additional-info-cols {
+
+
+.card-additional-info-col-no-words {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 10px;
   margin-top: 10px;
+
 }
 
 .card-additional-info-social {
@@ -26,6 +29,21 @@
 
 .card-additional-info-col {
   text-transform: capitalize;
+}
+
+.card-additional-info-cols {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.card-additional-info-networks {
+  display: block;
+  height: 100%;
+  max-width: 260px;
+  max-height: 30px;
+  padding: 5px 5px 0 0;
 }
 
 .card-additional-info-first {
@@ -52,6 +70,12 @@
   font-family: "Montserrat", sans-serif;
   background-color: var(--lt-color-gray-400);
   border-radius: 5px;
+}
+
+.card-additional-info-no-word {
+  display: block;
+  font-size: 14px;
+  /* text-transform: capitalize; */
 }
 
 .content-score-wrapper {

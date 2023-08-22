@@ -5,7 +5,7 @@ import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import CastItem from "../../Cast/CastItem/CastItem";
 import CardPage from "../../Card/CardPage/CardPage";
 
-export default function SearchItem({ item, stateTypeRequest, requestType }) {
+export default function SearchItem({ item, stateTypeRequest }) {
   const [overview, setOverview] = React.useState([]);
   const navigate = useNavigate();
 

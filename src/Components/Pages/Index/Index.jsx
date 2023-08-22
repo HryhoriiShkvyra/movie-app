@@ -21,8 +21,6 @@ export default function Index() {
     }
   }
 
-  console.log(searchValue);
-
   function handleClickSearch() {
     fetch(
       "https://api.themoviedb.org/3/search/movie?query=" +

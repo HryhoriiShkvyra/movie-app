@@ -81,13 +81,26 @@ export default function CardAdditionalInfo({ requestType }) {
 
   const NetworksLength = () => {
     if (networksArray.length > 1) {
-      return <div>1</div>;
+      return (
+        <div className="card-additional-info-col">
+          <h4>networks</h4>
+          {networksArray.map((item) => (
+            <img
+              className="card-additional-info-networks"
+              key={item.id}
+              src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
+              alt=""
+            />
+          ))}
+        </div>
+      );
     } else {
       return (
         <div className="card-additional-info-col">
           <h4>networks</h4>
           {networksArray.map((item) => (
             <img
+              className="card-additional-info-img"
               key={item.id}
               src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
               alt=""
@@ -173,16 +186,46 @@ export default function CardAdditionalInfo({ requestType }) {
               </div>
             </div>
           )}
-          <div className="card-additional-info-col">
+          {keywordsArray === undefined ? (
+            <div className="card-additional-info-col-no-words">
+              <h4>keywords</h4>
+              <div className="card-additional-info-words">
+                <span className="card-additional-info-no-word">
+                  No keywords have been added
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="card-additional-info-col">
+              <h4>keywords</h4>
+              <div className="card-additional-info-words">
+                {keywordsArray.map((item) => (
+                  <div className="card-additional-info-word" key={item.id}>
+                    {item.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {/* )} */}
+          {/* <div className="card-additional-info-col">
             <h4>keywords</h4>
             <div className="card-additional-info-words">
-              {keywordsArray.map((item) => (
-                <div className="card-additional-info-word" key={item.id}>
-                  {item.name}
-                </div>
-              ))}
+              {keywordsArray === undefined ? (
+                <span className="card-additional-info-no-word">
+                  No keywords have been added
+                </span>
+              ) : (
+                <>
+                  {keywordsArray.map((item) => (
+                    <div className="card-additional-info-word" key={item.id}>
+                      {item.name}
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
-          </div>
+          </div> */}
         </div>
       )}
 

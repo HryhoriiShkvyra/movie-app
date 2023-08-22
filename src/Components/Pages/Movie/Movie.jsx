@@ -1,5 +1,7 @@
 import React from "react";
 import "./Movie.css";
+import Card from "../../Card/Card/Card";
+import CardPage from "../../Card/CardPage/CardPage";
 
 export default function Movie() {
   const [trendingItems, setTrendingItems] = React.useState([]);
@@ -30,28 +32,7 @@ export default function Movie() {
     <div className="movie">
       <div className="container">
         <div className="movie-wrapper">
-          <div className="trending">
-            {trendingItems.map((item) => (
-              <div className="card-item" key={item.id}>
-                {item.id}
-              </div>
-            ))}
-            {/* {
-              trendingItems === undefined ? 
-              null 
-              :
-
-              <div>
-                {
-                  trendingItems.map(item => (
-                    <div className="card-item" key={item.id}>
-                      {item.id}
-                    </div>
-                  ))
-                }
-              </div>
-            } */}
-          </div>
+          <CardPage />
         </div>
       </div>
     </div>

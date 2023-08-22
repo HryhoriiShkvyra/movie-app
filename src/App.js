@@ -38,7 +38,7 @@ function App() {
           element: <Movie />,
         },
         {
-          path: "/shows",
+          path: "/tv",
           element: <Shows />,
         },
         {

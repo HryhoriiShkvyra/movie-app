@@ -136,20 +136,31 @@ export default function Card() {
                   <div className="card-overview-text">{cardValue.overview}</div>
                 </div>
               </div>
-              <div className="card-no-image">
-                <div className="card-profile">
-                  David Fincher
-                  <span className="card-character">Director</span>
+              {cardValue.created_by === undefined ? (
+                <div className="card-no-image">
+                  <div className="card-profile">
+                    David Fincher
+                    <span className="card-character">Director</span>
+                  </div>
+                  <div className="card-profile">
+                    Chuck Palahniuk
+                    <span className="card-character">Novel</span>
+                  </div>
+                  <div className="card-profile">
+                    Jim Uhls
+                    <span className="card-character">Screenplay</span>
+                  </div>
                 </div>
-                <div className="card-profile">
-                  Chuck Palahniuk
-                  <span className="card-character">Novel</span>
+              ) : (
+                <div className="card-no-image">
+                  {cardValue.created_by.map((item) => (
+                    <div className="card-profile" key={item.id}>
+                      {item.name}
+                      <span className="card-character">Director</span>
+                    </div>
+                  ))}
                 </div>
-                <div className="card-profile">
-                  Jim Uhls
-                  <span className="card-character">Screenplay</span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         )}
