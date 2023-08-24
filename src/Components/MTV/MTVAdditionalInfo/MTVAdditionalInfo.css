@@ -50,6 +50,14 @@
   font-weight: 700;
 }
 
+.card-additional-info-img {
+  display: block;
+  height: 100%;
+  max-width: 260px;
+  max-height: 30px;
+  padding: 5px 5px 0 0;
+}
+
 .card-additional-info-words {
   width: 255px;
   display: flex;

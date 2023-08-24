@@ -22,9 +22,9 @@ export default function PersonPage() {
   const fetch = require("node-fetch");
 
   const Person_Url =
-    process.env.REACT_APP_BASE_URL + `person/${onlyId}?language=en-US`;
+    process.env.REACT_APP_BASE_URL + `person/${id}?language=en-US`;
   const Person_Acting =
-    process.env.REACT_APP_BASE_URL + `person/${onlyId}/movie_credits`;
+    process.env.REACT_APP_BASE_URL + `person/${id}/movie_credits`;
 
   const options = {
     method: "GET",

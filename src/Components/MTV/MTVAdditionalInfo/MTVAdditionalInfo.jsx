@@ -30,30 +30,6 @@ export default function MTVAdditionalInfo({ requestType }) {
     },
   };
 
-  // React.useEffect(() => {
-  //   function request_1() {
-  //     fetch(url_1, options)
-  //       .then((res) => res.json())
-  //       .then((data) => setCardValue(data))
-  //       .catch((err) => console.error("error" + err));
-  //   }
-
-  //   function request_2() {
-  //     fetch(url_2, options)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setKeywords(data.keywords);
-  //         setIsLoading((prev) => !prev);
-  //       })
-  //       .catch((err) => console.error("error" + err));
-  //   }
-
-  // request_1();
-  // request_2();
-
-  // console.log(cardValue);
-  // }, []);
-
   const FetchData = async () => {
     try {
       const promise_0 = fetch(url_0, options).then((response) =>

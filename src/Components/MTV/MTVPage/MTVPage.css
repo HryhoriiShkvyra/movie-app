@@ -4,6 +4,12 @@
 .about-card {
   display: flex;
   flex-direction: row;
+  /* gap: 10px; */
+}
+
+.about-main {
+  /* width: 100%; */
+  /* min-width: 1050px; */
 }
 
 .about-else {
