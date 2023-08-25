@@ -5,11 +5,12 @@ import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Movie from "../Pages/Movie/Movie";
 
-export default function ScrollBar({ pageType, id, cleanedId }) {
+export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const [trendingItemsDay, setTrendingItemsDay] = React.useState([]);
   const [trendingItemsWeek, setTrendingItemsWeek] = React.useState([]);
   const [personFilmArray, setPersonFilmArray] = React.useState([]);
-  const [MTVCredits, setMTVCredits] = React.useState([]);
+  const [tvCredits, setTvCredits] = React.useState([]);
+  const [movieCredits, setMovieCredits] = React.useState([]);
   const [trendingBtn, setTrendingBtn] = React.useState("day");
   const [isLoading, setIsLoading] = React.useState(null);
   const [personId, setPersonId] = React.useState();
@@ -25,8 +26,10 @@ export default function ScrollBar({ pageType, id, cleanedId }) {
     process.env.REACT_APP_BASE_URL + "/trending/all/week?language=en-US";
   const Person_url =
     process.env.REACT_APP_BASE_URL + `person/${id}/movie_credits`;
-  const MTV_credits_url =
+  const TV_credits_url =
     process.env.REACT_APP_BASE_URL + `tv/${id}/credits?language=en-US`;
+  const Movie_credits_url =
+    process.env.REACT_APP_BASE_URL + `movie/${id}/credits?language=en-US`;
 
   const options = {
     method: "GET",
@@ -56,7 +59,11 @@ export default function ScrollBar({ pageType, id, cleanedId }) {
         response.json()
       );
 
-      const promise_mtv_credits_url = fetch(MTV_credits_url, options).then(
+      const promise_tv_credits_url = fetch(TV_credits_url, options).then(
+        (response) => response.json()
+      );
+
+      const promise_movie_credits_url = fetch(Movie_credits_url, options).then(
         (response) => response.json()
       );
 
@@ -64,7 +71,8 @@ export default function ScrollBar({ pageType, id, cleanedId }) {
         promise_trending_url_day,
         promise_trending_url_week,
         promise_person_url,
-        promise_mtv_credits_url,
+        promise_tv_credits_url,
+        promise_movie_credits_url,
       ]);
 
       const data = results;
@@ -74,7 +82,8 @@ export default function ScrollBar({ pageType, id, cleanedId }) {
       setTrendingItemsDay(data[0].results);
       setTrendingItemsWeek(data[1].results);
       setPersonFilmArray(data[2].cast);
-      setMTVCredits(data[3].cast);
+      setTvCredits(data[3].cast);
+      setMovieCredits(data[4].cast);
 
       setIsLoading((prev) => !prev);
     } catch (error) {
@@ -197,61 +206,65 @@ export default function ScrollBar({ pageType, id, cleanedId }) {
 
     const ScrollBarLogicMTVPage = () => {
       return (
-        <div className="cast-wrapper">
-          <span className="cast-top">top billed cast</span>
-          <div className="cast">
-            {MTVCredits.slice(0, 8).map((item) => (
-              // <div key={item.id} value={item.id} onClick={handlePersonId}>
-              //   press here, in console you should see item-id
-              // </div>
-              <div
-                className="cast-item"
-                key={item.id}
-                onClick={(e) => handleRedirectToActor(e)}
-              >
-                <img
-                  className="cast-photo"
-                  src={
-                    process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
-                  }
-                  getid={item.id}
-                  alt=""
-                />
-                <div className="cast-text">
-                  <div className="cast-name">{item.name}</div>
-                  <div className="cast-character">{item.character}</div>
-                </div>
+        <>
+          {movieOrTv === "movie" ? (
+            <div className="cast-wrapper">
+              <span className="cast-top">top billed cast</span>
+              <div className="cast">
+                {movieCredits.slice(0, 8).map((item) => (
+                  <div
+                    className="cast-item"
+                    key={item.id}
+                    onClick={(e) => handleRedirectToActor(e)}
+                  >
+                    <img
+                      className="cast-photo"
+                      src={
+                        process.env.REACT_APP_IMAGE_URL +
+                        "w200" +
+                        item.profile_path
+                      }
+                      getid={item.id}
+                      alt=""
+                    />
+                    <div className="cast-text">
+                      <div className="cast-name">{item.name}</div>
+                      <div className="cast-character">{item.character}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-        // <div className="scroll-items-wrapper">
-        //   <div className="scroll-items">
-        //     {MTVCredits.map((item) => (
-        //       <div className="scroll-item" key={item.id}>
-        //         <img
-        //           className="scroll-item-image"
-        //           src={
-        //             process.env.REACT_APP_IMAGE_URL + `w200` + item.profile_path
-        //           }
-        //           alt=""
-        //           getid={item.id}
-        //           onClick={(e) => handleRedirectToTV(e)}
-        //         />
-        //         <div className="scroll-item-text">
-        //           <span className="scroll-item-title">
-        //             {item.name ? item.name : item.title}
-        //           </span>
-        //           <span className="scroll-item-date-release">
-        //             {item.release_date
-        //               ? item.release_date
-        //               : item.first_air_date}{" "}
-        //           </span>
-        //         </div>
-        //       </div>
-        //     ))}
-        //   </div>
-        // </div>
+            </div>
+          ) : (
+            <div className="cast-wrapper">
+              <span className="cast-top">top billed cast</span>
+              <div className="cast">
+                {tvCredits.slice(0, 8).map((item) => (
+                  <div
+                    className="cast-item"
+                    key={item.id}
+                    onClick={(e) => handleRedirectToActor(e)}
+                  >
+                    <img
+                      className="cast-photo"
+                      src={
+                        process.env.REACT_APP_IMAGE_URL +
+                        "w200" +
+                        item.profile_path
+                      }
+                      getid={item.id}
+                      alt=""
+                    />
+                    <div className="cast-text">
+                      <div className="cast-name">{item.name}</div>
+                      <div className="cast-character">{item.character}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
       );
     };
 
@@ -289,9 +302,6 @@ export default function ScrollBar({ pageType, id, cleanedId }) {
     } else if (pageType === "mtv-actors") {
       return (
         <div className="container">
-          <div className="scroll-text">
-            <div className="scroll-title">series cast</div>
-          </div>
           <ScrollBarLogicMTVPage />
         </div>
       );

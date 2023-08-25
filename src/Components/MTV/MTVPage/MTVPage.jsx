@@ -7,7 +7,7 @@ import Navbar from "../../Navbar/Navbar";
 import { Link, useParams } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
 
-export default function MTVPage({ MTVSearch }) {
+export default function MTVPage() {
   const { requestType } = useParams();
   const { id } = useParams();
 
@@ -30,7 +30,7 @@ export default function MTVPage({ MTVSearch }) {
       <div className="container">
         <div className="about-card">
           <div className="about-main">
-            <ScrollBar id={id} pageType={pageType} />
+            <ScrollBar id={id} pageType={pageType} movieOrTv={requestType} />
             {/* <CardCast requestType={requestType} /> */}
           </div>
           <div className="about-else">
