@@ -70,9 +70,14 @@
 }
 
 .scroll-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding-bottom: 5px;
+}
+
+.scroll-item-image-wrapper {
+  position: relative;
 }
 
 .scroll-item-image {
@@ -88,22 +93,18 @@
   gap: 5px;
   margin-top: 30px;
   color: var(--lt-color-gray-500);
-  
-
 }
 
 .scroll-item-title {
   font-weight: 700;
   color: var(--lt-color-gray-900);
-  transition: all .5s ease;
-
+  transition: all 0.5s ease;
 }
 
 .scroll-item-title:hover {
   color: var(--lt-color-blue-500);
   cursor: pointer;
-  transition: all .5s ease;
-
+  transition: all 0.5s ease;
 }
 
 /* ----------------------------------------------------- */
@@ -154,7 +155,6 @@
 .scroll-item-title-person {
   font-weight: 400;
 }
-
 
 /* -------------------------------------------------------- */
 

@@ -2,6 +2,7 @@ import React from "react";
 import "./Index.css";
 import { useNavigate } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
+import LatestTrailers from "../../LastestTrailers/LatestTrailers";
 
 export default function Index() {
   const [searchValue, setSearchValue] = React.useState([]);
@@ -54,7 +55,7 @@ export default function Index() {
             </div>
           </div>
           <ScrollBar pageType={pageType} />
-          <div className="latest-trailers"></div>
+          <LatestTrailers/>
         </div>
       </div>
     </div>

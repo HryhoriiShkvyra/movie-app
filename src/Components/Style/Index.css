@@ -129,7 +129,7 @@ table {
 
 /* -------------------------------//-------------------------------- */
 
-@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 /* --lt-color-gray-200:  #f1f3f9;
 --lt-color-gray-300:  #dee3ed;
@@ -171,6 +171,16 @@ table {
   --lt-color-blue-800: #0b1a20;
   --lt-color-blue-900: #060b13;
 
+  --lt-t-color-blue-100: rgba(240, 244, 252, 0.5);
+  --lt-t-color-blue-200: rgba(217, 226, 249, 0.5);
+  --lt-t-color-blue-300: rgba(168, 194, 237, 0.5);
+  --lt-t-color-blue-400: rgba(108, 154, 214, 0.5);
+  --lt-t-color-blue-500: rgba(64, 117, 163, 0.5);
+  --lt-t-color-blue-600: rgba(37, 76, 110, 0.5);
+  --lt-t-color-blue-700: rgba(18, 40, 55, 0.5);
+  --lt-t-color-blue-800: rgba(11, 26, 32, 0.5);
+  --lt-t-color-blue-900: rgba(6, 11, 19, 0.5);
+
   --lt-color-orange-100: #fae2cb;
   --lt-color-orange-200: #f9cc97;
   --lt-color-orange-300: #f6b066;
@@ -184,13 +194,38 @@ table {
   /* ------------------------------//------------------------------------ */
 
   --height: 82.7vh;
+
+  --imageBorderRadius: 8px;
+  --LightGreen: rgb(30, 213, 169);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: var(--lt-color-gray-300);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--lt-color-gray-500);
+  border-radius: 10px;
 }
 
 body {
   font-family: "Courier Prime", monospace;
   color: var(--lt-color-gray-900);
 
-  background-color: var(--lt-color-gray-300);
+  background-color: #fff;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 h4 {
@@ -204,6 +239,16 @@ h6 {
   text-transform: capitalize;
 }
 
+p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+Link {
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .container {
   width: 1335px;
   margin: 0 auto;
@@ -214,14 +259,41 @@ h6 {
   border-left: 1px solid var(--lt-color-orange-500);
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  background-color: var(--lt-color-gray-300);
-  border-radius: 10px;
+.card-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+
+  color: var(--lt-t-color-blue-300);
+
+  /* cursor: pointer; */
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--lt-color-gray-500);
-  border-radius: 10px;
+.card-icon:hover {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+
+  color: var(--lt-color-blue-300);
+
+  cursor: pointer;
+}
+
+.card-play {
+  position: absolute;
+  top: 40%;
+  right: 50%;
+  /* bottom: 50%; */
+  left: 50%;
+
+  color: var(--lt-color-gray-200);
+
+  transform: scale(3.5);
+  transition: all ease 0.5s;
+
+  cursor: pointer;
 }

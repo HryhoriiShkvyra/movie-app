@@ -4,6 +4,7 @@ import Loading from "../Loading/Loading";
 import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Movie from "../Pages/Movie/Movie";
+import PendingIcon from "@mui/icons-material/Pending";
 
 export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const [trendingItemsDay, setTrendingItemsDay] = React.useState([]);
@@ -128,20 +129,23 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
               {trendingItemsDay.map((item) => (
                 <div className="scroll-item" key={item.id}>
                   {item.title ? (
-                    <img
-                      className="scroll-item-image"
-                      src={
-                        process.env.REACT_APP_IMAGE_URL +
-                        `w200` +
-                        item.poster_path
-                      }
-                      alt=""
-                      getid={item.id}
-                      gettitle={item.title}
-                      onClick={(e) => (
-                        handleRedirectToMovie(e), handleGetTitle(e)
-                      )}
-                    />
+                    <div>
+                      <img
+                        className="scroll-item-image"
+                        src={
+                          process.env.REACT_APP_IMAGE_URL +
+                          `w200` +
+                          item.poster_path
+                        }
+                        alt=""
+                        getid={item.id}
+                        gettitle={item.title}
+                        onClick={(e) => (
+                          handleRedirectToMovie(e), handleGetTitle(e)
+                        )}
+                      />
+                      <PendingIcon className="card-icon" />
+                    </div>
                   ) : (
                     <img
                       className="scroll-item-image"
