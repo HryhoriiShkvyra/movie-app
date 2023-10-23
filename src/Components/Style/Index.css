@@ -197,18 +197,28 @@ table {
 
   --imageBorderRadius: 8px;
   --LightGreen: rgb(30, 213, 169);
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-  background-color: var(--lt-color-gray-300);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--lt-color-gray-500);
-  border-radius: 10px;
+  --scrollerGrey: rgb(219, 219, 219);
+  --lightGrey: rgb(227, 227, 227);
+  --darkerGrey: rgb(200, 200, 200);
+  --bDarkBlue: rgb(3, 37, 65);
+  --LightBlue: rgb(1, 180, 228);
+  --LighterGreen: rgb(192, 254, 207);
+  --LightGreen: rgb(30, 213, 169);
+  --LogoGreen: rgb(144, 206, 161);
+  --LogoOrange: rgb(253, 193, 112);
+  --LogoRed: rgb(217, 59, 99);
+  --accountSilver: rgb(149, 149, 149);
+  --accountPink: rgb(234, 20, 140);
+  --accountPurple: rgb(128, 91, 231);
+  --accountGreen: rgb(1, 210, 119);
+  --accountTeal: rgb(1, 198, 172);
+  --accountLightBlue: rgb(1, 180, 228);
+  --accountBlue: rgb(1, 119, 210);
+  --accountOrange: rgb(210, 119, 1);
+  --accountYellow: rgb(210, 144, 1);
+  --accountRed: rgb(212, 2, 66);
+  --imageBorderRadius: 8px;
+  --maxPrimaryPageWidth: 1400px;
 }
 
 body {
@@ -249,9 +259,22 @@ Link {
   font-weight: 600;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: var(--lt-color-gray-300);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--lt-color-gray-500);
+  border-radius: 10px;
+}
+
 .container {
   width: 1335px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .plank {

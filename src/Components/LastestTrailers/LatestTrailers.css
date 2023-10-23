@@ -1,8 +1,21 @@
 .latest-trailers {
+  position: relative;
   width: 100%;
   background-color: var(--lt-t-color-blue-700);
   padding: 30px 40px 35px 40px;
-  overflow: hidden;
+
+  /* background-position: center; */
+  /* background-repeat: no-repeat; */
+
+  /* overflow: hidden; */
+  overflow-y: auto;
+}
+
+.latest-trailers-background-image {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .latest-trailers-nav {
@@ -14,6 +27,8 @@
 }
 
 .latest-trailers-btns {
+  display: flex;
+  justify-content: center;
   width: fit-content;
   border: 1px solid var(--LightGreen);
   border-radius: 20px;
@@ -93,9 +108,6 @@
   /* background-color: var(--lt-t-color-blue-700); */
 
   border-radius: var(--imageBorderRadius);
-}
-
-.latest-trailers-card-icon {
 }
 
 .latest-trailers-card-about {

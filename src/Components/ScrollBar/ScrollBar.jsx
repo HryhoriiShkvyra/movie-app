@@ -5,6 +5,7 @@ import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
 import { Link, useNavigate } from "react-router-dom";
 import Movie from "../Pages/Movie/Movie";
 import PendingIcon from "@mui/icons-material/Pending";
+import { FreeBreakfast } from "@mui/icons-material";
 
 export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const [trendingItemsDay, setTrendingItemsDay] = React.useState([]);
@@ -13,6 +14,8 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const [tvCredits, setTvCredits] = React.useState([]);
   const [movieCredits, setMovieCredits] = React.useState([]);
   const [trendingBtn, setTrendingBtn] = React.useState("day");
+  const [popularBtn, setPopularBtn] = React.useState("streaming");
+  const [freeToWatchBtn, setFreeToWatchBtn] = React.useState("movies");
   const [isLoading, setIsLoading] = React.useState(null);
   const [personId, setPersonId] = React.useState();
   const [itemId, setItemId] = React.useState();
@@ -120,33 +123,15 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
     return navigate(`/person/${itemId}`);
   };
 
-  const ScrollBarWrapper = () => {
-    const ScrollBarLogicIndexPage = () => {
-      return (
-        <div className="scroll-items-wrapper">
-          {trendingBtn === "day" ? (
-            <div className="scroll-items">
-              {trendingItemsDay.map((item) => (
-                <div className="scroll-item" key={item.id}>
-                  {item.title ? (
-                    <div>
-                      <img
-                        className="scroll-item-image"
-                        src={
-                          process.env.REACT_APP_IMAGE_URL +
-                          `w200` +
-                          item.poster_path
-                        }
-                        alt=""
-                        getid={item.id}
-                        gettitle={item.title}
-                        onClick={(e) => (
-                          handleRedirectToMovie(e), handleGetTitle(e)
-                        )}
-                      />
-                      <PendingIcon className="card-icon" />
-                    </div>
-                  ) : (
+  const ScrollBarLogicIndexPageTrending = () => {
+    return (
+      <div className="scroll-items-wrapper">
+        {trendingBtn === "day" ? (
+          <div className="scroll-items">
+            {trendingItemsDay.map((item) => (
+              <div className="scroll-item" key={item.id}>
+                {item.title ? (
+                  <div>
                     <img
                       className="scroll-item-image"
                       src={
@@ -156,29 +141,14 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
                       }
                       alt=""
                       getid={item.id}
-                      gettitle={item.name}
+                      gettitle={item.title}
                       onClick={(e) => (
-                        handleRedirectToTV(e), handleGetTitle(e)
+                        handleRedirectToMovie(e), handleGetTitle(e)
                       )}
                     />
-                  )}
-                  <div className="scroll-item-text">
-                    <span className="scroll-item-title">
-                      {item.name ? item.name : item.title}
-                    </span>
-                    <span className="scroll-item-date-release">
-                      {item.release_date
-                        ? item.release_date
-                        : item.first_air_date}{" "}
-                    </span>
+                    <PendingIcon className="card-icon" />
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="scroll-items">
-              {trendingItemsWeek.map((item) => (
-                <div className="scroll-item" key={item.id}>
+                ) : (
                   <img
                     className="scroll-item-image"
                     src={
@@ -188,26 +158,100 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
                     }
                     alt=""
                     getid={item.id}
-                    onClick={(e) => handleRedirectToTV(e)}
+                    gettitle={item.name}
+                    onClick={(e) => (handleRedirectToTV(e), handleGetTitle(e))}
                   />
-                  <div className="scroll-item-text">
-                    <span className="scroll-item-title">
-                      {item.name ? item.name : item.title}
-                    </span>
-                    <span className="scroll-item-date-release">
-                      {item.release_date
-                        ? item.release_date
-                        : item.first_air_date}{" "}
-                    </span>
-                  </div>
+                )}
+                <div className="scroll-item-text">
+                  <span className="scroll-item-title">
+                    {item.name ? item.name : item.title}
+                  </span>
+                  <span className="scroll-item-date-release">
+                    {item.release_date
+                      ? item.release_date
+                      : item.first_air_date}{" "}
+                  </span>
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    };
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="scroll-items">
+            {trendingItemsWeek.map((item) => (
+              <div className="scroll-item" key={item.id}>
+                <img
+                  className="scroll-item-image"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path
+                  }
+                  alt=""
+                  getid={item.id}
+                  onClick={(e) => handleRedirectToTV(e)}
+                />
+                <div className="scroll-item-text">
+                  <span className="scroll-item-title">
+                    {item.name ? item.name : item.title}
+                  </span>
+                  <span className="scroll-item-date-release">
+                    {item.release_date
+                      ? item.release_date
+                      : item.first_air_date}{" "}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
+  React.useEffect(() => {
+    console.log(freeToWatchBtn);
+  }, [freeToWatchBtn]);
+
+  const ScrollBarLogicIndexPageFreeToWatch = () => {
+    return (
+      <div className="scroll-items-wrapper">
+        {freeToWatchBtn === "movies" ? (
+          <div className="scroll-items">
+            <h5>This panel didn't return any results. Try refreshing it.</h5>
+          </div>
+        ) : (
+          <div className="scroll-items">
+            {/* {trendingItemsWeek.map((item) => (
+              <div className="scroll-item" key={item.id}>
+                <img
+                  className="scroll-item-image"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path
+                  }
+                  alt=""
+                  getid={item.id}
+                  onClick={(e) => handleRedirectToTV(e)}
+                />
+                <div className="scroll-item-text">
+                  <span className="scroll-item-title">
+                    {item.name ? item.name : item.title}
+                  </span>
+                  <span className="scroll-item-date-release">
+                    {item.release_date
+                      ? item.release_date
+                      : item.first_air_date}{" "}
+                  </span>
+                </div>
+              </div>
+            ))} */}
+            <h4>not hehe</h4>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const ScrollBarWrapper = () => {
+    ScrollBarLogicIndexPageTrending();
+    ScrollBarLogicIndexPageFreeToWatch();
     const ScrollBarLogicMTVPage = () => {
       return (
         <>
@@ -272,13 +316,13 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
       );
     };
 
-    if (pageType === "index-page") {
+    if (pageType === "index-page-trending") {
       return (
         <div className="container">
           <div className="scroll-text">
             <div className="scroll-title">Trending</div>
             <div className="scroll-type">
-              <button
+              <div
                 onClick={(e) => setTrendingBtn("day")}
                 className={
                   trendingBtn === "day"
@@ -286,9 +330,19 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
                     : "scroll-type-btn"
                 }
               >
-                Today
-              </button>
-              <button
+                <h3>
+                  <a
+                    className={
+                      trendingBtn === "day"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    Today
+                  </a>
+                </h3>
+              </div>
+              <div
                 onClick={(e) => setTrendingBtn("week")}
                 className={
                   trendingBtn === "week"
@@ -296,17 +350,163 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
                     : "scroll-type-btn"
                 }
               >
-                This Week
-              </button>
+                <h3>
+                  <a
+                    className={
+                      trendingBtn === "week"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    Week
+                  </a>
+                </h3>
+              </div>
             </div>
           </div>
-          <ScrollBarLogicIndexPage />
+          <ScrollBarLogicIndexPageTrending />
         </div>
       );
-    } else if (pageType === "mtv-actors") {
+    } else if (pageType === "index-page-popular") {
       return (
         <div className="container">
-          <ScrollBarLogicMTVPage />
+          <div className="scroll-text">
+            <div className="scroll-title">What's popular</div>
+            <div className="scroll-type">
+              <div
+                onClick={(e) => setPopularBtn("streaming")}
+                className={
+                  popularBtn === "streaming"
+                    ? "scroll-type-btn-active"
+                    : "scroll-type-btn"
+                }
+              >
+                <h3>
+                  <a
+                    className={
+                      popularBtn === "streaming"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    Streaming
+                  </a>
+                </h3>
+              </div>
+              <div
+                onClick={(e) => setPopularBtn("on-tv")}
+                className={
+                  popularBtn === "on-tv"
+                    ? "scroll-type-btn-active"
+                    : "scroll-type-btn"
+                }
+              >
+                <h3>
+                  <a
+                    className={
+                      popularBtn === "on-tv"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    On TV
+                  </a>
+                </h3>
+              </div>
+              <div
+                onClick={(e) => setPopularBtn("for-rent")}
+                className={
+                  popularBtn === "for-rent"
+                    ? "scroll-type-btn-active"
+                    : "scroll-type-btn"
+                }
+              >
+                <h3>
+                  <a
+                    className={
+                      popularBtn === "for-rent"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    For Rent
+                  </a>
+                </h3>
+              </div>
+              <div
+                onClick={(e) => setPopularBtn("in-theaters")}
+                className={
+                  popularBtn === "in-theaters"
+                    ? "scroll-type-btn-active"
+                    : "scroll-type-btn"
+                }
+              >
+                <h3>
+                  <a
+                    className={
+                      popularBtn === "in-theaters"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    In Theaters
+                  </a>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <ScrollBarLogicIndexPageTrending />
+        </div>
+      );
+    } else if (pageType === "index-page-free") {
+      return (
+        <div className="container">
+          <div className="scroll-text">
+            <div className="scroll-title">Free To Watch</div>
+            <div className="scroll-type">
+              <div
+                onClick={(e) => setFreeToWatchBtn("movies")}
+                className={
+                  freeToWatchBtn === "movies"
+                    ? "scroll-type-btn-active"
+                    : "scroll-type-btn"
+                }
+              >
+                <h3>
+                  <a
+                    className={
+                      freeToWatchBtn === "movies"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    Movies
+                  </a>
+                </h3>
+              </div>
+              <div
+                onClick={(e) => setFreeToWatchBtn("tv")}
+                className={
+                  freeToWatchBtn === "tv"
+                    ? "scroll-type-btn-active"
+                    : "scroll-type-btn"
+                }
+              >
+                <h3>
+                  <a
+                    className={
+                      freeToWatchBtn === "tv"
+                        ? "scroll-type-btn-anchor-active"
+                        : "scroll-type-btn-anchor"
+                    }
+                  >
+                    TV
+                  </a>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <ScrollBarLogicIndexPageFreeToWatch />
         </div>
       );
     }

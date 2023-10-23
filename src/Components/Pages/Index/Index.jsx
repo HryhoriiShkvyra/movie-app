@@ -3,10 +3,13 @@ import "./Index.css";
 import { useNavigate } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
 import LatestTrailers from "../../LastestTrailers/LatestTrailers";
+import JoinToday from "../../JoinToday/JoinToday";
 
 export default function Index() {
   const [searchValue, setSearchValue] = React.useState([]);
-  const pageType = "index-page";
+  const pageTypeTrending = "index-page-trending";
+  const pageTypePopular = "index-page-popular";
+  const pageTypeFree = "index-page-free";
 
   const navigate = useNavigate();
   function handleInputDown(event) {
@@ -54,8 +57,11 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <ScrollBar pageType={pageType} />
-          <LatestTrailers/>
+          <ScrollBar pageType={pageTypeTrending} />
+          <LatestTrailers />
+          <ScrollBar pageType={pageTypePopular} />
+          <ScrollBar pageType={pageTypeFree} />
+          <JoinToday />
         </div>
       </div>
     </div>
