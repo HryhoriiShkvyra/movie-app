@@ -250,13 +250,24 @@ h6 {
 }
 
 p {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
+}
+
+a {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 Link {
   font-size: 16px;
   font-weight: 600;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-left: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -272,8 +283,15 @@ Link {
 }
 
 .container {
-  width: 1335px;
+  width: 1300px;
   margin: 0 auto;
+  overflow: hidden;
+}
+
+.container-index-page {
+  width: 1300px;
+  margin: 0 auto;
+  /* padding: 20px; */
   overflow: hidden;
 }
 

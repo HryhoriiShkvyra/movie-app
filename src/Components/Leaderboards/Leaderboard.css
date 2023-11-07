@@ -1,0 +1,96 @@
+.leaderboard.index-page {
+  width: 100%;
+  margin: 30px 40px;
+}
+
+.leaderboard-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.leaderboard-position-type {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.leaderboard-position-dot {
+  content: "#";
+  width: 8px;
+  height: 8px;
+
+  border-radius: var(--imageBorderRadius);
+}
+
+.leaderboard-position-dot.all {
+  background-color: var(--LogoGreen);
+}
+
+.leaderboard-position-dot.week {
+  background-color: var(--LogoRed);
+}
+
+.leaderboard.scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+
+  padding-top: 20px;
+}
+
+.leaderboard.user:nth-child(odd) {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.leaderboard.user:nth-child(even) {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.leaderboard.photo {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+
+  border-radius: 50px;
+}
+
+.leaderboard.edits.size {
+  width: 550px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: center;
+}
+
+.leaderboard.edits.all {
+  width: 500px;
+  height: 8px;
+
+  background-color: var(--LogoGreen);
+  border-radius: var(--imageBorderRadius);
+}
+
+.leaderboard.edits.week {
+  width: 500px;
+  height: 8px;
+
+  background-color: var(--LogoRed);
+  border-radius: var(--imageBorderRadius);
+}

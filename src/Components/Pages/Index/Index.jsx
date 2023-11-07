@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
 import LatestTrailers from "../../LastestTrailers/LatestTrailers";
 import JoinToday from "../../JoinToday/JoinToday";
+import Leaderboard from "../../Leaderboards/Leaderboard";
 
 export default function Index() {
   const [searchValue, setSearchValue] = React.useState([]);
@@ -57,11 +58,12 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <ScrollBar pageType={pageTypeTrending} />
+          {/* <ScrollBar pageType={pageTypeTrending} /> */}
           <LatestTrailers />
-          <ScrollBar pageType={pageTypePopular} />
-          <ScrollBar pageType={pageTypeFree} />
-          <JoinToday />
+          {/* <ScrollBar pageType={pageTypePopular} /> */}
+          {/* <ScrollBar pageType={pageTypeFree} /> */}
+          {/* <JoinToday /> */}
+          <Leaderboard />
         </div>
       </div>
     </div>

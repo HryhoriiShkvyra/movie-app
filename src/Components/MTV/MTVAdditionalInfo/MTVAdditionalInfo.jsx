@@ -211,7 +211,7 @@ export default function MTVAdditionalInfo({ requestType }) {
         <h6>yes! looking good!</h6>
       </div>
 
-      <div className="leaderboard">
+      <div className="leaderboard MTVAdditional">
         <h4>Top Contributors</h4>
         <div className="leaders">
           <div className="leader">

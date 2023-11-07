@@ -1,22 +1,8 @@
-.index {
-  /* height: var(--height) */
-}
-
-.index-wrapper {
-  /* position: relative;
-    top: 300px;
-    display: flex;
-    justify-content: center;
-    
-
-    font-size: 40px; */
-}
-
 .index-wrapper {
   display: flex;
   flex-direction: column;
   padding-bottom: 105px;
-  /* width: 100%; */
+  align-items: center;
 }
 
 /* --------------------------------//----------------------------- */

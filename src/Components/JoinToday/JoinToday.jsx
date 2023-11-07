@@ -2,16 +2,13 @@ import React from "react";
 import "./JoinToday.css";
 
 export default function JoinToday() {
+  const [value, setValue] = React.useState([]);
   const [image, setImage] = React.useState();
-  const [isLoading, setIsLoading] = React.useState();
+  const [isLoading, setIsLoading] = React.useState(null);
 
-  const Movie_credits_url =
-    process.env.REACT_APP_IMAGE_URL +
-    `w200/q3jHCb4dMfYF6ojikKuHd6LscxC.jpg
-    `;
-  const credits_url =
-    process.env.REACT_APP_BASE_URL + `movie/550/credits?language=en-US`;
-  // `w1920_and_h800_multi_faces_filter\(duotone,190235,ad47dd\)/lMnoYqPIAVL0YaLP5YjRy7iwaYv.jpg
+  const fetch = require("node-fetch");
+
+  const url = "https://api.themoviedb.org/3/movie/550?language=en-US";
 
   const options = {
     method: "GET",
@@ -23,26 +20,13 @@ export default function JoinToday() {
 
   const FetchData = async () => {
     setIsLoading(true);
-
-    try {
-      //   const promise_image = fetch(Movie_credits_url, options).then((response) =>
-      //     response.json()
-      //   );
-      const promise_credits = fetch(credits_url, options).then((response) =>
-        response.json()
-      );
-
-      const results = await Promise.all([promise_credits]);
-
-      const data = results;
-
-      //   setImage(data);
-      console.log(data);
-
-      setIsLoading((prev) => prev);
-    } catch (error) {
-      console.error("error - " + error);
-    }
+    const request = await fetch(url, options).then((response) =>
+      response.json().then((data) => {
+        // console.log(data);
+        setValue(data);
+        setIsLoading((prev) => !prev);
+      })
+    );
   };
 
   React.useEffect(() => {
@@ -50,35 +34,56 @@ export default function JoinToday() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="join-today">
-        <div className="join-today-title">Join Today</div>
-        <div className="join-today-inner">
-          <div className="join-today-right">
-            <div className="join-today-right-text">
-              Get access to maintain your own custom personal lists, track what
-              you've seen and search and filter for what to watch
-              next—regardless if it's in theatres, on TV or available on popular
-              streaming services like Netflix, Apple TV Plus, Rakuten TV, MUBI,
-              and FilmBox+.
+    <div className="join-today">
+      {isLoading === true ? (
+        <div>null</div>
+      ) : (
+        <div
+          className="container-index-page-join-today"
+          style={{
+            // backgroundImage: `
+            // linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+            // (${process.env.REACT_APP_IMAGE_URL}w500${value.backdrop_path})`,
+            // backgroundSize: "contain",
+            // backgroundPosition: "center",
+            // backgroundColor: "rgba(128, 91, 231, 0.5)",
+
+            backgroundImage: `
+              linear-gradient(to bottom, rgba(128, 91, 231, 0.5), rgba(128, 91, 231, 0.5)),
+              url(${process.env.REACT_APP_IMAGE_URL}w500${value.backdrop_path})
+            `,
+            // backgroundBlendMode: "overlay",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="join-today-title">Join Today</div>
+          <div className="join-today-inner">
+            <div className="join-today-left">
+              <div className="join-today-left-text">
+                Get access to maintain your own custom personal lists, track
+                what you've seen and search and filter for what to watch
+                next—regardless if it's in theatres, on TV or available on
+                popular streaming services like Netflix, Apple TV Plus, Rakuten
+                TV, MUBI, and FilmBox+.
+              </div>
+              <button className="join-today-left-btn">Sign Up</button>
             </div>
-            <div className="join-today-right-btn"></div>
-          </div>
-          <div className="join-today-left">
-            <ul>
-              <li>Enjoy TMDB ad free</li>
-              <li>Maintain a personal watchlist</li>
-              <li>
-                Filter by your subscribed streaming services and find something
-                to watch
-              </li>
-              <li>Log the movies and TV shows you've seen</li>
-              <li>Build custom lists</li>
-              <li>Contribute to and improve our database</li>
-            </ul>
+            <div className="join-today-right">
+              <ul>
+                <li>Enjoy TMDB ad free</li>
+                <li>Maintain a personal watchlist</li>
+                <li>
+                  Filter by your subscribed streaming services and find
+                  something to watch
+                </li>
+                <li>Log the movies and TV shows you've seen</li>
+                <li>Build custom lists</li>
+                <li>Contribute to and improve our database</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

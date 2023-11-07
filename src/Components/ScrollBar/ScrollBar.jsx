@@ -44,8 +44,8 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   };
 
   React.useEffect(() => {
-    console.log(pageType);
-    console.log(cleanedId);
+    // console.log(pageType);
+    // console.log(cleanedId);
   }, []);
 
   const fetchData = async () => {
@@ -81,7 +81,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
 
       const data = results;
 
-      console.log(data);
+      // console.log(data);
 
       setTrendingItemsDay(data[0].results);
       setTrendingItemsWeek(data[1].results);
@@ -101,7 +101,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
 
   const handleGetTitle = (e) => {
     const itemId = e.target.getAttribute("gettitle");
-    return console.log(itemId);
+    // return console.log(itemId);
   };
 
   const handleRedirectToMovie = (e) => {
@@ -125,7 +125,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
 
   const ScrollBarLogicIndexPageTrending = () => {
     return (
-      <div className="scroll-items-wrapper">
+      <div className="container-index-page">
         {trendingBtn === "day" ? (
           <div className="scroll-items">
             {trendingItemsDay.map((item) => (
@@ -176,7 +176,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
             ))}
           </div>
         ) : (
-          <div className="scroll-items">
+          <div className="container-index-page">
             {trendingItemsWeek.map((item) => (
               <div className="scroll-item" key={item.id}>
                 <img
@@ -207,18 +207,18 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   };
 
   React.useEffect(() => {
-    console.log(freeToWatchBtn);
+    // console.log(freeToWatchBtn);
   }, [freeToWatchBtn]);
 
   const ScrollBarLogicIndexPageFreeToWatch = () => {
     return (
-      <div className="scroll-items-wrapper">
+      <div className="container-index-page">
         {freeToWatchBtn === "movies" ? (
           <div className="scroll-items">
-            <h5>This panel didn't return any results. Try refreshing it.</h5>
+            <h4>This panel didn't return any results. Try refreshing it.</h4>
           </div>
         ) : (
-          <div className="scroll-items">
+          <div className="container-index-page">
             {/* {trendingItemsWeek.map((item) => (
               <div className="scroll-item" key={item.id}>
                 <img
@@ -318,7 +318,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
 
     if (pageType === "index-page-trending") {
       return (
-        <div className="container">
+        <div className="container-index-page">
           <div className="scroll-text">
             <div className="scroll-title">Trending</div>
             <div className="scroll-type">
@@ -369,7 +369,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
       );
     } else if (pageType === "index-page-popular") {
       return (
-        <div className="container">
+        <div className="container-index-page">
           <div className="scroll-text">
             <div className="scroll-title">What's popular</div>
             <div className="scroll-type">
@@ -460,7 +460,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
       );
     } else if (pageType === "index-page-free") {
       return (
-        <div className="container">
+        <div className="container-index-page">
           <div className="scroll-text">
             <div className="scroll-title">Free To Watch</div>
             <div className="scroll-type">

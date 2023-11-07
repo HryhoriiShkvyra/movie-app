@@ -8,14 +8,11 @@
   padding-top: 30px;
 }
 
-
-
 .card-additional-info-col-no-words {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
-
 }
 
 .card-additional-info-social {
@@ -101,7 +98,7 @@
   border-radius: 7px;
 }
 
-.leaderboard {
+.leaderboard.MTVAdditional {
   display: flex;
   flex-direction: column;
   gap: 10px;
