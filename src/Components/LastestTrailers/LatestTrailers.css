@@ -12,6 +12,7 @@
 }
 
 .latest-trailers-background-image {
+  display: flex;
   width: 100%;
   background-position: center;
   background-size: cover;

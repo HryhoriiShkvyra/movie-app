@@ -1,5 +1,7 @@
 .scroll-bar {
-  width: 1050px;
+  display: flex;
+  align-items: center;
+  /* width: 1050px; */
   margin-top: 30px;
   /* overflow: hidden; */
 }
