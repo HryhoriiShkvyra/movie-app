@@ -36,6 +36,11 @@ function App() {
         {
           path: "/movie",
           element: <Movie />,
+          children: [
+            {
+              path: "/movie/",
+            },
+          ],
         },
         {
           path: "/tv",
