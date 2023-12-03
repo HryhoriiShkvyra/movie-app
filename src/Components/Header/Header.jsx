@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const [isLang, setIsLang] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
-  const [isHovered, setIsHovered] = React.useState("dasd");
+  const [isHovered, setIsHovered] = React.useState("");
 
   function handleInputDown(event) {
     if (event.key === "Enter") {
