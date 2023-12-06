@@ -50,13 +50,6 @@
   color: var(--lt-color-gray-500);
 }
 
-.filter-checkbox-wrapper {
-  /* position: relative; */
-  display: flex;
-  flex-direction: row;
-  align-items: normal;
-}
-
 .filter-checkmark {
   position: absolute;
   top: 0;
@@ -91,7 +84,7 @@
 } */
 
 .filter-checkbox-text {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--lt-color-gray-600);
 }
 
@@ -248,6 +241,14 @@
   margin: 0;
 }
 
+.filter-checkbox-wrapper {
+  /* position: relative; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
 .filter-dates-wrapper {
   display: flex;
   flex-direction: column;
@@ -281,4 +282,45 @@
   padding: 5px 7px;
   border: 1px solid var(--lt-color-gray-300);
   border-radius: var(--imageBorderRadius);
+}
+
+.filter-range-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+}
+
+.filter-range-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+}
+
+.filter-range-lines {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-range-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: rotate(90deg);
+  /* position: absolute;
+  bottom: 0; */
+}
+
+.filter-range-line-big {
+  transform: rotate(90deg);
+  padding-bottom: 13px;
+}
+
+.filter-range-scale {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

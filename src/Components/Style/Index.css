@@ -270,6 +270,11 @@ ul {
   margin-left: 20px;
 }
 
+p {
+  font-size: 14px;
+  color: var(--lt-color-gray-400);
+}
+
 .app {
   position: relative;
 }

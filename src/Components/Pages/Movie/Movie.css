@@ -1,6 +1,7 @@
 .movie {
   display: flex;
-  height: var(--height);
+  /* height: var(--height); */
+  padding-bottom: 150px;
 }
 
 .content {

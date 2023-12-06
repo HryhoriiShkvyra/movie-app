@@ -1,12 +1,10 @@
 import React from "react";
 import "./Movie.css";
 import MTVPage from "../../MTV/MTVPage/MTVPage";
-import PendingIcon from "@mui/icons-material/Pending";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Sort from "../../Filters/Sort/Sort";
 import WhereToWatch from "../../Filters/Where to watch/WhereToWatch";
 import Filters from "../../Filters/Filters/Filters";
+import Card from "../../Card/Card";
 
 export default function Movie() {
   const [data, setData] = React.useState([
@@ -81,16 +79,19 @@ export default function Movie() {
         </button>
       ))} */}
       <div className="container">
-        <div className="content-wrapper">
-          <div className="title">
-            <h2>Popular Movies</h2>
+        <div className="content">
+          <div>
+            <div className="title">
+              <h2>Popular Movies</h2>
+            </div>
+            <div className="content"></div>
+            <div className="filters">
+              <Sort />
+              <WhereToWatch />
+              <Filters />
+            </div>
           </div>
-          <div className="content"></div>
-          <div className="filters">
-            <Sort />
-            <WhereToWatch />
-            <Filters />
-            {/* {data.map((item) => (
+          {/* {data.map((item) => (
               <div className="filter-panel" key={item.id}>
                 <div
                   onClick={() => handleClickFilterState(item.title)}
@@ -140,9 +141,10 @@ export default function Movie() {
                 </div>
               </div>
             ))} */}
-          </div>
 
-          <div className="items"></div>
+          <div className="items">
+            <Card />
+          </div>
         </div>
       </div>
 
