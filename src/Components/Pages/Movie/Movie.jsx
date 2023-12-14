@@ -5,6 +5,8 @@ import Sort from "../../Filters/Sort/Sort";
 import WhereToWatch from "../../Filters/Where to watch/WhereToWatch";
 import Filters from "../../Filters/Filters/Filters";
 import Card from "../../Card/Card";
+import MovieWrapper from "../../MovieWrapper/MovieWrapper";
+import { useLocation } from "react-router-dom";
 
 export default function Movie() {
   const [data, setData] = React.useState([
@@ -44,12 +46,15 @@ export default function Movie() {
       ],
     },
   ]);
+  const [movieState, setMovieState] = React.useState();
+  const [handleGenres, setHandleGenres] = React.useState();
+
+  const { state } = useLocation();
+  const pageState = state;
 
   React.useEffect(() => {
     console.log(data);
   }, [data]);
-
-  console.log(data.map((item) => item.list));
 
   const handleClickFilterState = (title) => {
     setData(
@@ -71,14 +76,12 @@ export default function Movie() {
     );
   };
 
+  console.log(pageState);
+
   return (
     <div className="movie">
-      {/* {data.map((item) => (
-        <button onClick={(e) => toggleItem(item.id)} key={item.id}>
-          {item.id}
-        </button>
-      ))} */}
-      <div className="container">
+      <MovieWrapper pageState={pageState} />
+      {/* <div className="container">
         <div className="content">
           <div>
             <div className="title">
@@ -88,65 +91,18 @@ export default function Movie() {
             <div className="filters">
               <Sort />
               <WhereToWatch />
-              <Filters />
+              <Filters
+                handleGenres={handleGenres}
+                setHandleGenres={setHandleGenres}
+              />
             </div>
           </div>
-          {/* {data.map((item) => (
-              <div className="filter-panel" key={item.id}>
-                <div
-                  onClick={() => handleClickFilterState(item.title)}
-                  className="filter-title"
-                >
-                  {item.title}
-                  <div className="filter-title-arrow">
-                    {item.filterState ? (
-                      <KeyboardArrowDownIcon />
-                    ) : (
-                      <KeyboardArrowRightIcon />
-                    )}
-                  </div>
-                </div>
-                <div
-                  className={item.filterState ? "filter-open" : "filter-closed"}
-                >
-                  <div className="list-title">{item.listTitle}</div>
-                  <div className="list">
-                    <div
-                      onClick={() => handleClickFilterSubState(item.listTitle)}
-                      className="list-main-btn"
-                    >
-                      {item.list[0]}{" "}
-                      {item.filterSubState ? (
-                        <KeyboardArrowDownIcon />
-                      ) : (
-                        <KeyboardArrowRightIcon />
-                      )}
-                    </div>
-                    <div
-                      className={
-                        item.filterSubState
-                          ? "list-btns-wrapper-active"
-                          : "list-btns-wrapper"
-                      }
-                    >
-                      <div className="list-btns">
-                        {item.list.slice(1).map((i) => (
-                          <div className="list-btn" key={i}>
-                            {i}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))} */}
 
           <div className="items">
             <Card />
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* {data.map((item) => (
         <div key={item.id}>

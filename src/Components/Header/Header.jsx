@@ -133,7 +133,11 @@ const Header = () => {
                   >
                     {item.titleAndLink.map((item) => (
                       <div key={item.title}>
-                        <Link className="header nav link" to={item.link}>
+                        <Link
+                          className="header nav link"
+                          to={item.link}
+                          state={{ pageState: item.title }}
+                        >
                           {item.title}
                         </Link>
                       </div>

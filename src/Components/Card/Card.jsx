@@ -75,7 +75,10 @@ export default function Card() {
           ))}
         </div>
       ) : (
-        <Loading />
+        <>
+          <Loading />
+          No items were found that match your query
+        </>
       )}
     </>
   );

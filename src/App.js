@@ -12,6 +12,7 @@ import SearchPage from "./Components/Search/SearchPage/SearchPage";
 import MTVPage from "./Components/MTV/MTVPage/MTVPage";
 import CastPage from "./Components/Cast/CastPage/CastPage";
 import PersonPage from "./Components/Person/PersonPage/PersonPage";
+import MovieWrapper from "./Components/MovieWrapper/MovieWrapper";
 
 function App() {
   const Layout = () => {
@@ -38,7 +39,16 @@ function App() {
           element: <Movie />,
           children: [
             {
-              path: "/movie/",
+              path: "/movie/now-paying",
+              element: <MovieWrapper />,
+            },
+            {
+              path: "/movie/upcoming",
+              element: <MovieWrapper />,
+            },
+            {
+              path: "/movie/top-rated",
+              element: <MovieWrapper />,
             },
           ],
         },
