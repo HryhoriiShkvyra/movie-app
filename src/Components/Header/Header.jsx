@@ -22,9 +22,9 @@ const Header = () => {
     }
   }
 
-  React.useEffect(() => {
-    console.log(isHovered);
-  }, [isHovered]);
+  // React.useEffect(() => {
+  //   console.log(isHovered);
+  // }, [isHovered]);
 
   const btns = ["Movie", "TV Shows", "People", "More"];
   const x = [

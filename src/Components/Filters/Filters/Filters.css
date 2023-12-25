@@ -13,7 +13,7 @@
 }
 
 .filter {
-  padding: 15px 20px;
+  padding: 14px 16px 16px;
   border-bottom: 1px solid var(--lt-color-gray-300);
 }
 
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
 .filter-title-items {
@@ -42,7 +42,7 @@
   align-items: center;
   gap: 10px;
   /* justify-content: space-between; */
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
 .filter-title-icon {
@@ -84,7 +84,7 @@
 } */
 
 .filter-checkbox-text {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--lt-color-gray-600);
 }
 
@@ -199,11 +199,7 @@
   justify-content: center;
 }
 
-.list-btn {
-  cursor: pointer;
-}
-
-.filter-btn {
+.list-btn .filter-btn {
   cursor: pointer;
 }
 
@@ -241,12 +237,32 @@
   margin: 0;
 }
 
+.filter-checkbox-wrapper-search {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 .filter-checkbox-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.filter-checkbox {
   /* position: relative; */
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
+}
+
+.filter-check-box.av {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .filter-dates-wrapper {

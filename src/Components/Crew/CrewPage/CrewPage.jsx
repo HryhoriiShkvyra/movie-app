@@ -1,5 +1,5 @@
 import React from "react";
-import "./CastPage.css";
+import "./CrewPage.css";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
@@ -7,7 +7,7 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import Navbar from "../../Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import PersonPage from "../../Person/PersonPage/PersonPage";
-import CastItem from "../CastItem/CastItem";
+import CastItem from "../CrewItem/CrewItem";
 
 export default function CrewPage() {
   const [itemValue, setItemValue] = React.useState();

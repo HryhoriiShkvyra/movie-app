@@ -9,8 +9,9 @@ import TV from "./Components/Pages/TV/TV";
 import People from "./Components/Pages/People/People";
 import More from "./Components/Pages/More/More";
 import SearchPage from "./Components/Search/SearchPage/SearchPage";
-import MTVPage from "./Components/MTV/MTVPage/MTVPage";
-import CastPage from "./Components/Cast/CastPage/CastPage";
+import CardPage from "./Components/CardPageFolder/CardPage/CardPage";
+import CrewPage from "./Components/Crew/CrewPage/CrewPage";
+import CardPageCard from "./Components/CardPageFolder/CardPageCard/CardPageCard";
 import PersonPage from "./Components/Person/PersonPage/PersonPage";
 import MovieWrapper from "./Components/MovieWrapper/MovieWrapper";
 
@@ -50,6 +51,10 @@ function App() {
               path: "/movie/top-rated",
               element: <MovieWrapper />,
             },
+            // {
+            //   path: "/movie/:id",
+            //   element: <CardPage />,
+            // },
           ],
         },
         {
@@ -70,19 +75,19 @@ function App() {
         },
         // {
         //   path: "/search/:searchValue/:id",
-        //   element: <MTVPage />,
+        //   element: <CardPage />,
         // },
         {
           path: "/:requestType/:id",
-          element: <MTVPage />,
+          element: <CardPage />,
         },
         {
           path: "/people/:searchValue/:id",
-          element: <MTVPage />,
+          element: <CardPage />,
         },
         {
           path: "/search/:searchValue/:id/cast",
-          element: <CastPage />,
+          element: <CrewPage />,
         },
         {
           path: "/person/:id",

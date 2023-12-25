@@ -47,6 +47,7 @@ export default function MovieWrapper(pageState) {
   const pageValue = pageState.pageState.pageState;
 
   console.log(pageValue);
+  console.log(pageState);
 
   const MovieWrapperLogic = () => {
     if (pageValue === "Popular") {
@@ -67,7 +68,7 @@ export default function MovieWrapper(pageState) {
               </div>
 
               <div className="items">
-                <Card />
+                <Card pageValue={pageValue} />
               </div>
             </div>
           </div>
@@ -170,11 +171,7 @@ export default function MovieWrapper(pageState) {
             <div className="filters">
               <Sort />
               <WhereToWatch />
-              <Filters
-                pageValue={pageValue}
-                // handleGenres={handleGenres}
-                // setHandleGenres={setHandleGenres}
-              />
+              <Filters pageValue={pageValue} />
             </div>
           </div>
 

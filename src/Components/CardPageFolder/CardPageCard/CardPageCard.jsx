@@ -1,6 +1,6 @@
 import React from "react";
-import "./MTVCard.css";
-import { useParams } from "react-router-dom";
+import "./CardPageCard.css";
+import { useLocation, useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import FormatListBulletedRoundedIcon from "@mui/icons-material/FormatListBulletedRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
@@ -8,7 +8,7 @@ import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 
-export default function MTVCard() {
+export default function CardPageCard() {
   const [cardValue, setCardValue] = React.useState();
   const [cardGenres, setCardGenres] = React.useState([]);
   const [cardReleaseDate, setCardReleaseDate] = React.useState();
@@ -17,11 +17,32 @@ export default function MTVCard() {
   const { requestType } = useParams();
   const [isLoading, setIsLoading] = React.useState(false);
 
-  // React.useEffect(() => console.log(requestType), []);
+  const handleId = (id) => {
+    let idWithLetters = id;
+    const onlyId = idWithLetters.replace(/\D/g, "");
+    // let newId = onlyId;
+
+    // for (let i = 0; i < id.length; i++) {
+    //   if (!id[i].replace(/\D/g, "")) {
+    //     newId += id[i];
+    //   }
+    // }
+    return onlyId;
+  };
+
+  // React.useState(() => {
+  //   console.log(id);
+  // }, []);
+
+  React.useEffect(() => {
+    handleId(id);
+  }, [id]);
 
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/${requestType}/${id}?language=en-US`;
+  const url = `https://api.themoviedb.org/3/movie/${handleId(
+    id
+  )}?language=en-US`;
   const options = {
     method: "GET",
     headers: {
@@ -40,7 +61,7 @@ export default function MTVCard() {
           setCardGenres(data.genres);
           setCardReleaseDate(data.release_date);
           setCardOverview(data.overview);
-          // console.log(data);
+          console.log(data);
           setIsLoading((prev) => !prev);
         })
         .catch((err) => console.error("error:" + err));
@@ -49,28 +70,32 @@ export default function MTVCard() {
   }, []);
 
   return (
-    <div className="card">
+    <div className="card-page-card">
       <div className="container">
         {isLoading === false ? (
           <Loading />
         ) : (
-          <div className="card-wrapper">
+          <div className="card-page-card-wrapper">
             <img
-              className="card-poster"
+              className="card-page-card-poster"
               src={
                 process.env.REACT_APP_IMAGE_URL + `w300` + cardValue.poster_path
               }
             />
-            <div className="card-header-poster">
-              <div className="card-title">
-                <div className="card-title-cols">
+            <div className="card-page-card-header-poster">
+              <div className="card-page-card-title">
+                <div className="card-page-card-title-cols">
                   {cardValue.title ? (
-                    <span className="card-name">{cardValue.title}</span>
+                    <span className="card-page-card-name">
+                      {cardValue.title}
+                    </span>
                   ) : (
-                    <span className="card-name">{cardValue.name}</span>
+                    <span className="card-page-card-name">
+                      {cardValue.name}
+                    </span>
                   )}
-                  {/* <span className="card-name">{cardValue.name}</span> */}
-                  <span className="card-release-year">
+                  <span className="card-page-card-name">{cardValue.name}</span>
+                  <span className="card-page-card-release-year">
                     {cardReleaseDate === undefined ? (
                       <>({cardValue.first_air_date.slice(0, 4)})</>
                     ) : (
@@ -78,85 +103,89 @@ export default function MTVCard() {
                     )}
                   </span>
                 </div>
-                <div className="card-facts">
+                <div className="card-page-card-facts">
                   {cardValue.release_date === undefined ? null : (
-                    <span className="card-release-date">
+                    <span className="card-page-card-release-date">
                       {cardValue.release_date}
                     </span>
                   )}
                   <div className="card-genres">
                     {cardGenres.map((item) => (
-                      <span className="card-genre" key={item.id}>
+                      <span className="card-page-card-genre" key={item.id}>
                         {item.name}
                       </span>
                     ))}
                   </div>
                   {cardValue.runtime === undefined ? null : (
-                    <span className="card-runtime">
+                    <span className="card-page-card-runtime">
                       {cardValue.runtime} min
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="card-actions">
-                <div className="card-chart">
-                  <div className="card-chart-wrapper">
-                    <div className="card-chart-line">
-                      <span className="card-chart-score">100</span>
-                      <span className="card-chart-symbol">%</span>
+              <div className="card-page-card-actions">
+                <div className="card-page-card-chart">
+                  <div className="card-page-card-chart-wrapper">
+                    <div className="card-page-card-chart-line">
+                      <span className="card-page-card-chart-score">100</span>
+                      <span className="card-page-card-chart-symbol">%</span>
                     </div>
                   </div>
-                  <div className="card-chart-text">
+                  <div className="card-page-card-chart-text">
                     <span>user</span>
                     <span>score</span>
                   </div>
                 </div>
-                <div className="card-add-to-value">
+                <div className="card-page-card-add-to-value">
                   <FormatListBulletedRoundedIcon />
                 </div>
-                <div className="card-add-to-value">
+                <div className="card-page-card-add-to-value">
                   <FavoriteRoundedIcon />
                 </div>
-                <div className="card-add-to-value">
+                <div className="card-page-card-add-to-value">
                   <BookmarkRoundedIcon />
                 </div>
-                <div className="card-add-to-value">
+                <div className="card-page-card-add-to-value">
                   <StarRoundedIcon />
                 </div>
-                <div className="card-trailer">
+                <div className="card-page-card-trailer">
                   <PlayArrowRoundedIcon />
                   play trailer
                 </div>
               </div>
-              <div className="card-header-info">
-                <div className="card-tagline">{cardValue.tagline}</div>
-                <div className="card-overview-wrapper">
-                  <div className="card-overview-title">Overview</div>
-                  <div className="card-overview-text">{cardValue.overview}</div>
+              <div className="card-page-card-header-info">
+                <div className="card-page-card-tagline">
+                  {cardValue.tagline}
+                </div>
+                <div className="card-page-card-overview-wrapper">
+                  <div className="card-page-card-overview-title">Overview</div>
+                  <div className="card-page-card-overview-text">
+                    {cardValue.overview}
+                  </div>
                 </div>
               </div>
               {cardValue.created_by === undefined ? (
-                <div className="card-no-image">
-                  <div className="card-profile">
+                <div className="card-page-card-no-image">
+                  <div className="card-page-card-profile">
                     David Fincher
-                    <span className="card-character">Director</span>
+                    <span className="card-page-card-character">Director</span>
                   </div>
-                  <div className="card-profile">
+                  <div className="card-page-card-profile">
                     Chuck Palahniuk
-                    <span className="card-character">Novel</span>
+                    <span className="card-page-card-character">Novel</span>
                   </div>
-                  <div className="card-profile">
+                  <div className="card-page-card-profile">
                     Jim Uhls
-                    <span className="card-character">Screenplay</span>
+                    <span className="card-page-card-character">Screenplay</span>
                   </div>
                 </div>
               ) : (
-                <div className="card-no-image">
+                <div className="card-page-card-no-image">
                   {cardValue.created_by.map((item) => (
-                    <div className="card-profile" key={item.id}>
+                    <div className="card-page-card-profile" key={item.id}>
                       {item.name}
-                      <span className="card-character">Director</span>
+                      <span className="card-page-card-character">Director</span>
                     </div>
                   ))}
                 </div>

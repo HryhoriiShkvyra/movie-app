@@ -19,8 +19,32 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const [isLoading, setIsLoading] = React.useState(null);
   const [personId, setPersonId] = React.useState();
   const [itemId, setItemId] = React.useState();
+  const [test, setTest] = React.useState();
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    console.log(id);
+  }, []);
+
+  const handleId = (id) => {
+    let idWithLetters = id;
+    // const onlyId = idWithLetters.replace(/\D/g, "");
+    // let newId = onlyId;
+
+    // for (let i = 0; i < id.length; i++) {
+    //   if (!id[i].replace(/\D/g, "")) {
+    //     newId += id[i];
+    //   }
+    // }
+    // return onlyId;
+  };
+
+  // ==========================
+
+  // console.log(handleId(id));
+
+  // ==========================
 
   const fetch = require("node-fetch");
 
@@ -35,6 +59,47 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const Movie_credits_url =
     process.env.REACT_APP_BASE_URL + `movie/${id}/credits?language=en-US`;
 
+  // ==================
+
+  const handleTypeRequest = () => {
+    let innerId = handleId(id);
+    const TV_credits_url =
+      process.env.REACT_APP_BASE_URL + `tv/${innerId}?language=en-US`;
+    const Movie_credits_url =
+      process.env.REACT_APP_BASE_URL + `movie/${innerId}?language=en-US`;
+  };
+
+  const fetchDataTypeReq = async () => {
+    setIsLoading(true);
+    async function getResponse() {
+      try {
+        const response = await fetch(TV_credits_url, options);
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+
+        const data = await response.json();
+        console.log("=>" + data);
+        setTest(data);
+      } catch (error) {
+        const response = await fetch(Movie_credits_url, options);
+        const data = await response.json();
+        console.log(data);
+        setTest(data);
+      }
+    }
+
+    return getResponse();
+  };
+
+  // React.useEffect(() => {
+  //   fetchDataTypeReq();
+  // }, []);
+
+  // handleTypeRequest();
+
+  // ==================
+
   const options = {
     method: "GET",
     headers: {
@@ -43,10 +108,13 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
     },
   };
 
-  React.useEffect(() => {
-    // console.log(pageType);
-    // console.log(cleanedId);
-  }, []);
+  // fetch(`https://api.themoviedb.org/3/tv/94722?language=en-US`, options)
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data));
+
+  // fetch(`https://api.themoviedb.org/3/movie/94722?language=en-US`, options)
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data));
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -517,9 +585,7 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
       {isLoading === true ? (
         <Loading />
       ) : (
-        <div className="scroll-bar">
-          <ScrollBarWrapper />
-        </div>
+        <div className="scroll-bar">{<ScrollBarWrapper />}</div>
       )}
     </>
   );

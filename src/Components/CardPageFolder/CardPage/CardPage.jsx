@@ -1,15 +1,37 @@
 import React from "react";
-import "./MTVPage.css";
-import MTVCard from "../MTVCard/MTVCard";
+import "./CardPage.css";
+import CardPageCard from "../CardPageCard/CardPageCard";
 // import CardCast from "../CardCast/CardCast";
-import MTVAdditionalInfo from "../MTVAdditionalInfo/MTVAdditionalInfo";
+import CardPageAdditionalInfo from "../CardPageAdditionalInfo/CardPageAdditionalInfo";
 import Navbar from "../../Navbar/Navbar";
 import { Link, useParams } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
+import CardCast from "../CardCast/CardCast";
 
-export default function MTVPage() {
+export default function CardPage() {
   const { requestType } = useParams();
   const { id } = useParams();
+
+  console.log(id);
+
+  // console.log(onlyId);
+
+  const handleId = (id) => {
+    let idWithLetters = id;
+    const onlyId = idWithLetters.replace(/\D/g, "");
+    // let newId = onlyId;
+
+    // for (let i = 0; i < id.length; i++) {
+    //   if (!id[i].replace(/\D/g, "")) {
+    //     newId += id[i];
+    //   }
+    // }
+    return onlyId;
+  };
+
+  React.useEffect(() => {
+    handleId(id);
+  }, [id]);
 
   const pageType = "mtv-actors";
 
@@ -26,15 +48,19 @@ export default function MTVPage() {
   return (
     <div className="card-page">
       <Navbar />
-      <MTVCard requestType={requestType} />
+      <CardPageCard requestType={requestType} id={handleId(id)} />
       <div className="container">
         <div className="about-card">
           <div className="about-main">
-            <ScrollBar id={id} pageType={pageType} movieOrTv={requestType} />
-            {/* <CardCast requestType={requestType} /> */}
+            <ScrollBar
+              id={handleId(id)}
+              pageType={pageType}
+              movieOrTv={requestType}
+            />
+            <CardCast requestType={requestType} />
           </div>
           <div className="about-else">
-            <MTVAdditionalInfo requestType={requestType} />
+            <CardPageAdditionalInfo requestType={requestType} />
           </div>
         </div>
         {/* <Link

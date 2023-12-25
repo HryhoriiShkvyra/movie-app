@@ -86,7 +86,7 @@ export default function Leaderboard() {
     }));
     const SortNumbers = getNumbers.sort((a, b) => b.value - a.value);
 
-    console.log(SortNumbers);
+    // console.log(SortNumbers);
 
     const HighestNumber = SortNumbers[0].value;
 

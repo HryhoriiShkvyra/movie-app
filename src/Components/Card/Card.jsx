@@ -1,14 +1,53 @@
 import React from "react";
 import "./Card.css";
 import Loading from "../Loading/Loading";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import CardPage from "../CardPageFolder/CardPage/CardPage";
+import CardPageCard from "../CardPageFolder/CardPageCard/CardPageCard";
 
-export default function Card() {
+export default function Card(pageValue) {
   const [value, setValue] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
+  const [pageValueState, setPageValueState] = React.useState();
+
+  const navigate = useNavigate();
+
+  const pageRequestValue = () => {};
+
+  const pageState = pageValue.pageValue;
+
+  const handlePageValue = (pageValue) => {
+    if (!pageValue) {
+      return;
+    }
+
+    console.log(pageValue);
+
+    const { pageValue: page } = pageValue;
+
+    if (page === "Popular") {
+      return setPageValueState("popular");
+    } else if (page === "Now Playing") {
+      return setPageValueState("now_playing");
+    } else if (page === "Upcoming") {
+      return setPageValueState("upcoming");
+    } else if (page === "Top Rated") {
+      return setPageValueState("top_rated");
+    }
+  };
+
+  React.useState(() => {
+    console.log("pageState ====> " + pageState);
+    console.log(pageValue.pageValue);
+    console.log(pageValueState);
+    // handlePageValue();
+  }, [pageState]);
+
   const fetch = require("node-fetch");
 
-  const url =
-    "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1";
+  const url = `https://api.themoviedb.org/3/movie/${handlePageValue()}}?language=en-US&page=1`;
+
   const options = {
     method: "GET",
     headers: {
@@ -24,6 +63,7 @@ export default function Card() {
       .then((data) => {
         setValue(data);
         console.log(data);
+        handlePageValue();
         setIsLoading((prev) => !prev);
       })
       .catch((err) => console.error("error:" + err));
@@ -33,12 +73,26 @@ export default function Card() {
     fetchData();
   }, []);
 
+  const handleRedirectToCard = (e) => {
+    e.preventDefault();
+    console.log(e.id);
+    navigate(`/movie/${e.id}-${e.name}`);
+  };
+
+  const handleId = (e) => {
+    console.log(e);
+  };
+
   return (
     <>
       {isLoading ? (
         <div className="cards">
-          {value.results.map((item) => (
-            <div className="card" key={item.id}>
+          {/* {value.results.map((item) => (
+            <Link
+              className="card"
+              key={item.id}
+              to={`/movie/${item.id}-${item.name}`}
+            >
               <div className="card-poster">
                 <img
                   className="card-poster"
@@ -71,8 +125,8 @@ export default function Card() {
                   )}
                 </div>
               </div>
-            </div>
-          ))}
+            </Link>
+          ))} */}
         </div>
       ) : (
         <>

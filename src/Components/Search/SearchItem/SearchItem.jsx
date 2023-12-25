@@ -2,8 +2,8 @@ import React from "react";
 import "./SearchItem.css";
 import LandscapeIcon from "@mui/icons-material/Landscape";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import CastItem from "../../Cast/CastItem/CastItem";
-import MTVPage from "../../MTV/MTVPage/MTVPage";
+import CrewItem from "../../Crew/CrewItem/CrewItem";
+import CardPage from "../../CardPageFolder/CardPage/CardPage";
 
 export default function SearchItem({ item, stateTypeRequest }) {
   const [overview, setOverview] = React.useState([]);
@@ -139,7 +139,7 @@ export default function SearchItem({ item, stateTypeRequest }) {
         </div>
       );
     } else if (stateTypeRequest === "people") {
-      return <CastItem item={item} />;
+      return <CrewItem item={item} />;
     } else if (stateTypeRequest === "collection") {
       return (
         <div>

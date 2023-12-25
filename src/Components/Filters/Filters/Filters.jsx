@@ -18,10 +18,27 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
   const [filterShowMe, setFilterShowMe] = React.useState("everything");
   const [filterAvailability, setFilterAvailability] = React.useState(true);
   const [filterReleaseDate, setFilterReleaseDate] = React.useState(true);
+  const [filterReleaseDateStateArray, setFilterReleaseDateStateArray] =
+    React.useState([
+      { title: "TheatricalLimited", state: false },
+      { title: "Theatrical", state: false },
+      { title: "Premiere", state: false },
+      { title: "Digital", state: false },
+      { title: "Physical", state: false },
+      { title: "TV", state: false },
+    ]);
 
-  React.useEffect(() => {
-    console.log(pageValue);
-  }, [pageValue]);
+  const [
+    filterReleaseDateStateArraySearch,
+    setFilterReleaseDateStateArraySearch,
+  ] = React.useState([
+    { title: "Search all releases?", state: false },
+    { title: "Search all countries?", state: false },
+  ]);
+
+  // React.useEffect(() => {
+  //   console.log(pageValue);
+  // }, [pageValue]);
 
   const genres = [
     "Action",
@@ -127,6 +144,32 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
     setHandleGenres(item);
   };
 
+  const handleClickReleaseDate = (e) => {
+    setFilterReleaseDateStateArray((prev) =>
+      prev.map((item) => {
+        if (item.title === e.title) {
+          return { ...item, state: !item.state };
+        } else {
+          return item;
+        }
+      })
+    );
+    console.log(e.title, e.state);
+  };
+
+  const handleClickReleaseDateSearch = (e) => {
+    setFilterReleaseDateStateArraySearch((prev) =>
+      prev.map((item) => {
+        if (item.title === e.title) {
+          return { ...item, state: !item.state };
+        } else {
+          return item;
+        }
+      })
+    );
+    console.log(e.title, e.state);
+  };
+
   const FilterReleaseDate = () => {
     if (pageValue === "Popular") {
       return (
@@ -135,14 +178,16 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
             <h3>Release Dates</h3>
           </div>
           <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
           </div>
           <div className="filter-dates-wrapper">
             <div className="filter-dates-item">
@@ -162,55 +207,34 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
           <div className="filter-title">
             <h3>Release Dates</h3>
           </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
+          <div className="filter-checkbox-wrapper-search">
+            {filterReleaseDateStateArraySearch.map((item) => (
+              <div className="filter-checkbox" key={item.title}>
+                <input
+                  className="filter-checkbox-input"
+                  type="checkbox"
+                  content="#"
+                  checked={item.state}
+                  onChange={(e) => handleClickReleaseDateSearch(item)}
+                />
+                <span className="filter-checkbox-text">{item.title}</span>
+              </div>
+            ))}
           </div>
+
           <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
-          </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
-          </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
-          </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
+            {filterReleaseDateStateArray.map((item) => (
+              <div className="filter-checkbox" key={item.title}>
+                <input
+                  className="filter-checkbox-input"
+                  type="checkbox"
+                  content="#"
+                  checked={item.state}
+                  onChange={(e) => handleClickReleaseDate(item)}
+                />
+                <span className="filter-checkbox-text">{item.title}</span>
+              </div>
+            ))}
           </div>
           <div className="filter-dates-wrapper">
             <div className="filter-dates-item">
@@ -231,54 +255,73 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
             <h3>Release Dates</h3>
           </div>
           <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
+
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
           </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
-          </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
-          </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
-          </div>
-          <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
+
+          <div className="filter-checkbox-wrapper-type">
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
+
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
+
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
+
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
           </div>
           <div className="filter-dates-wrapper">
             <div className="filter-dates-item">
@@ -299,14 +342,16 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
             <h3>Release Dates</h3>
           </div>
           <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterReleaseDate}
-              onChange={(e) => handleReleaseDate()}
-            />
-            <span className="filter-checkbox-text">Search all releases?</span>
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                checked={filterReleaseDate}
+                onChange={(e) => handleReleaseDate()}
+              />
+              <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
           </div>
           <div className="filter-dates-wrapper">
             <div className="filter-dates-item">
@@ -394,16 +439,18 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
             <h3>Availabilities</h3>
           </div>
           <div className="filter-checkbox-wrapper">
-            <input
-              className="filter-checkbox"
-              type="checkbox"
-              content="#"
-              checked={filterAvailability}
-              onChange={(e) => handleAvailability()}
-            />
-            <span className="filter-checkbox-text">
-              Search all availabilities?
-            </span>
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox"
+                type="checkbox"
+                content="#"
+                checked={filterAvailability}
+                onChange={(e) => handleAvailability()}
+              />
+              <span className="filter-checkbox-text">
+                Search all availabilities?
+              </span>
+            </div>
           </div>
         </div>
 
@@ -605,10 +652,19 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
     );
   };
 
+  // const handleClick = (e) => {
+  //   setFilterReleaseDateStateArray((prevState) =>
+  //     prevState.map((item) =>
+  //       item ===  ? { ...item, item: !theatrical } : item
+  //     )
+  //   );
+  // };
+
+  React.useEffect(() => {}, [filterReleaseDateStateArray]);
+
   return (
     <div className="filter-panel">
-      <FilterLogic />
-      {Loading ? <></> : <Loading />}
+      {Loading ? <FilterLogic /> : <Loading />}
     </div>
   );
 }

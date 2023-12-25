@@ -1,5 +1,5 @@
 import React from "react";
-import "./MTVAdditionalInfo.css";
+import "./CardPageAdditionalInfo.css";
 import {
   ChangeHistoryRounded,
   FacebookRounded,
@@ -8,7 +8,7 @@ import {
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 
-export default function MTVAdditionalInfo({ requestType }) {
+export default function CardPageAdditionalInfo({ requestType }) {
   const { id } = useParams();
   // const { requestType } = useParams();
 

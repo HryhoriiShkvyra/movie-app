@@ -1,6 +1,6 @@
 import React from "react";
 import "./Movie.css";
-import MTVPage from "../../MTV/MTVPage/MTVPage";
+import CardPage from "../../CardPageFolder/CardPage/CardPage";
 import Sort from "../../Filters/Sort/Sort";
 import WhereToWatch from "../../Filters/Where to watch/WhereToWatch";
 import Filters from "../../Filters/Filters/Filters";
@@ -52,9 +52,9 @@ export default function Movie() {
   const { state } = useLocation();
   const pageState = state;
 
-  React.useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // React.useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   const handleClickFilterState = (title) => {
     setData(
@@ -81,205 +81,7 @@ export default function Movie() {
   return (
     <div className="movie">
       <MovieWrapper pageState={pageState} />
-      {/* <div className="container">
-        <div className="content">
-          <div>
-            <div className="title">
-              <h2>Popular Movies</h2>
-            </div>
-            <div className="content"></div>
-            <div className="filters">
-              <Sort />
-              <WhereToWatch />
-              <Filters
-                handleGenres={handleGenres}
-                setHandleGenres={setHandleGenres}
-              />
-            </div>
-          </div>
-
-          <div className="items">
-            <Card />
-          </div>
-        </div>
-      </div> */}
-
-      {/* {data.map((item) => (
-        <div key={item.id}>
-          <div onClick={(e) => handleClick()}>{item.id}</div>
-          <div className={item.state === false ? "display" : "hidden"}>
-            hehe
-          </div>
-        </div>
-      ))} */}
-
-      {/* <div className="container">
-        <div className="left navigation">
-          <div className="navigation-title">Popular Movies</div>
-          <div className="navigation-btns">
-            <div className="navigation-btn">
-              <div
-                onClick={(e) => setSortBtn((prev) => !prev)}
-                className="navigation-btn-main"
-              >
-                <div className="navigation-btn-title">Sort</div>
-                <div className="navigation-btn-inner">
-                  <div className="navigation-btn-count">9</div>
-                  <div
-                    className={
-                      sortBtn
-                        ? "navigation-btn-icon"
-                        : "navigation-btn-icon-active"
-                    }
-                  >
-                    <ArrowBackIosIcon />
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className={
-                  sortBtn
-                    ? "navigation-btn-not-main-active"
-                    : "navigation-btn-not-main"
-                }
-              >
-                <div className="navigation-subTitle">Sort Results By</div>
-                <div className="navigation-subBtn-wrapper">
-                  <button
-                    onClick={(e) => setSortResult((prev) => !prev)}
-                    className="navigation-subBtn"
-                  >
-                    Popularity Descending <ArrowDropDownIcon />
-                  </button>
-                  <div
-                    className={
-                      sortResult
-                        ? "navigation-list-wrapper"
-                        : "navigation-list-wrapper-active"
-                    }
-                  >
-                    <ol className="navigation-list-active">
-                      <div className="navigation-list-items">
-                        <li className="navigation-list-item">
-                          Popularity Descending
-                        </li>
-                        <li className="navigation-list-item">
-                          Popularity Ascending
-                        </li>
-                        <li className="navigation-list-item">
-                          Rating Descending
-                        </li>
-                        <li className="navigation-list-item">
-                          Rating Ascending
-                        </li>
-                        <li className="navigation-list-item">
-                          Release Date Descending
-                        </li>
-                        <li className="navigation-list-item">
-                          Release Date Ascending
-                        </li>
-                        <li className="navigation-list-item">Title (A-Z)</li>
-                        <li className="navigation-list-item">Title (Z-A)"</li>
-                      </div>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="navigation-btn">
-              <div
-                onClick={(e) => setWhereToWatch((prev) => !prev)}
-                className="navigation-btn-main"
-              >
-                <div className="navigation-btn-title">Where to watch</div>
-                <div className="navigation-btn-inner">
-                  <div className="navigation-btn-count">9</div>
-                  <div
-                    className={
-                      whereToWatch
-                        ? "navigation-btn-icon"
-                        : "navigation-btn-icon-active"
-                    }
-                  >
-                    <ArrowBackIosIcon />
-                  </div>
-                </div>
-              </div>
-              <div
-                className={
-                  whereToWatch
-                    ? "navigation-btn-not-main-active"
-                    : "navigation-btn-not-main"
-                }
-              >
-                <div className="navigation-subTitle">My Services</div>
-              </div>
-              <div className="navigation-checkbox-wrapper">
-                <input
-                  className="navigation-checkbox-btn"
-                  type="checkbox"
-                ></input>
-                <div className="navigation-checkbox-text">
-                  Restrict searches to my subscribed services?
-                </div>
-              </div>
-              <div
-                className={
-                  whereToWatch
-                    ? "navigation-btn-not-main-active"
-                    : "navigation-btn-not-main"
-                }
-              >
-                <div className="navigation-subTitle">Country</div>
-                <div className="navigation-subBtn-wrapper">
-                  <button
-                    onClick={(e) => setCountryBtn((prev) => !prev)}
-                    className="navigation-subBtn"
-                  >
-                    Popularity Descending <ArrowDropDownIcon />
-                  </button>
-                  <div
-                    className={
-                      countryBtn
-                        ? "navigation-list-wrapper"
-                        : "navigation-list-wrapper-active"
-                    }
-                  >
-                    <ol className="navigation-list-active">
-                      <div className="navigation-list-items">
-                        <li className="navigation-list-item">
-                          Popularity Descending
-                        </li>
-                        <li className="navigation-list-item">
-                          Popularity Ascending
-                        </li>
-                        <li className="navigation-list-item">
-                          Rating Descending
-                        </li>
-                        <li className="navigation-list-item">
-                          Rating Ascending
-                        </li>
-                        <li className="navigation-list-item">
-                          Release Date Descending
-                        </li>
-                        <li className="navigation-list-item">
-                          Release Date Ascending
-                        </li>
-                        <li className="navigation-list-item">Title (A-Z)</li>
-                        <li className="navigation-list-item">Title (Z-A)"</li>
-                      </div>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="navigation-search-btn"></div>
-        </div>
-        <div className="right content">content</div>
-      </div> */}
+      {/* <MTVPage /> */}
     </div>
   );
 }
