@@ -26,6 +26,10 @@ function App() {
     );
   };
 
+  console.log(
+    'git commit -m "In a case of it, I must push everything to github"'
+  );
+
   const router = createBrowserRouter([
     {
       path: "/",
