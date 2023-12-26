@@ -44,37 +44,37 @@ export default function MovieWrapper(pageState) {
     },
   ]);
 
-  const pageValue = pageState.pageState.pageState;
+  // const pageValue = pageState.pageState.pageState;
 
-  console.log(pageValue);
-  console.log(pageState);
+  // console.log(pageValue);
+  console.log(pageState.pageState);
 
   const MovieWrapperLogic = () => {
-    if (pageValue === "Popular") {
+    if (pageState.pageState === "Popular") {
       return (
         <div>
           <div className="container">
             <div className="content">
               <div>
                 <div className="title">
-                  <h2>{pageValue} Movies</h2>
+                  <h2>{pageState.pageState} Movies</h2>
                 </div>
                 <div className="content"></div>
                 <div className="filters">
                   <Sort />
                   <WhereToWatch />
-                  <Filters pageValue={pageValue} />
+                  <Filters pageValue={pageState.pageState} />
                 </div>
               </div>
 
               <div className="items">
-                <Card pageValue={pageValue} />
+                <Card pageValue={pageState.pageState} />
               </div>
             </div>
           </div>
         </div>
       );
-    } else if (pageValue === "Now Playing") {
+    } else if (pageState.pageState === "Now Playing") {
       return (
         <div>
           <div>
@@ -82,13 +82,13 @@ export default function MovieWrapper(pageState) {
               <div className="content">
                 <div>
                   <div className="title">
-                    <h2>{pageValue} Movies</h2>
+                    <h2>{pageState.pageState} Movies</h2>
                   </div>
                   <div className="content"></div>
                   <div className="filters">
                     <Sort />
                     <WhereToWatch />
-                    <Filters pageValue={pageValue} />
+                    <Filters pageValue={pageState.pageState} />
                   </div>
                 </div>
 
@@ -100,7 +100,7 @@ export default function MovieWrapper(pageState) {
           </div>
         </div>
       );
-    } else if (pageValue === "Upcoming") {
+    } else if (pageState.pageState === "Upcoming") {
       return (
         <div>
           <div>
@@ -109,13 +109,13 @@ export default function MovieWrapper(pageState) {
                 <div className="content">
                   <div>
                     <div className="title">
-                      <h2>{pageValue} Movies</h2>
+                      <h2>{pageState.pageState} Movies</h2>
                     </div>
                     <div className="content"></div>
                     <div className="filters">
                       <Sort />
                       <WhereToWatch />
-                      <Filters pageValue={pageValue} />
+                      <Filters pageValue={pageState.pageState} />
                     </div>
                   </div>
 
@@ -129,7 +129,7 @@ export default function MovieWrapper(pageState) {
           );
         </div>
       );
-    } else if (pageValue === "Top Rated") {
+    } else if (pageState.pageState === "Top Rated") {
       return (
         <div>
           <div>
@@ -138,13 +138,13 @@ export default function MovieWrapper(pageState) {
                 <div className="content">
                   <div>
                     <div className="title">
-                      <h2>{pageValue} Movies</h2>
+                      <h2>{pageState.pageState} Movies</h2>
                     </div>
                     <div className="content"></div>
                     <div className="filters">
                       <Sort />
                       <WhereToWatch />
-                      <Filters pageValue={pageValue} />
+                      <Filters pageValue={pageState.pageState} />
                     </div>
                   </div>
 
@@ -171,7 +171,7 @@ export default function MovieWrapper(pageState) {
             <div className="filters">
               <Sort />
               <WhereToWatch />
-              <Filters pageValue={pageValue} />
+              <Filters pageValue={pageState.pageState} />
             </div>
           </div>
 

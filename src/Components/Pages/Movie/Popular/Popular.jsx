@@ -1,14 +1,16 @@
 import React from "react";
-import "./Movie.css";
-import CardPage from "../../CardPageFolder/CardPage/CardPage";
-import Sort from "../../Filters/Sort/Sort";
-import WhereToWatch from "../../Filters/Where to watch/WhereToWatch";
-import Filters from "../../Filters/Filters/Filters";
-import Card from "../../Card/Card";
-import MovieWrapper from "../../MovieWrapper/MovieWrapper";
+import "./Popular.css";
+import CardPage from "../../../CardPageFolder/CardPage/CardPage";
+import Sort from "../../../Filters/Sort/Sort";
+import WhereToWatch from "../../../Filters/Where to watch/WhereToWatch";
+import Filters from "../../../Filters/Filters/Filters";
+import Card from "../../../Card/Card";
+import MovieWrapper from "../../../MovieWrapper/MovieWrapper";
 import { useLocation } from "react-router-dom";
 
-export default function Upcoming() {
+export default function Popular() {
+  const pageState = "Popular";
+
   const [data, setData] = React.useState([
     {
       title: "Sort",
@@ -49,9 +51,6 @@ export default function Upcoming() {
   const [movieState, setMovieState] = React.useState();
   const [handleGenres, setHandleGenres] = React.useState();
 
-  const { state } = useLocation();
-  const pageState = state;
-
   // React.useEffect(() => {
   //   console.log(data);
   // }, [data]);
@@ -76,11 +75,9 @@ export default function Upcoming() {
     );
   };
 
-  console.log(pageState);
-
-  return null;
-  // <div className="movie">
-  //   <MovieWrapper pageState={pageState} />
-  //   <MTVPage />
-  // </div>
+  return (
+    <div className="movie">
+      <MovieWrapper pageState={pageState} />
+    </div>
+  );
 }

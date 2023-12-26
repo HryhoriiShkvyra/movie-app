@@ -3,12 +3,14 @@ import "./Header.css";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isLang, setIsLang] = React.useState(false);
   const [inputValue, setInputValue] = React.useState("");
   const [isHovered, setIsHovered] = React.useState("");
+
+  const navigate = useNavigate();
 
   function handleInputDown(event) {
     if (event.key === "Enter") {
@@ -22,9 +24,11 @@ const Header = () => {
     }
   }
 
-  // React.useEffect(() => {
-  //   console.log(isHovered);
-  // }, [isHovered]);
+  const redirectToMoviePage = (e) => {
+    // e.preventDefault();
+    console.log(e);
+    navigate(`{e}`);
+  };
 
   const btns = ["Movie", "TV Shows", "People", "More"];
   const x = [
@@ -135,8 +139,9 @@ const Header = () => {
                       <div key={item.title}>
                         <Link
                           className="header nav link"
+                          // onClick={(e) => redirectToMoviePage(item.link)}
                           to={item.link}
-                          state={{ pageState: item.title }}
+                          // state={{ pageState: item.title }}
                         >
                           {item.title}
                         </Link>

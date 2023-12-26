@@ -11,9 +11,11 @@ import More from "./Components/Pages/More/More";
 import SearchPage from "./Components/Search/SearchPage/SearchPage";
 import CardPage from "./Components/CardPageFolder/CardPage/CardPage";
 import CrewPage from "./Components/Crew/CrewPage/CrewPage";
-import CardPageCard from "./Components/CardPageFolder/CardPageCard/CardPageCard";
 import PersonPage from "./Components/Person/PersonPage/PersonPage";
-import MovieWrapper from "./Components/MovieWrapper/MovieWrapper";
+import Popular from "./Components/Pages/Movie/Popular/Popular";
+import NowPlaying from "./Components/Pages/Movie/NowPlaying/NowPlaying";
+import Upcoming from "./Components/Pages/Movie/Upcoming/Upcoming";
+import TopRated from "./Components/Pages/Movie/TopRated/TopRated";
 
 function App() {
   const Layout = () => {
@@ -41,25 +43,19 @@ function App() {
         },
         {
           path: "/movie",
-          element: <Movie />,
-          children: [
-            {
-              path: "/movie/now-paying",
-              element: <MovieWrapper />,
-            },
-            {
-              path: "/movie/upcoming",
-              element: <MovieWrapper />,
-            },
-            {
-              path: "/movie/top-rated",
-              element: <MovieWrapper />,
-            },
-            // {
-            //   path: "/movie/:id",
-            //   element: <CardPage />,
-            // },
-          ],
+          element: <Popular />,
+        },
+        {
+          path: "/movie/now-paying",
+          element: <NowPlaying />,
+        },
+        {
+          path: "/movie/upcoming",
+          element: <Upcoming />,
+        },
+        {
+          path: "/movie/top-rated",
+          element: <TopRated />,
         },
         {
           path: "/tv",

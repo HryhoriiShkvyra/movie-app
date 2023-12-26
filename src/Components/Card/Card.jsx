@@ -15,14 +15,14 @@ export default function Card(pageValue) {
 
   const pageRequestValue = () => {};
 
+  console.log(pageValue);
+
   const pageState = pageValue.pageValue;
 
   const handlePageValue = (pageValue) => {
     if (!pageValue) {
       return;
     }
-
-    console.log(pageValue);
 
     const { pageValue: page } = pageValue;
 
@@ -38,9 +38,9 @@ export default function Card(pageValue) {
   };
 
   React.useState(() => {
-    console.log("pageState ====> " + pageState);
-    console.log(pageValue.pageValue);
-    console.log(pageValueState);
+    // console.log("pageState ====> " + pageState);
+    // console.log(pageValue.pageValue);
+    // console.log(pageValueState);
     // handlePageValue();
   }, [pageState]);
 
