@@ -15,6 +15,10 @@ import Popular from "./Components/Pages/Movie/Popular/Popular";
 import NowPlaying from "./Components/Pages/Movie/NowPlaying/NowPlaying";
 import Upcoming from "./Components/Pages/Movie/Upcoming/Upcoming";
 import TopRated from "./Components/Pages/Movie/TopRated/TopRated";
+import TVPopular from "./Components/Pages/TV/TVPopular/TVPopular";
+import TVAiringToday from "./Components/Pages/TV/TVAiringToday/TVAiringToday";
+import TVOnTV from "./Components/Pages/TV/TVOnTV/TVOnTV";
+import TVTopRated from "./Components/Pages/TV/TVTopRated/TVTopRated";
 
 function App() {
   const Layout = () => {
@@ -58,7 +62,19 @@ function App() {
         },
         {
           path: "/tv",
-          element: <TV />,
+          element: <TVPopular />,
+        },
+        {
+          path: "/tv/airing-today",
+          element: <TVAiringToday />,
+        },
+        {
+          path: "/tv/on-the-air",
+          element: <TVOnTV />,
+        },
+        {
+          path: "/tv/top-rated",
+          element: <TVTopRated />,
         },
         {
           path: "/people",

@@ -5,187 +5,151 @@ import WhereToWatch from "../Filters/Where to watch/WhereToWatch";
 import Filters from "../Filters/Filters/Filters";
 import Card from "../Card/Card";
 
-export default function MovieWrapper(pageState) {
-  const [data, setData] = React.useState([
-    {
-      title: "Sort",
-      filterState: false,
-      filterSubState: false,
-      btnTitle: "Sort",
-      listTitle: "Sort Results By",
-      list: [
-        "Popularity Descending",
-        "Popularity Ascending",
-        "Rating Descending",
-        "Rating Ascending",
-        "Release Date Descending",
-        "Release Date Ascending",
-        "Title (A-Z)",
-        "Title (Z-A)",
-      ],
-    },
-    {
-      title: "Where to watch",
-      filterState: false,
-      filterSubState: false,
-      btnTitle: "Where to watch",
-      listTitle: "My Services",
-      checkbox: "Restrict searches to my subscribed services?",
-      list: [
-        "Ukraine 1",
-        "Ukraine 2",
-        "Ukraine 3",
-        "Ukraine 4",
-        "Ukraine 5",
-        "Ukraine 6",
-        "Ukraine 7",
-        "Ukraine 8",
-      ],
-    },
-  ]);
-
+// export default function MovieWrapper(pageState) {
+export default function MovieWrapper({ currentLocation }) {
   // const pageValue = pageState.pageState.pageState;
 
   // console.log(pageValue);
-  console.log(pageState.pageState);
+  // console.log(pageState.pageState);
+  console.log(currentLocation);
 
-  const MovieWrapperLogic = () => {
-    if (pageState.pageState === "Popular") {
-      return (
-        <div>
-          <div className="container">
-            <div className="content">
-              <div>
-                <div className="title">
-                  <h2>{pageState.pageState} Movies</h2>
-                </div>
-                <div className="content"></div>
-                <div className="filters">
-                  <Sort />
-                  <WhereToWatch />
-                  <Filters pageValue={pageState.pageState} />
-                </div>
-              </div>
+  // const MovieWrapperLogic = () => {
+  //   if (pageState.pageState === "Popular") {
+  //     return (
+  //       <div>
+  //         <div className="container">
+  //           <div className="content">
+  //             <div>
+  //               <div className="title">
+  //                 <h2>{pageState.pageState} Movies</h2>
+  //               </div>
+  //               <div className="content"></div>
+  //               <div className="filters">
+  //                 <Sort />
+  //                 <WhereToWatch />
+  //                 <Filters pageValue={pageState.pageState} />
+  //               </div>
+  //             </div>
 
-              <div className="items">
-                <Card pageValue={pageState.pageState} />
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    } else if (pageState.pageState === "Now Playing") {
-      return (
-        <div>
-          <div>
-            <div className="container">
-              <div className="content">
-                <div>
-                  <div className="title">
-                    <h2>{pageState.pageState} Movies</h2>
-                  </div>
-                  <div className="content"></div>
-                  <div className="filters">
-                    <Sort />
-                    <WhereToWatch />
-                    <Filters pageValue={pageState.pageState} />
-                  </div>
-                </div>
+  //             <div className="items">
+  //               <Card pageValue={pageState.pageState} />
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   } else if (pageState.pageState === "Now Playing") {
+  //     return (
+  //       <div>
+  //         <div>
+  //           <div className="container">
+  //             <div className="content">
+  //               <div>
+  //                 <div className="title">
+  //                   <h2>{pageState.pageState} Movies</h2>
+  //                 </div>
+  //                 <div className="content"></div>
+  //                 <div className="filters">
+  //                   <Sort />
+  //                   <WhereToWatch />
+  //                   <Filters pageValue={pageState.pageState} />
+  //                 </div>
+  //               </div>
 
-                <div className="items">
-                  <Card pageValue={pageState.pageState} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    } else if (pageState.pageState === "Upcoming") {
-      return (
-        <div>
-          <div>
-            <div>
-              <div className="container">
-                <div className="content">
-                  <div>
-                    <div className="title">
-                      <h2>{pageState.pageState} Movies</h2>
-                    </div>
-                    <div className="content"></div>
-                    <div className="filters">
-                      <Sort />
-                      <WhereToWatch />
-                      <Filters pageValue={pageState.pageState} />
-                    </div>
-                  </div>
+  //               <div className="items">
+  //                 <Card pageValue={pageState.pageState} />
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     );
+  //   } else if (pageState.pageState === "Upcoming") {
+  //     return (
+  //       <div>
+  //         <div>
+  //           <div>
+  //             <div className="container">
+  //               <div className="content">
+  //                 <div>
+  //                   <div className="title">
+  //                     <h2>{pageState.pageState} Movies</h2>
+  //                   </div>
+  //                   <div className="content"></div>
+  //                   <div className="filters">
+  //                     <Sort />
+  //                     <WhereToWatch />
+  //                     <Filters pageValue={pageState.pageState} />
+  //                   </div>
+  //                 </div>
 
-                  <div className="items">
-                    <Card pageValue={pageState.pageState} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          );
-        </div>
-      );
-    } else if (pageState.pageState === "Top Rated") {
-      return (
-        <div>
-          <div>
-            <div>
-              <div className="container">
-                <div className="content">
-                  <div>
-                    <div className="title">
-                      <h2>{pageState.pageState} Movies</h2>
-                    </div>
-                    <div className="content"></div>
-                    <div className="filters">
-                      <Sort />
-                      <WhereToWatch />
-                      <Filters pageValue={pageState.pageState} />
-                    </div>
-                  </div>
+  //                 <div className="items">
+  //                   <Card pageValue={pageState.pageState} />
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         );
+  //       </div>
+  //     );
+  //   } else if (pageState.pageState === "Top Rated") {
+  //     return (
+  //       <div>
+  //         <div>
+  //           <div>
+  //             <div className="container">
+  //               <div className="content">
+  //                 <div>
+  //                   <div className="title">
+  //                     <h2>{pageState.pageState} Movies</h2>
+  //                   </div>
+  //                   <div className="content"></div>
+  //                   <div className="filters">
+  //                     <Sort />
+  //                     <WhereToWatch />
+  //                     <Filters pageValue={pageState.pageState} />
+  //                   </div>
+  //                 </div>
 
-                  <div className="items">
-                    <Card pageValue={pageState.pageState} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          );
-        </div>
-      );
-    }
+  //                 <div className="items">
+  //                   <Card pageValue={pageState.pageState} />
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //         );
+  //       </div>
+  //     );
+  //   }
 
-    return (
-      <div className="container">
-        <div className="content">
-          <div>
-            <div className="title">
-              <h2>Popular Movies</h2>
-            </div>
-            <div className="content"></div>
-            <div className="filters">
-              <Sort />
-              <WhereToWatch />
-              <Filters pageValue={pageState.pageState} />
-            </div>
-          </div>
+  //   return (
+  //     <div className="container">
+  //       <div className="content">
+  //         <div>
+  //           <div className="title">
+  //             <h2>Popular Movies</h2>
+  //           </div>
+  //           <div className="content"></div>
+  //           <div className="filters">
+  //             <Sort />
+  //             <WhereToWatch />
+  //             <Filters pageValue={pageState.pageState} />
+  //           </div>
+  //         </div>
 
-          <div className="items">
-            <Card />
-          </div>
-        </div>
-      </div>
-    );
-  };
+  //         <div className="items">
+  //           <Card />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // };
 
   return (
     <div className="movie">
-      <MovieWrapperLogic />
+      {/* <MovieWrapperLogic /> */}
 
       {/* {data.map((item) => (
         <div key={item.id}>
