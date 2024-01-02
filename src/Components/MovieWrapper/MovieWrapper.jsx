@@ -93,7 +93,7 @@ export default function MovieWrapper(pageState) {
                 </div>
 
                 <div className="items">
-                  <Card />
+                  <Card pageValue={pageState.pageState} />
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function MovieWrapper(pageState) {
                   </div>
 
                   <div className="items">
-                    <Card />
+                    <Card pageValue={pageState.pageState} />
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function MovieWrapper(pageState) {
                   </div>
 
                   <div className="items">
-                    <Card />
+                    <Card pageValue={pageState.pageState} />
                   </div>
                 </div>
               </div>

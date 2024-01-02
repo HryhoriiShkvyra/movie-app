@@ -12,20 +12,9 @@ export default function CardPage() {
   const { requestType } = useParams();
   const { id } = useParams();
 
-  console.log(id);
-
-  // console.log(onlyId);
-
   const handleId = (id) => {
     let idWithLetters = id;
     const onlyId = idWithLetters.replace(/\D/g, "");
-    // let newId = onlyId;
-
-    // for (let i = 0; i < id.length; i++) {
-    //   if (!id[i].replace(/\D/g, "")) {
-    //     newId += id[i];
-    //   }
-    // }
     return onlyId;
   };
 

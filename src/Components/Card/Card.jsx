@@ -15,38 +15,28 @@ export default function Card(pageValue) {
 
   const pageRequestValue = () => {};
 
-  console.log(pageValue);
-
   const pageState = pageValue.pageValue;
 
-  const handlePageValue = (pageValue) => {
-    if (!pageValue) {
-      return;
-    }
-
-    const { pageValue: page } = pageValue;
-
-    if (page === "Popular") {
+  const handlePageValue = () => {
+    if (pageState === "Popular") {
       return setPageValueState("popular");
-    } else if (page === "Now Playing") {
+    } else if (pageState === "Now Playing") {
       return setPageValueState("now_playing");
-    } else if (page === "Upcoming") {
+    } else if (pageState === "Upcoming") {
       return setPageValueState("upcoming");
-    } else if (page === "Top Rated") {
+    } else if (pageState === "Top Rated") {
       return setPageValueState("top_rated");
     }
   };
 
   React.useState(() => {
-    // console.log("pageState ====> " + pageState);
-    // console.log(pageValue.pageValue);
-    // console.log(pageValueState);
-    // handlePageValue();
+    handlePageValue();
+    console.log(pageValueState);
   }, [pageState]);
 
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/movie/${handlePageValue()}}?language=en-US&page=1`;
+  const url = `https://api.themoviedb.org/3/movie/${pageValueState}?language=en-US&page=1`;
 
   const options = {
     method: "GET",
@@ -87,7 +77,7 @@ export default function Card(pageValue) {
     <>
       {isLoading ? (
         <div className="cards">
-          {/* {value.results.map((item) => (
+          {value.results.map((item) => (
             <Link
               className="card"
               key={item.id}
@@ -114,19 +104,19 @@ export default function Card(pageValue) {
                   {item.name ? (
                     <h3 className="card-title">{item.name}</h3>
                   ) : (
-                    <h3>item.name not working</h3>
+                    <h3 className="card-title">{item.title}</h3>
                   )}
                 </div>
                 <div className="card-release-date">
                   {item.first_air_date ? (
                     <p>{item.first_air_date}</p>
                   ) : (
-                    <p>item.first_air_date not working</p>
+                    <p>{item.release_date}</p>
                   )}
                 </div>
               </div>
             </Link>
-          ))} */}
+          ))}
         </div>
       ) : (
         <>

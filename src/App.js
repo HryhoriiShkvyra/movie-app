@@ -4,7 +4,6 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Index from "./Components/Pages/Index/Index";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import Movie from "./Components/Pages/Movie/Movie";
 import TV from "./Components/Pages/TV/TV";
 import People from "./Components/Pages/People/People";
 import More from "./Components/Pages/More/More";

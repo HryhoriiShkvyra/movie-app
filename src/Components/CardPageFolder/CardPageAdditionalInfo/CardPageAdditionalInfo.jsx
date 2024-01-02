@@ -21,6 +21,7 @@ export default function CardPageAdditionalInfo({ requestType }) {
 
   const url_0 = `https://api.themoviedb.org/3/${requestType}/${id}?language=en-US`;
   const url_1 = `https://api.themoviedb.org/3/${requestType}/${id}/keywords`;
+  // const url_1 = `https://api.themoviedb.org/3/${requestType}/${id}/keywords`;
   const options = {
     method: "GET",
     headers: {
@@ -45,10 +46,8 @@ export default function CardPageAdditionalInfo({ requestType }) {
 
       setCardValue(data[0]);
       setNetworksArray(data[0].networks);
-      setKeywordsArray(data[1].results);
+      setKeywordsArray(data[1].keywords);
 
-      console.log(data[1].results);
-      // console.log(requestType);
       setIsLoading(true);
     } catch (error) {
       console.error(error);

@@ -12,8 +12,6 @@ export default function CardCast() {
   const { searchValue } = useParams();
   const { id } = useParams();
   const { requestType } = useParams();
-  // console.log(requestType);
-  // console.log(searchValue);
   const fetch = require("node-fetch");
 
   const url = `https://api.themoviedb.org/3/${requestType}/${id}/credits?language=en-US`;
@@ -32,9 +30,7 @@ export default function CardCast() {
         .then((res) => res.json())
         .then((data) => {
           setCastValue(data.cast);
-          console.log(data.cast);
           setIsLoading((prev) => !prev);
-          // console.log(data.cast);
         })
         .catch((err) => console.error("error:" + err));
     }
@@ -49,46 +45,48 @@ export default function CardCast() {
 
   return (
     <div>
-      <span value="test" onClick={handlePersonId}>
-        press here
-      </span>
       {isLoading === true ? (
-        <div className="cast-wrapper">
-          <span className="cast-top">top billed cast</span>
-          <div className="cast">
-            {castValue.slice(0, 8).map((item) => (
+        <div className="card-cast-wrapper">
+          <span className="card-cast-top">top billed cast</span>
+          <div className="card-cast">
+            {castValue.slice(0, 9).map((item) => (
               // <div key={item.id} value={item.id} onClick={handlePersonId}>
               //   press here, in console you should see item-id
               // </div>
               <div
-                className="cast-item"
+                className="card-cast-item"
                 key={item.id}
                 value={item.id}
                 onClick={handlePersonId}
               >
                 <img
-                  className="cast-photo"
-                  // src={
-                  //   process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
-                  // }
+                  className="card-cast-photo"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
+                  }
                   alt=""
                 />
-                {/* <div className="cast-text">
-                  <div className="cast-name">{item.name}</div>
-                  <div className="cast-character">{item.character}</div>
-                </div> */}
+                <div className="card-cast-text">
+                  <div className="card-cast-name">{item.name}</div>
+                  <div className="card-cast-character">{item.character}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <div className="cast-wrapper">
-          <span className="cast-text">top billed cast</span>
+        <div className="tcast-wrapper">
+          <h1>
+            {" "}
+            .card-cast-wrapper clearly busy right now, and we have no access to
+            this part of .file and you need to change parent name
+          </h1>
+          {/* <span className="cast-text">top billed cast</span>
           <div className="cast">
             <div className="cast-unfilled-photo"></div>
             <div className="cast-unfilled-name"></div>
             <div className="cast-unfilled-character"></div>
-          </div>
+          </div> */}
         </div>
       )}
 

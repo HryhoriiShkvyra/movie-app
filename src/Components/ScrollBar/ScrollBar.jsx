@@ -3,7 +3,6 @@ import "./ScrollBar.css";
 import Loading from "../Loading/Loading";
 import ImageRoundedIcon from "@mui/icons-material/ImageRounded";
 import { Link, useNavigate } from "react-router-dom";
-import Movie from "../Pages/Movie/Movie";
 import PendingIcon from "@mui/icons-material/Pending";
 import { FreeBreakfast } from "@mui/icons-material";
 
@@ -22,10 +21,6 @@ export default function ScrollBar({ pageType, id, cleanedId, movieOrTv }) {
   const [test, setTest] = React.useState();
 
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    console.log(id);
-  }, []);
 
   const handleId = (id) => {
     let idWithLetters = id;

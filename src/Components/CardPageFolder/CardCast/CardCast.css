@@ -1,27 +1,28 @@
-.cast-wrapper {
+.card-cast-wrapper {
   width: 1050px;
   display: flex;
   flex-direction: column;
   overflow-x: auto;
 }
 
-.cast-top {
+.card-cast-top {
   margin: 30px 15px 10px;
   font-size: 22px;
   font-weight: 700;
   text-transform: capitalize;
 }
 
-.cast {
+.card-cast {
   display: flex;
   flex-direction: row;
 }
 
-.cast-item {
+.card-cast-item {
   display: flex;
   flex-direction: column;
   min-width: 138px;
-  height: 243px;
+  /* height: 243px; this is prev height  need to figure out which one is proper for this card-cast-item - 243px or 220px*/
+  height: 220px;
   margin: 10px 4px 10px 10px;
   padding-bottom: 10px;
 
@@ -29,18 +30,21 @@
   border-radius: 10px;
   overflow: hidden;
 
-  /* -webkit-box-shadow: 0px 0px 300px -50px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 0px 300px -50px rgba(0,0,0,1);
-    box-shadow: 0px 0px 300px -50px rgba(0,0,0,1); */
+  /* -webkit-box-shadow: 0px 0px 57px -160px rgba(241, 243, 249, 1);
+  -moz-box-shadow: 0px 0px 57px -160px rgba(241, 243, 249, 1);
+  box-shadow: 0px 0px 57px -160px rgba(241, 243, 249, 1); */
 
+  -webkit-box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
-.cast-photo {
+.card-cast-photo {
   width: 138px;
 }
 
-.cast-text {
+.card-cast-text {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -48,17 +52,18 @@
   height: 60px;
   top: -30px;
   gap: 5px;
-  padding: 12px 12px 50px;
+  padding: 12px 12px 12px;
 
-  background-color: var(--lt-color-gray-300);
+  /* background-color: var(--lt-color-gray-200); */
+  background-color: white;
 }
 
-.cast-name {
+.card-cast-name {
   font-size: 14px;
   font-weight: 700;
 }
 
-.cast-character {
+.card-cast-character {
   font-size: 13px;
   font-style: italic;
 }
@@ -66,7 +71,7 @@
 .full-cast-and-crew-link {
   display: block;
   padding: 30px 0px 30px 15px;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   text-transform: capitalize;
   text-decoration: none;

@@ -61,7 +61,6 @@ export default function CardPageCard() {
           setCardGenres(data.genres);
           setCardReleaseDate(data.release_date);
           setCardOverview(data.overview);
-          console.log(data);
           setIsLoading((prev) => !prev);
         })
         .catch((err) => console.error("error:" + err));
