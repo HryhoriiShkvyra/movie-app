@@ -16,17 +16,30 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
   const [filterUserVote, setFilterUserVote] = React.useState("200");
   const [filterRuntime, setFilterRuntime] = React.useState("120");
   const [filterShowMe, setFilterShowMe] = React.useState("everything");
-  const [filterAvailability, setFilterAvailability] = React.useState(true);
+  const [filterMovieAvailability, setFilterMovieAvailability] =
+    React.useState(true);
+  const [filterTVAvailability, setFilterTVAvailability] = React.useState([
+    { title: "TheatricalLimited", state: false },
+    { title: "Theatrical", state: false },
+    { title: "Premiere", state: false },
+    { title: "Digital", state: false },
+    { title: "Physical", state: false },
+    { title: "TV", state: false },
+  ]);
   const [filterReleaseDate, setFilterReleaseDate] = React.useState(true);
   const [filterReleaseDateStateArray, setFilterReleaseDateStateArray] =
     React.useState([
-      { title: "TheatricalLimited", state: false },
-      { title: "Theatrical", state: false },
-      { title: "Premiere", state: false },
-      { title: "Digital", state: false },
-      { title: "Physical", state: false },
-      { title: "TV", state: false },
+      { title: "Search all availabilities?", state: false },
+      { title: "Stream", state: true },
+      { title: "Free", state: true },
+      { title: "Ads", state: true },
+      { title: "Rent", state: true },
+      { title: "Buy", state: true },
     ]);
+
+  console.log(
+    "------------================== need to add state or something like that to availability ------------------------====================="
+  );
 
   const [
     filterReleaseDateStateArraySearch,
@@ -132,8 +145,12 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
     setFilterShowMe(e);
   };
 
-  const handleAvailability = () => {
-    setFilterAvailability((prev) => !prev);
+  const handleMovieAvailability = () => {
+    setFilterMovieAvailability((prev) => !prev);
+  };
+  const handleTVAvailability = (e) => {
+    console.log(e);
+    // setFilterTVAvailability((prev) => !prev);
   };
 
   const handleReleaseDate = () => {
@@ -170,8 +187,98 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
     console.log(e.title, e.state);
   };
 
-  const FilterReleaseDate = () => {
-    if (pageValue === "Popular") {
+  const FilterAvailability = () => {
+    if (pageValue === "Popular TV Shows") {
+      return (
+        <div className="filter">
+          <div className="filter-title">
+            <h3>Availabilities</h3>
+          </div>
+          <div className="filter-checkbox-wrapper">
+            {filterReleaseDateStateArray.map((item) => (
+              <div className="filter-checkbox" key={item.title}>
+                <input
+                  className="filter-checkbox-input"
+                  type="checkbox"
+                  content="#"
+                  checked={item.state}
+                  onChange={(e) => handleClickReleaseDate(item)}
+                />
+                <span className="filter-checkbox-text">{item.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    } else if (pageValue === "TV Shows Airing Today") {
+      return (
+        <div className="filter">
+          <div className="filter-title">
+            <h3>Availabilities</h3>
+          </div>
+          <div className="filter-checkbox-wrapper">
+            {filterReleaseDateStateArray.map((item) => (
+              <div className="filter-checkbox" key={item.title}>
+                <input
+                  className="filter-checkbox-input"
+                  type="checkbox"
+                  content="#"
+                  checked={item.state}
+                  onChange={(e) => handleClickReleaseDate(item)}
+                />
+                <span className="filter-checkbox-text">{item.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    } else if (pageValue === "Currently Airing TV Shows") {
+      return (
+        <div className="filter">
+          <div className="filter-title">
+            <h3>Availabilities</h3>
+          </div>
+          <div className="filter-checkbox-wrapper">
+            {filterReleaseDateStateArray.map((item) => (
+              <div className="filter-checkbox" key={item.title}>
+                <input
+                  className="filter-checkbox-input"
+                  type="checkbox"
+                  content="#"
+                  checked={item.state}
+                  onChange={(e) => handleClickReleaseDate(item)}
+                />
+                <span className="filter-checkbox-text">{item.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="filter">
+          <div className="filter-title">
+            <h3>Availabilities</h3>
+          </div>
+          <div className="filter-checkbox-wrapper">
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+              />
+              <span className="filter-checkbox-text">
+                Search all availabilities?
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  const FilterReleaseDateAndAirDate = () => {
+    if (pageValue === "Popular Movies") {
       return (
         <div className="filter">
           <div className="filter-title">
@@ -201,7 +308,7 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
           </div>
         </div>
       );
-    } else if (pageValue === "Now Playing") {
+    } else if (pageValue === "Now Playing Movies") {
       return (
         <div className="filter">
           <div className="filter-title">
@@ -248,7 +355,7 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
           </div>
         </div>
       );
-    } else if (pageValue === "Upcoming") {
+    } else if (pageValue === "Upcoming Movies") {
       return (
         <div className="filter">
           <div className="filter-title">
@@ -295,7 +402,7 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
           </div>
         </div>
       );
-    } else if (pageValue === "Top Rated") {
+    } else if (pageValue === "Top Rated Movies") {
       return (
         <div className="filter">
           <div className="filter-title">
@@ -311,6 +418,36 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
                 onChange={(e) => handleReleaseDate()}
               />
               <span className="filter-checkbox-text">Search all releases?</span>
+            </div>
+          </div>
+          <div className="filter-dates-wrapper">
+            <div className="filter-dates-item">
+              <div className="filter-dates-text">from</div>
+              <div className="filter-dates-calendar"></div>
+            </div>
+            <div className="filter-dates-item">
+              <div className="filter-dates-text">to</div>
+              <div className="filter-dates-calendar"></div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="filter">
+          <div className="filter-title">
+            <h3>Air Dates</h3>
+          </div>
+          <div className="filter-checkbox-wrapper-search">
+            <div className="filter-checkbox">
+              <input
+                className="filter-checkbox-input"
+                type="checkbox"
+                content="#"
+                // checked
+                // onChange={(e) => handleClickReleaseDateSearch(item)}
+              />
+              <span className="filter-checkbox-text">Search all episodes?</span>
             </div>
           </div>
           <div className="filter-dates-wrapper">
@@ -394,27 +531,42 @@ export default function Filters({ pageValue, handleGenres, setHandleGenres }) {
           </div>
         </div>
 
-        <div className="filter">
+        <FilterAvailability />
+
+        {/* <div className="filter">
           <div className="filter-title">
             <h3>Availabilities</h3>
           </div>
           <div className="filter-checkbox-wrapper">
-            <div className="filter-checkbox">
-              <input
-                className="filter-checkbox"
-                type="checkbox"
-                content="#"
-                checked={filterAvailability}
-                onChange={(e) => handleAvailability()}
-              />
-              <span className="filter-checkbox-text">
-                Search all availabilities?
-              </span>
+            <div className="filter-checkbox-wrapper">
+              {filterReleaseDateStateArray.map((item) => (
+                <div className="filter-checkbox" key={item.title}>
+                  <input
+                    className="filter-checkbox-input"
+                    type="checkbox"
+                    content="#"
+                    checked={item.state}
+                    onChange={(e) => handleClickReleaseDate(item)}
+                  />
+                  <span className="filter-checkbox-text">{item.title}</span>
+                </div>
+              ))}
+              <div className="filter-checkbox">
+                <input
+                  className="filter-checkbox-input"
+                  type="checkbox"
+                  content="#"
+                  checked
+                />
+                <span className="filter-checkbox-text">
+                  Search all availabilities?
+                </span>
+              </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <FilterReleaseDate />
+        <FilterReleaseDateAndAirDate />
 
         <div className="filter">
           <div className="filter-title">

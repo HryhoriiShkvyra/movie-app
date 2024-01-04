@@ -9,7 +9,7 @@ import MovieWrapper from "../../../MovieWrapper/MovieWrapper";
 import { useLocation } from "react-router-dom";
 
 export default function Popular() {
-  const pageState = "Popular";
+  const pageState = "Popular Movies";
 
   const [data, setData] = React.useState([
     {

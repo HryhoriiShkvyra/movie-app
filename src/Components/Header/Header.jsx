@@ -79,7 +79,7 @@ const Header = () => {
       titleAndLink: [
         {
           title: "Popular",
-          link: "/Popular People",
+          link: "/person",
         },
       ],
     },

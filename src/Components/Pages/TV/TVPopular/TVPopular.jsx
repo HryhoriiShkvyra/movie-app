@@ -9,12 +9,11 @@ import MovieWrapper from "../../../MovieWrapper/MovieWrapper";
 import { useLocation } from "react-router-dom";
 
 export default function TVPopular() {
-  const currentLocation = window.location.href;
+  const pageState = "Popular TV Shows";
 
   return (
     <div className="movie">
-      TVPopular
-      <MovieWrapper currentLocation={currentLocation} />
+      <MovieWrapper pageState={pageState} />
     </div>
   );
 }

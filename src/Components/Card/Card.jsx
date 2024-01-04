@@ -15,28 +15,41 @@ export default function Card(pageValue) {
 
   const pageRequestValue = () => {};
 
-  const pageState = pageValue.pageValue;
-
   const handlePageValue = () => {
-    if (pageState === "Popular") {
-      return setPageValueState("popular");
-    } else if (pageState === "Now Playing") {
-      return setPageValueState("now_playing");
-    } else if (pageState === "Upcoming") {
-      return setPageValueState("upcoming");
-    } else if (pageState === "Top Rated") {
-      return setPageValueState("top_rated");
+    if (pageValue.pageValue === "Popular Movies") {
+      return setPageValueState("movie/popular");
+    } else if (pageValue.pageValue === "Now Playing Movies") {
+      return setPageValueState("movie/now_playing");
+    } else if (pageValue.pageValue === "Upcoming Movies") {
+      return setPageValueState("movie/upcoming");
+    } else if (pageValue.pageValue === "Top Rated Movies") {
+      return setPageValueState("movie/top_rated");
+    } else if (pageValue.pageValue === "Popular TV Shows") {
+      return setPageValueState("tv/popular");
+    } else if (pageValue.pageValue === "TV Shows Airing Today") {
+      return setPageValueState("tv/airing_today");
+    } else if (pageValue.pageValue === "Currently Airing TV Shows") {
+      return setPageValueState("tv/on_the_air");
+    } else if (pageValue.pageValue === "Top Rated TV Shows") {
+      return setPageValueState("tv/top_rated");
     }
   };
 
   React.useState(() => {
+    console.log(pageValue);
     handlePageValue();
-    console.log(pageValueState);
-  }, [pageState]);
+    // console.log(pageValueState);
+  }, [pageValue]);
 
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/movie/${pageValueState}?language=en-US&page=1`;
+  const url = `https://api.themoviedb.org/3/${pageValueState}?language=en-US&page=1`;
+
+  React.useEffect(() => {
+    console.log(
+      `https://api.themoviedb.org/3/${pageValueState}?language=en-US&page=1`
+    );
+  }, [pageValue]);
 
   const options = {
     method: "GET",

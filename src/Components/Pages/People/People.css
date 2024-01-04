@@ -3,10 +3,50 @@
 }
 
 .people-wrapper {
-  position: relative;
-  top: 300px;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 16px;
+}
 
-  font-size: 40px;
+.person-card {
+  max-width: 313px;
+  max-height: 385px;
+  margin-top: 25px;
+  background-color: white;
+  border: 1px solid var(--lt-color-gray-300);
+  border-radius: 8px 8px 0 0;
+}
+
+.person-card-img-wrapper {
+  /* max-width: 313px; */
+  /* max-height: 313px; */
+  width: 313px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--imageBorderRadius);
+}
+
+.person-card-img {
+  position: relative;
+  width: 313px;
+  top: -70px;
+
+  /* max-width: 313px; */
+  /* max-height: 313px; */
+  /* aspect-ratio: 1 / 1; */
+  /* overflow: hidden; */
+}
+
+.person-card-text {
+  padding: 15px 10px 10px;
+}
+
+.person-card-know_for {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-content: center;
+  margin-top: 5px;
+  /* font-size: 12px; */
 }

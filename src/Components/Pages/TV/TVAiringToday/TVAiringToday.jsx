@@ -9,12 +9,11 @@ import MovieWrapper from "../../../MovieWrapper/MovieWrapper";
 import { useLocation } from "react-router-dom";
 
 export default function TVAiringToday() {
-  const currentLocation = window.location.href;
+  const pageState = "TV Shows Airing Today";
 
   return (
     <div className="movie">
-      TVAiringToday
-      <MovieWrapper currentLocation={currentLocation} />
+      <MovieWrapper pageState={pageState} />
       {/* <MTVPage /> */}
     </div>
   );

@@ -77,7 +77,7 @@ function App() {
           element: <TVTopRated />,
         },
         {
-          path: "/people",
+          path: "/person",
           element: <People />,
         },
         {

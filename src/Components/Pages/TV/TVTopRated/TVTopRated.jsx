@@ -9,12 +9,11 @@ import MovieWrapper from "../../../MovieWrapper/MovieWrapper";
 import { useLocation } from "react-router-dom";
 
 export default function TVTopRated() {
-  const currentLocation = window.location.href;
+  const pageState = "Top Rated TV Shows";
 
   return (
     <div className="movie">
-      TVTopRated
-      <MovieWrapper currentLocation={currentLocation} />
+      <MovieWrapper pageState={pageState} />
       {/* <MTVPage /> */}
     </div>
   );
