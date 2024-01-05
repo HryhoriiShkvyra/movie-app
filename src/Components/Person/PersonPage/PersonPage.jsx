@@ -137,21 +137,21 @@ export default function PersonPage() {
     );
   }
 
-  function testFunc() {
-    const array0 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    const array1 = [2, 3, 5, 7, 8];
-    const container = [];
+  // function testFunc() {
+  //   const array0 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  //   const array1 = [2, 3, 5, 7, 8];
+  //   const container = [];
 
-    array0.map((item) => {
-      if (item === array1) {
-        container.push(item);
-      }
-    });
+  //   array0.map((item) => {
+  //     if (item === array1) {
+  //       container.push(item);
+  //     }
+  //   });
 
-    console.log(container);
-  }
+  //   console.log(container);
+  // }
 
-  testFunc();
+  // testFunc();
 
   const PeopleWrapper = () => {
     return (

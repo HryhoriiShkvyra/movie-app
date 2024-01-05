@@ -13,6 +13,8 @@
   max-width: 313px;
   max-height: 385px;
   margin-top: 25px;
+  color: var(--lt-color-gray-800);
+  text-decoration: none;
   background-color: white;
   border: 1px solid var(--lt-color-gray-300);
   border-radius: 8px 8px 0 0;
@@ -21,7 +23,11 @@
 .person-card-img-wrapper {
   /* max-width: 313px; */
   /* max-height: 313px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 313px;
+  background-color: var(--lt-color-gray-400);
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: var(--imageBorderRadius);
@@ -30,12 +36,16 @@
 .person-card-img {
   position: relative;
   width: 313px;
-  top: -70px;
+  top: -50px;
 
   /* max-width: 313px; */
   /* max-height: 313px; */
   /* aspect-ratio: 1 / 1; */
   /* overflow: hidden; */
+}
+
+.person-card-img-not-found {
+  transform: scale(2.5);
 }
 
 .person-card-text {

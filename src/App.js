@@ -81,6 +81,10 @@ function App() {
           element: <People />,
         },
         {
+          path: "/person/:id",
+          element: <PersonPage />,
+        },
+        {
           path: "/more",
           element: <More />,
         },
