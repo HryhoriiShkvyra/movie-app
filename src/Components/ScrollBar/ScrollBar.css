@@ -2,8 +2,19 @@
   display: flex;
   align-items: center;
   /* width: 1050px; */
+  gap: 20px;
   margin-top: 30px;
+
   /* overflow: hidden; */
+  overflow-y: auto;
+}
+
+.scroll-item- {
+  margin-bottom: 20px;
+}
+
+.scrollbar-item {
+  position: relative;
 }
 
 .scroll-text {
@@ -82,7 +93,9 @@
   z-index: -1;
 }
 
-.scroll-item {
+/* =========================================== */
+
+.scroll-item-v1 {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -246,4 +259,23 @@
   text-decoration: none;
   color: var(--lt-color-gray-900);
   border-bottom: 1px solid var(--lt-color-gray-800);
+}
+
+/* ============================== */
+
+/* four type */
+
+.scroll-bar-card-type-four {
+  padding-bottom: 10px;
+}
+
+.scroll-bar-card-image-type-four {
+  width: 130px;
+  border-radius: var(--imageBorderRadius);
+}
+
+.scroll-bar-card-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

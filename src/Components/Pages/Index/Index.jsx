@@ -8,9 +8,10 @@ import Leaderboard from "../../Leaderboards/Leaderboard";
 
 export default function Index() {
   const [searchValue, setSearchValue] = React.useState([]);
-  const pageTypeTrending = "index-page-trending";
-  const pageTypePopular = "index-page-popular";
-  const pageTypeFree = "index-page-free";
+  const scrollbarTrendingDay = "index-page-trending-day";
+  const scrollbarTrendingWeek = "index-page-trending-week";
+  const scrollbarPopular = "index-page-popular";
+  const scrollbarFree = "index-page-free";
 
   const navigate = useNavigate();
   function handleInputDown(event) {
@@ -58,10 +59,11 @@ export default function Index() {
               </button>
             </div>
           </div>
-          <ScrollBar pageType={pageTypeTrending} />
+          <ScrollBar scrollbarType={scrollbarTrendingDay} />
+          <ScrollBar scrollbarType={scrollbarTrendingWeek} />
           <LatestTrailers />
-          <ScrollBar pageType={pageTypePopular} />
-          <ScrollBar pageType={pageTypeFree} />
+          <ScrollBar scrollbarType={scrollbarPopular} />
+          <ScrollBar scrollbarType={scrollbarFree} />
           <JoinToday />
           <Leaderboard />
         </div>
