@@ -2,16 +2,16 @@ import React from "react";
 import "./Index.css";
 import { useNavigate } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
-import LatestTrailers from "../../LastestTrailers/LatestTrailers";
 import JoinToday from "../../JoinToday/JoinToday";
 import Leaderboard from "../../Leaderboards/Leaderboard";
 
 export default function Index() {
   const [searchValue, setSearchValue] = React.useState([]);
   const scrollbarTrendingDay = "index-page-trending-day";
-  const scrollbarTrendingWeek = "index-page-trending-week";
+  // const scrollbarTrendingWeek = "index-page-trending-week";
   const scrollbarPopular = "index-page-popular";
   const scrollbarFree = "index-page-free";
+  const scrollbarLatestTrailers = "index-page-latest-trailers";
 
   const navigate = useNavigate();
   function handleInputDown(event) {
@@ -60,7 +60,8 @@ export default function Index() {
             </div>
           </div>
           <ScrollBar scrollbarType={scrollbarTrendingDay} />
-          <LatestTrailers />
+          <ScrollBar scrollbarType={scrollbarLatestTrailers} />
+          {/* <LatestTrailers /> */}
           <ScrollBar scrollbarType={scrollbarPopular} />
           <ScrollBar scrollbarType={scrollbarFree} />
           <JoinToday />

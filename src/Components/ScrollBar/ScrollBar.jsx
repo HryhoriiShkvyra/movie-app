@@ -6,6 +6,9 @@ import { Link, useNavigate } from "react-router-dom";
 import PendingIcon from "@mui/icons-material/Pending";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import { FreeBreakfast } from "@mui/icons-material";
+import IMG0 from "../../Images/posters/breaking-bad_poster.jpg";
+import IMG1 from "../../Images/posters/better-call-saul_poster.jpeg";
+import IMG2 from "../../Images/posters/the-sopranos_poster.jpg";
 
 export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
   const [indexPageTrendingItemsDay, setIndexPageTrendingItemsDay] =
@@ -15,6 +18,9 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
   const [indexPageTrendingBtn, setIndexPageTrendingBtn] = React.useState("day");
   const [indexPageSecondTypeBtn, setIndexPageSecondTypeBtn] =
     React.useState("first");
+
+  const [latestTrailersBtn, setLatestTrailerBtn] = React.useState("popular");
+
   const [indexPageFreeBtn, setIndexPageFreeBtn] = React.useState([]);
   const [personFilmArray, setPersonFilmArray] = React.useState([]);
   const [tvCredits, setTvCredits] = React.useState([]);
@@ -25,6 +31,39 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
   const [personId, setPersonId] = React.useState();
   const [itemId, setItemId] = React.useState();
   const [test, setTest] = React.useState();
+
+  const latestTrailers = [
+    {
+      title: "Breaking Bad",
+      subTitle: "Breaking Bad - the Second season",
+      img: IMG0,
+    },
+    {
+      title: "Better Call Saul",
+      subTitle: "Better Call Saul - the First season",
+      img: IMG1,
+    },
+    {
+      title: "The Sopranos",
+      subTitle: "The Sopranos - the Season",
+      img: IMG2,
+    },
+    {
+      title: "Breaking Bad Bad",
+      subTitle: "Breaking Bad - the Second season",
+      img: IMG0,
+    },
+    {
+      title: "Better Call Saul Saul",
+      subTitle: "Better Call Saul - the First season",
+      img: IMG1,
+    },
+    {
+      title: "The Sopranos pinos",
+      subTitle: "The Sopranos - the Season",
+      img: IMG2,
+    },
+  ];
 
   const navigate = useNavigate();
 
@@ -98,7 +137,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
     }
   };
 
-  const ScrollBarTypeFirst = ({ scrollbarData }) => {
+  const ScrollBarTypeFirst = () => {
     if (scrollbarType === "index-page-trending-day") {
       return (
         <div className="container-index-page">
@@ -529,105 +568,107 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
     }
   };
 
-  // const ScrollBarTypeSecond = () => {
-  //   return (
-  //     <div className="scroll-bar">
-  //       <div
-  //         className="latest-trailers-background-image"
-  //         style={{ backgroundImage: `url("${backgroundImage}")` }}
-  //         alt=""
-  //       >
-  //         <div className="latest-trailers">
-  //           <div className="latest-trailers-nav">
-  //             <h2>latest trailers</h2>
-  //             <div className="latest-trailers-btns">
-  //               <button
-  //                 className={
-  //                   activeBtn === "popular"
-  //                     ? "latest-trailers-btn-active"
-  //                     : "latest-trailers-btn"
-  //                 }
-  //                 onClick={(e) => setActiveBtn("popular")}
-  //               >
-  //                 <a>Popular</a>
-  //               </button>
-  //               <button
-  //                 className={
-  //                   activeBtn === "streaming"
-  //                     ? "latest-trailers-btn-active"
-  //                     : "latest-trailers-btn"
-  //                 }
-  //                 onClick={(e) => setActiveBtn("streaming")}
-  //               >
-  //                 <a>Streaming</a>
-  //               </button>
-  //               <button
-  //                 className={
-  //                   activeBtn === "on-tv"
-  //                     ? "latest-trailers-btn-active"
-  //                     : "latest-trailers-btn"
-  //                 }
-  //                 onClick={(e) => setActiveBtn("on-tv")}
-  //               >
-  //                 <a>On Tv</a>
-  //               </button>
-  //               <button
-  //                 className={
-  //                   activeBtn === "for-rent"
-  //                     ? "latest-trailers-btn-active"
-  //                     : "latest-trailers-btn"
-  //                 }
-  //                 onClick={(e) => setActiveBtn("for-rent")}
-  //               >
-  //                 <a>For Rent</a>
-  //               </button>
-  //               <button
-  //                 className={
-  //                   activeBtn === "in-theaters"
-  //                     ? "latest-trailers-btn-active"
-  //                     : "latest-trailers-btn"
-  //                 }
-  //                 onClick={(e) => setActiveBtn("in-theaters")}
-  //               >
-  //                 <a>In Theaters</a>
-  //               </button>
-  //             </div>
-  //           </div>
-  //           <div className="latest-trailers-cards">
-  //             {personFilmArray.map((item) => (
-  //               <div
-  //                 className="latest-trailers-card"
-  //                 key={item.title}
-  //                 // onMouseEnter={setBackgroundImage(item.img)}
-  //                 // onMouseLeave={onMouseLeave()}
-  //               >
-  //                 <div
-  //                   className="latest-trailers-card-image-wrapper"
-  //                   src=""
-  //                   alt=""
-  //                 >
-  //                   {/* <div className="latest-trailers-card-image" /> */}
-  //                   <img
-  //                     className="latest-trailers-card-image"
-  //                     src={item.img}
-  //                     alt=""
-  //                     // onClick={ClickTest}
-  //                   />
-  //                   <PendingIcon className="card-icon" />
-  //                   <PlayArrowRoundedIcon className="card-play" />
-  //                 </div>
-  //                 <div className="latest-trailers-card-about">
-  //                   <h2>{item.title}</h2>
-  //                   <h3>{item.subTitle}</h3>
-  //                 </div>
-  //               </div>
-  //             ))}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
+  const ScrollBarTypeSecond = () => {
+    return (
+      <div className="container">
+        <div className="scrollbar">
+          <div
+            className="scrollbar-latest-trailers-background-image"
+            // style={{ backgroundImage: `url("${backgroundImage}")` }}
+            alt=""
+          >
+            <div className="scrollbar-latest-trailers">
+              <div className="scrollbar-latest-trailers-nav">
+                <h2>latest trailers</h2>
+                <div className="scrollbar-latest-trailers-btns">
+                  <button
+                    className={
+                      latestTrailersBtn === "popular"
+                        ? "scrollbar-latest-trailers-btn-active"
+                        : "scrollbar-latest-trailers-btn"
+                    }
+                    onClick={(e) => setLatestTrailerBtn("popular")}
+                  >
+                    <a>Popular</a>
+                  </button>
+                  <button
+                    className={
+                      latestTrailersBtn === "streaming"
+                        ? "scrollbar-latest-trailers-btn-active"
+                        : "scrollbar-latest-trailers-btn"
+                    }
+                    onClick={(e) => setLatestTrailerBtn("streaming")}
+                  >
+                    <a>Streaming</a>
+                  </button>
+                  <button
+                    className={
+                      latestTrailersBtn === "on-tv"
+                        ? "scrollbar-latest-trailers-btn-active"
+                        : "scrollbar-latest-trailers-btn"
+                    }
+                    onClick={(e) => setLatestTrailerBtn("on-tv")}
+                  >
+                    <a>On Tv</a>
+                  </button>
+                  <button
+                    className={
+                      latestTrailersBtn === "for-rent"
+                        ? "scrollbar-latest-trailers-btn-active"
+                        : "scrollbar-latest-trailers-btn"
+                    }
+                    onClick={(e) => setLatestTrailerBtn("for-rent")}
+                  >
+                    <a>For Rent</a>
+                  </button>
+                  <button
+                    className={
+                      latestTrailersBtn === "in-theaters"
+                        ? "scrollbar-latest-trailers-btn-active"
+                        : "scrollbar-latest-trailers-btn"
+                    }
+                    onClick={(e) => setLatestTrailerBtn("in-theaters")}
+                  >
+                    <a>In Theaters</a>
+                  </button>
+                </div>
+              </div>
+              <div className="scrollbar-latest-trailers-cards">
+                {latestTrailers.map((item) => (
+                  <div
+                    className="latest-trailers-card"
+                    key={item.title}
+                    // onMouseEnter={setBackgroundImage(item.img)}
+                    // onMouseLeave={onMouseLeave()}
+                  >
+                    <div
+                      className="scrollbar-latest-trailers-card-image-wrapper"
+                      src=""
+                      alt=""
+                    >
+                      {/* <div className="latest-trailers-card-image" /> */}
+                      <img
+                        className="scrollbar-latest-trailers-card-image"
+                        src={item.img}
+                        alt=""
+                        // onClick={ClickTest}
+                      />
+                      <PendingIcon className="card-icon" />
+                      <PlayArrowRoundedIcon className="card-play" />
+                    </div>
+                    <div className="scrollbar-latest-trailers-card-about">
+                      <h2>{item.title}</h2>
+                      <h3>{item.subTitle}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const ScrollBarTypeThird = () => {
     return (
@@ -887,6 +928,8 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
           <ScrollBarTypeFirst />
         </div>
       );
+    } else if (scrollbarType === "index-page-latest-trailers") {
+      return <ScrollBarTypeSecond />;
     }
   };
 
