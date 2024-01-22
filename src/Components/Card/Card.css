@@ -45,7 +45,7 @@
   padding: 30px 0 30px 15px;
 }
 
-.user-score-chart {
+/* .user-score-chart {
   position: absolute;
   top: -17px;
   display: flex;
@@ -76,8 +76,7 @@
   align-items: center;
   color: white;
   font-size: 14px;
-  /* font-weight: 700; */
-}
+} */
 
 .outer-circle > .outer-circle-number > span {
   /* position: absolute;
