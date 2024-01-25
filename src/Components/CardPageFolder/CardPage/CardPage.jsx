@@ -41,23 +41,12 @@ export default function CardPage() {
       <div className="container">
         <div className="about-card">
           <div className="about-main">
-            <ScrollBar
-              id={handleId(id)}
-              pageType={pageType}
-              movieOrTv={requestType}
-            />
             <CardCast requestType={requestType} />
           </div>
           <div className="about-else">
             <CardPageAdditionalInfo requestType={requestType} />
           </div>
         </div>
-        {/* <Link
-          to={`/search/${searchValue}/${id}/cast`}
-          className="full-cast-and-crew-link"
-        >
-          full cast & crew
-        </Link> */}
       </div>
     </div>
   );

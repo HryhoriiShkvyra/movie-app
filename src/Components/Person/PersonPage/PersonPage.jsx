@@ -12,6 +12,8 @@ export default function PersonPage() {
   const onlyId = id.slice(0, 3);
   const pageType = "person";
 
+  const scrollbarPeoplePage = "people-page";
+
   const [personValue, setPersonValue] = React.useState([]);
   const [personKnownAs, setPersonKnownAs] = React.useState([]);
   const [personActingCast, setPersonActingCast] = React.useState([]);
@@ -48,13 +50,14 @@ export default function PersonPage() {
 
       const data = results;
 
+      console.log(data);
+
       setPersonValue(data[0]);
       setPersonKnownAs(data[0].also_known_as);
       setPersonActingCast(data[1].cast);
       setPersonActingCrew(data[1].crew);
       // setYearsLength(data[1);
       setIsLoading((prev) => !prev);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -192,7 +195,7 @@ export default function PersonPage() {
             <div className="pp-biography-title">biography</div>
             <div className="pp-biography-text">{personValue.biography}</div>
           </div>
-          <ScrollBar pageType={pageType} id={personValue.id} />
+          {/* <ScrollBar pageType={pageType} id={personValue.id} /> */}
           <div className="pp-section">
             <div className="pp-section-controls">
               <span className="pp-section-title">Acting</span>
@@ -209,6 +212,7 @@ export default function PersonPage() {
             </div>
             <div className="pp-acting-content">{/* <ArrayTable /> */}</div>
           </div>
+          <ScrollBar scrollbarType={scrollbarPeoplePage} id={id} />
         </div>
       </div>
     );

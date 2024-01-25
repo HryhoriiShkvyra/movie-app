@@ -2,12 +2,15 @@ import React from "react";
 import "./CardCast.css";
 import Loading from "../../Loading/Loading";
 import { Link, useParams } from "react-router-dom";
+import ScrollBar from "../../ScrollBar/ScrollBar";
 // import CrewPage from "../../Crew/CastPage/CastPage";
 
 export default function CardCast() {
   const [isLoading, setIsLoading] = React.useState();
   const [castValue, setCastValue] = React.useState([]);
   const [personId, setPersonId] = React.useState();
+
+  const scrollbarCarsCast = "card-cast";
 
   const { searchValue } = useParams();
   const { id } = useParams();
@@ -29,7 +32,8 @@ export default function CardCast() {
       fetch(url, options)
         .then((res) => res.json())
         .then((data) => {
-          setCastValue(data.cast);
+          console.log(data);
+          setCastValue(data);
           setIsLoading((prev) => !prev);
         })
         .catch((err) => console.error("error:" + err));
@@ -46,34 +50,7 @@ export default function CardCast() {
   return (
     <div>
       {isLoading === true ? (
-        <div className="card-cast-wrapper">
-          <span className="card-cast-top">top billed cast</span>
-          <div className="card-cast">
-            {castValue.slice(0, 9).map((item) => (
-              // <div key={item.id} value={item.id} onClick={handlePersonId}>
-              //   press here, in console you should see item-id
-              // </div>
-              <div
-                className="card-cast-item"
-                key={item.id}
-                value={item.id}
-                onClick={handlePersonId}
-              >
-                <img
-                  className="card-cast-photo"
-                  src={
-                    process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
-                  }
-                  alt=""
-                />
-                <div className="card-cast-text">
-                  <div className="card-cast-name">{item.name}</div>
-                  <div className="card-cast-character">{item.character}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <ScrollBar scrollbarType={scrollbarCarsCast} id={castValue.id} />
       ) : (
         <div className="tcast-wrapper">
           <h1>

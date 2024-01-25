@@ -61,7 +61,6 @@ export default function Index() {
           </div>
           <ScrollBar scrollbarType={scrollbarTrendingDay} />
           <ScrollBar scrollbarType={scrollbarLatestTrailers} />
-          {/* <LatestTrailers /> */}
           <ScrollBar scrollbarType={scrollbarPopular} />
           <ScrollBar scrollbarType={scrollbarFree} />
           <JoinToday />
