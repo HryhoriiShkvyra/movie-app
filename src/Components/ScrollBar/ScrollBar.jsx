@@ -92,79 +92,180 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
   const FetchData = async () => {
     setIsLoading(true);
 
-    console.log(scrollbarType);
     try {
+      let promises = [];
+
       if (scrollbarType === "index-page-trending-day") {
-        const promise_trending_url_day = fetch(Trending_url_day, options).then(
-          (response) => response.json()
-        );
-        const promise_trending_url_week = fetch(
-          Trending_url_week,
-          options
-        ).then((response) => response.json());
-
-        const results = await Promise.all([
-          promise_trending_url_day,
-          promise_trending_url_week,
-        ]);
-
-        const data = results;
-
-        console.log(data[0].results);
-        console.log(data[1].results);
-
-        setIndexPageTrendingItemsDay(data[0].results);
-        setIndexPageTrendingItemsWeek(data[1].results);
-
-        setIsLoading((prev) => !prev);
+        promises = [
+          fetch(Trending_url_day, options),
+          fetch(Trending_url_week, options),
+        ];
+      } else if (scrollbarType === "index-page-latest-trailers") {
+        promises = [
+          fetch(Trending_url_day, options),
+          fetch(Trending_url_week, options),
+        ];
+      } else if (scrollbarType === "index-page-popular") {
+        promises = [
+          fetch(Trending_url_day, options),
+          fetch(Trending_url_week, options),
+        ];
+      } else if (scrollbarType === "index-page-free") {
+        promises = [
+          fetch(Trending_url_day, options),
+          fetch(Trending_url_week, options),
+        ];
       } else if (scrollbarType === "card-cast") {
-        const promise_movie_credits_url = fetch(
-          Movie_credits_url,
-          options
-        ).then((response) => response.json());
-
-        const results = await Promise.all([promise_movie_credits_url]);
-
-        const data = results;
-
-        console.log(data[0].cast);
-
-        setMovieCredits(data[0].cast);
-
-        setIsLoading((prev) => !prev);
+        promises = [fetch(Movie_credits_url, options)];
       } else if (scrollbarType === "people-page") {
-        const promise_person_url = fetch(Person_url, options).then((response) =>
-          response.json()
-        );
-
-        const results = await Promise.all([promise_person_url]);
-
-        const data = results;
-
-        console.log(data[0]);
-
-        setPersonFilmArray(data[0].cast);
-
-        setIsLoading((prev) => !prev);
+        promises = [fetch(Person_url, options)];
       } else if (scrollbarType === "TV") {
-        const promise_tv_credits_url = fetch(TV_credits_url, options).then(
-          (response) => response.json()
-        );
+        promises = [fetch(TV_credits_url, options)];
+      }
 
-        const results = await Promise.all([promise_tv_credits_url]);
+      const results = await Promise.all(promises);
 
-        const data = results;
+      const data = await handleFetchResults(results);
 
+      if (scrollbarType === "index-page-trending-day") {
+        setIndexPageTrendingItemsDay(data[0]);
+        setIndexPageTrendingItemsWeek(data[1]);
+      } else if (scrollbarType === "index-page-latest-trailers") {
+        setIndexPageTrendingItemsDay(data[0]);
+        setIndexPageTrendingItemsWeek(data[1]);
+      } else if (scrollbarType === "index-page-popular") {
+        setIndexPageTrendingItemsDay(data[0]);
+        setIndexPageTrendingItemsWeek(data[1]);
+      } else if (scrollbarType === "card-cast") {
         console.log(data[0]);
-
-        // setPersonFilmArray(data[0].cast);
-
-        setIsLoading((prev) => !prev);
+        setMovieCredits(data[0]);
+      } else if (scrollbarType === "people-page") {
+        setPersonFilmArray(data[0].cast);
+      } else if (scrollbarType === "TV") {
+        // handle TV data
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const handleFetchResults = async (results) => {
+    return Promise.all(
+      results.map(async (result) => {
+        if (!result.ok) {
+          throw new Error("Fetch failed");
+        }
+
+        return result.json();
+      })
+    ).then((dataArr) => {
+      return dataArr.map((data) => {
+        if (scrollbarType === "index-page-trending-day") {
+          return data.results;
+        }
+        if (scrollbarType === "index-page-popular") {
+          return data.results;
+        }
+        if (scrollbarType === "index-page-free") {
+          return data.results;
+        }
+        if (scrollbarType === "card-cast" || scrollbarType === "people-page") {
+          return data.cast;
+        }
+
+        // etc
+      });
+    });
+  };
+
+  // etc
+
+  // const FetchData = async () => {
+  //   setIsLoading(true);
+
+  //   console.log("scroll type => " + scrollbarType);
+  //   try {
+  //     if (scrollbarType === "index-page-trending-day") {
+  //       const promise_trending_url_day = fetch(Trending_url_day, options).then(
+  //         (response) => response.json()
+  //       );
+  //       const promise_trending_url_week = fetch(
+  //         Trending_url_week,
+  //         options
+  //       ).then((response) => response.json());
+
+  //       const results = await Promise.all([
+  //         promise_trending_url_day,
+  //         promise_trending_url_week,
+  //       ]);
+
+  //       const data = results;
+
+  //       console.log(data);
+
+  //       console.log(data[0].results);
+  //       console.log(data[1].results);
+
+  //       setIndexPageTrendingItemsDay(data[0].results);
+  //       setIndexPageTrendingItemsWeek(data[1].results);
+
+  //       setIsLoading((prev) => !prev);
+  //     } else if (scrollbarType === "card-cast") {
+  //       const promise_movie_credits_url = fetch(
+  //         Movie_credits_url,
+  //         options
+  //       ).then((response) => response.json());
+
+  //       const results = await Promise.all([promise_movie_credits_url]);
+
+  //       const data = results;
+
+  //       console.log(data);
+
+  //       console.log(data[0].cast);
+
+  //       setMovieCredits(data[0].cast);
+
+  //       setIsLoading((prev) => !prev);
+  //     } else if (scrollbarType === "people-page") {
+  //       const promise_person_url = fetch(Person_url, options).then((response) =>
+  //         response.json()
+  //       );
+
+  //       const results = await Promise.all([promise_person_url]);
+
+  //       const data = results;
+
+  //       console.log(data);
+
+  //       console.log(data[0]);
+
+  //       setPersonFilmArray(data[0].cast);
+
+  //       setIsLoading((prev) => !prev);
+  //     } else if (scrollbarType === "TV") {
+  //       const promise_tv_credits_url = fetch(TV_credits_url, options).then(
+  //         (response) => response.json()
+  //       );
+
+  //       const results = await Promise.all([promise_tv_credits_url]);
+
+  //       const data = results;
+
+  //       console.log(data);
+
+  //       console.log(data[0]);
+
+  //       // setPersonFilmArray(data[0].cast);
+
+  //       setIsLoading((prev) => !prev);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const ScrollBarTypeFirst = () => {
     if (scrollbarType === "index-page-trending-day") {
@@ -946,20 +1047,28 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
 
   const HandleRedirectToMovie = (e) => {
     console.log(e);
+
+    let title = e.title.replace(/ /g, "-").toLowerCase();
+
+    // console.log(title.replace(/[^a-zA-Z]/g, "-"));
+    // console.log(title.replace(/ /g, "-").toLowerCase());
+    // console
+    // const titleForRedirect =
+
     // const itemId = e.target.getAttribute("getid");
     // return console.log(itemId);
-    return navigate(`/movie/${e.id}`);
+    // return navigate(`/movie/${e.id}-${e.title}`);
   };
 
-  const SortingByYear = () => {
-    let list = personFilmArray;
+  // const SortingByYear = () => {
+  //   let list = personFilmArray;
 
-    console.log(list);
-  };
+  //   console.log(list);
+  // };
 
-  React.useEffect(() => {
-    SortingByYear();
-  });
+  // React.useEffect(() => {
+  //   SortingByYear();
+  // });
 
   const ScrollbarLogic = () => {
     if (scrollbarType === "index-page-trending-day") {
