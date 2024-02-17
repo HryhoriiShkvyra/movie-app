@@ -100,11 +100,6 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
           fetch(Trending_url_day, options),
           fetch(Trending_url_week, options),
         ];
-      } else if (scrollbarType === "index-page-latest-trailers") {
-        promises = [
-          fetch(Trending_url_day, options),
-          fetch(Trending_url_week, options),
-        ];
       } else if (scrollbarType === "index-page-popular") {
         promises = [
           fetch(Trending_url_day, options),
@@ -130,19 +125,17 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
       if (scrollbarType === "index-page-trending-day") {
         setIndexPageTrendingItemsDay(data[0]);
         setIndexPageTrendingItemsWeek(data[1]);
-      } else if (scrollbarType === "index-page-latest-trailers") {
-        setIndexPageTrendingItemsDay(data[0]);
-        setIndexPageTrendingItemsWeek(data[1]);
       } else if (scrollbarType === "index-page-popular") {
         setIndexPageTrendingItemsDay(data[0]);
         setIndexPageTrendingItemsWeek(data[1]);
+      } else if (scrollbarType === "index-page-free") {
+        setIndexPageTrendingItemsDay(data[0]);
+        setIndexPageTrendingItemsWeek(data[1]);
       } else if (scrollbarType === "card-cast") {
-        console.log(data[0]);
         setMovieCredits(data[0]);
       } else if (scrollbarType === "people-page") {
-        setPersonFilmArray(data[0].cast);
+        setPersonFilmArray(data[0]);
       } else if (scrollbarType === "TV") {
-        // handle TV data
       }
     } catch (error) {
       console.error(error);
@@ -174,98 +167,9 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
         if (scrollbarType === "card-cast" || scrollbarType === "people-page") {
           return data.cast;
         }
-
-        // etc
       });
     });
   };
-
-  // etc
-
-  // const FetchData = async () => {
-  //   setIsLoading(true);
-
-  //   console.log("scroll type => " + scrollbarType);
-  //   try {
-  //     if (scrollbarType === "index-page-trending-day") {
-  //       const promise_trending_url_day = fetch(Trending_url_day, options).then(
-  //         (response) => response.json()
-  //       );
-  //       const promise_trending_url_week = fetch(
-  //         Trending_url_week,
-  //         options
-  //       ).then((response) => response.json());
-
-  //       const results = await Promise.all([
-  //         promise_trending_url_day,
-  //         promise_trending_url_week,
-  //       ]);
-
-  //       const data = results;
-
-  //       console.log(data);
-
-  //       console.log(data[0].results);
-  //       console.log(data[1].results);
-
-  //       setIndexPageTrendingItemsDay(data[0].results);
-  //       setIndexPageTrendingItemsWeek(data[1].results);
-
-  //       setIsLoading((prev) => !prev);
-  //     } else if (scrollbarType === "card-cast") {
-  //       const promise_movie_credits_url = fetch(
-  //         Movie_credits_url,
-  //         options
-  //       ).then((response) => response.json());
-
-  //       const results = await Promise.all([promise_movie_credits_url]);
-
-  //       const data = results;
-
-  //       console.log(data);
-
-  //       console.log(data[0].cast);
-
-  //       setMovieCredits(data[0].cast);
-
-  //       setIsLoading((prev) => !prev);
-  //     } else if (scrollbarType === "people-page") {
-  //       const promise_person_url = fetch(Person_url, options).then((response) =>
-  //         response.json()
-  //       );
-
-  //       const results = await Promise.all([promise_person_url]);
-
-  //       const data = results;
-
-  //       console.log(data);
-
-  //       console.log(data[0]);
-
-  //       setPersonFilmArray(data[0].cast);
-
-  //       setIsLoading((prev) => !prev);
-  //     } else if (scrollbarType === "TV") {
-  //       const promise_tv_credits_url = fetch(TV_credits_url, options).then(
-  //         (response) => response.json()
-  //       );
-
-  //       const results = await Promise.all([promise_tv_credits_url]);
-
-  //       const data = results;
-
-  //       console.log(data);
-
-  //       console.log(data[0]);
-
-  //       // setPersonFilmArray(data[0].cast);
-
-  //       setIsLoading((prev) => !prev);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const ScrollBarTypeFirst = () => {
     if (scrollbarType === "index-page-trending-day") {
@@ -802,29 +706,31 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
 
   const ScrollBarTypeThird = () => {
     return (
-      <div className="card-cast-wrapper">
-        <span className="card-cast-top">top billed cast</span>
-        <div className="card-cast">
+      <div className="scrollbar-card-cast-wrapper">
+        <span className="scrollbar-card-cast-top">top billed cast</span>
+        <div className="scrollbar-card-cast">
           {movieCredits.slice(0, 9).map((item) => (
             // <div key={item.id} value={item.id} onClick={handlePersonId}>
             //   press here, in console you should see item-id
             // </div>
             <div
-              className="card-cast-item"
+              className="scrollbar-card-cast-item"
               key={item.id}
               value={item.id}
               onClick={(e) => handlePersonId(item.id)}
             >
               <img
-                className="card-cast-photo"
+                className="scrollbar-card-cast-photo"
                 src={
                   process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
                 }
                 alt=""
               />
-              <div className="card-cast-text">
-                <div className="card-cast-name">{item.name}</div>
-                <div className="card-cast-character">{item.character}</div>
+              <div className="scrollbar-card-cast-text">
+                <div className="scrollbar-card-cast-name">{item.name}</div>
+                <div className="scrollbar-card-cast-character">
+                  {item.character}
+                </div>
               </div>
             </div>
           ))}
@@ -835,7 +741,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
 
   const ScrollBarTypeFourth = () => {
     return (
-      <div className="scrollbar">
+      <div className="scrollbar-people-page">
         {personFilmArray.slice(0, 8).map((item) => (
           <div className="scrollbar-card-type-four" key={item.id}>
             {item.poster_path ? (
@@ -1057,7 +963,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
 
     // const itemId = e.target.getAttribute("getid");
     // return console.log(itemId);
-    // return navigate(`/movie/${e.id}-${e.title}`);
+    return navigate(`/movie/${e.id}-${title}`);
   };
 
   // const SortingByYear = () => {

@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import Navbar from "../../Navbar/Navbar";
 import ScrollBar from "../../ScrollBar/ScrollBar";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import PanoramaFishEyeRoundedIcon from "@mui/icons-material/PanoramaFishEyeRounded";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 
 export default function PersonPage() {
   const { id } = useParams();
@@ -14,19 +14,25 @@ export default function PersonPage() {
 
   const scrollbarPeoplePage = "people-page";
 
+  const [sortedData, setSortedData] = React.useState();
+
   const [personValue, setPersonValue] = React.useState([]);
   const [personKnownAs, setPersonKnownAs] = React.useState([]);
-  const [personActingCast, setPersonActingCast] = React.useState([]);
-  const [personActingCrew, setPersonActingCrew] = React.useState([]);
-  const [years, setYears] = React.useState();
+  const [personMovieActingCast, setPersonMovieActingCast] = React.useState([]);
+  const [personMovieActingCrew, setPersonMovieActingCrew] = React.useState([]);
+  const [personTvActingCast, setPersonTvActingCast] = React.useState([]);
+  const [personTvActingCrew, setPersonTvActingCrew] = React.useState([]);
+  const [doubleArray, setDoubleArray] = React.useState([]);
   // const [releasedDate, setReleasedDate] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const fetch = require("node-fetch");
 
   const Person_Url =
     process.env.REACT_APP_BASE_URL + `person/${id}?language=en-US`;
-  const Person_Acting =
+  const Person_Acting_Movie =
     process.env.REACT_APP_BASE_URL + `person/${id}/movie_credits`;
+  const Person_Acting_TV =
+    process.env.REACT_APP_BASE_URL + `person/${id}/tv_credits`;
 
   const options = {
     method: "GET",
@@ -42,11 +48,15 @@ export default function PersonPage() {
       const promise_0 = fetch(Person_Url, options).then((response) =>
         response.json()
       );
-      const promise_1 = fetch(Person_Acting, options).then((response) =>
+      const promise_1 = fetch(Person_Acting_Movie, options).then((response) =>
         response.json()
       );
 
-      const results = await Promise.all([promise_0, promise_1]);
+      const promise_2 = fetch(Person_Acting_TV, options).then((response) =>
+        response.json()
+      );
+
+      const results = await Promise.all([promise_0, promise_1, promise_2]);
 
       const data = results;
 
@@ -54,9 +64,12 @@ export default function PersonPage() {
 
       setPersonValue(data[0]);
       setPersonKnownAs(data[0].also_known_as);
-      setPersonActingCast(data[1].cast);
-      setPersonActingCrew(data[1].crew);
-      // setYearsLength(data[1);
+      setPersonMovieActingCast(data[1].cast);
+      setPersonMovieActingCrew(data[1].crew);
+      setPersonTvActingCast(data[2].cast);
+      setPersonTvActingCrew(data[2].crew);
+      // setDoubleArray(data[1].cast, data[1].crew);
+
       setIsLoading((prev) => !prev);
     } catch (error) {
       console.error(error);
@@ -67,80 +80,14 @@ export default function PersonPage() {
     fetchData();
   }, []);
 
-  function ArrayTable() {
-    function DataSequence() {
-      const array = personActingCast.map((item) =>
-        item.release_date.replace(/-/g, "")
-      );
-
-      array.sort((a, b) => {
-        return a.localeCompare(b);
-      });
-
-      console.log(array);
-
-      // return (
-      //   <div>
-      //     {array.map((item) => (
-      //       <div key={item}>{item}</div>
-      //     ))}
-      //   </div>
-      // );
-    }
-
-    function compareReleaseDates(a, b) {
-      return b.release_date.localeCompare(a.release_date);
-    }
-
-    const otherArray = personActingCast;
-
-    const releaseDates = DataSequence();
-
-    const newArray = otherArray.sort(compareReleaseDates);
-
-    const limitedArray = () => {
-      const array = personActingCast.map((item) =>
-        item.release_date.replace(/-/g, "")
-      );
-
-      array.sort((a, b) => {
-        return a.localeCompare(b);
-      });
-
-      const uniqYear = [];
-
-      array.slice().forEach((year) => {
-        if (!uniqYear.includes(year.slice(0, 4))) {
-          uniqYear.push(year.slice(0, 4));
-        }
-      });
-      console.log(uniqYear);
-
-      return uniqYear;
-    };
-
-    limitedArray();
-
-    return (
-      <div>
-        {newArray.map((item) => {
-          if (item.release_date === limitedArray) {
-            <div className="pp-section-item" key={item.id}>
-              <div className="pp-section-release-date">
-                {item.release_date.slice(0, 4)} <PanoramaFishEyeRoundedIcon />
-              </div>
-              <div className="pp-section-text">
-                <div className="pp-section-title">{item.title}</div>
-                <div className="pp-section-character">{item.character}</div>
-              </div>
-            </div>;
-          }
-        })}
-      </div>
-    );
-  }
-
   const PeopleWrapper = () => {
+    const actingMovieAndTv = personMovieActingCast.concat(personTvActingCast);
+    const crewMovieAndTv = personMovieActingCrew.concat(personTvActingCrew);
+    console.log(actingMovieAndTv);
+    console.log(crewMovieAndTv);
+    // console.log(personMovieActingCast);
+    // console.log(personMovieActingCrew);
+
     return (
       <div className="pp-wrapper">
         <div className="pp-left">
@@ -197,30 +144,101 @@ export default function PersonPage() {
           </div>
           {/* <ScrollBar pageType={pageType} id={personValue.id} /> */}
           <div className="pp-section">
-            <div className="pp-section-controls">
-              <span className="pp-section-title">Acting</span>
-              <div className="pp-section-sort">
-                <button className="pp-acting-title">
-                  <ChevronRightRoundedIcon />
+            <h2>Known For</h2>
+            <ScrollBar scrollbarType={scrollbarPeoplePage} id={id} />
+            <div className="pp-acting-content">{/* <ArrayTable /> */}</div>
+          </div>
+          <div className="pp-section">
+            <div className="pp-section-head">
+              <h2>Acting</h2>
+              <div className="pp-section-controls">
+                <button className="pp-acting-btn">
                   all
+                  <ArrowDropDownIcon />
                 </button>
-                <button className="pp-acting-title">
-                  <ChevronRightRoundedIcon />
+                <button className="pp-acting-btn">
                   department
+                  <ArrowDropDownIcon />
                 </button>
               </div>
             </div>
-            <div className="pp-acting-content">{/* <ArrayTable /> */}</div>
+            <div className="pp-acting-content">
+              {personMovieActingCast
+                .sort(
+                  (a, b) =>
+                    a.release_date.replace(/-/g, "") -
+                    b.release_date.replace(/-/g, "")
+                )
+                .sort(
+                  (a, b) =>
+                    a.first_air_date.replace(/-/g, "") -
+                    b.first_air_date.replace(/-/g, "")
+                )
+                .map((item) => (
+                  <div className="person-page-acting-wrapper" key={item.id}>
+                    <div className="acting-year-wrapper">
+                      {item.release_date ? (
+                        <div className="acting-year">
+                          {item.release_date.replace(/-/g, "").slice(0, 4)}
+                        </div>
+                      ) : (
+                        <div className="acting-year">_</div>
+                      )}
+                      <div className="acting-circle">
+                        <PanoramaFishEyeIcon />
+                      </div>
+                    </div>
+                    <div className="acting-text">
+                      <h4 className="acting-title">{item.title}</h4>
+                      <div className="acting-character">
+                        <p>as</p>
+
+                        {item.character}
+                      </div>
+                    </div>
+                  </div>
+                ))}{" "}
+            </div>
           </div>
-          <ScrollBar scrollbarType={scrollbarPeoplePage} id={id} />
+          <div className="pp-section">
+            <h2>Acting</h2>
+            <div className="pp-acting-content">
+              {personMovieActingCrew
+                .sort(
+                  (a, b) =>
+                    b.release_date.replace(/-/g, "") -
+                    a.release_date.replace(/-/g, "")
+                )
+                .map((item) => (
+                  <div className="person-page-acting-wrapper" key={item.id}>
+                    <div className="acting-year-wrapper">
+                      {item.release_date ? (
+                        <div className="acting-year">
+                          {item.release_date.replace(/-/g, "").slice(0, 4)}
+                        </div>
+                      ) : (
+                        <div className="acting-year">_</div>
+                      )}
+                      <div className="acting-circle">
+                        <PanoramaFishEyeIcon />
+                      </div>
+                    </div>
+                    <div className="acting-text">
+                      <h4 className="acting-title">{item.title}</h4>
+                      <div className="acting-character">
+                        <p>as</p>
+
+                        {item.job}
+                      </div>
+                    </div>
+                  </div>
+                ))}{" "}
+            </div>
+          </div>
         </div>
       </div>
     );
   };
-
-  // const Array = async () => {
-  //     const yearArray = await
-  // }
 
   return (
     <div className="person-page">

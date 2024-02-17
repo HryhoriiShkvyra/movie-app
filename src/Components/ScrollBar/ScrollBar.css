@@ -562,3 +562,18 @@
   font-size: 13px;
   font-style: italic;
 }
+
+/* ========================== */
+
+/* people-page */
+
+/* ========================== */
+
+.scrollbar-people-page {
+  width: 900px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+
+  overflow-x: scroll;
+}
