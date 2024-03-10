@@ -105,7 +105,7 @@ function App() {
           element: <CardPage />,
         },
         {
-          path: "/search/:searchValue/:id/cast",
+          path: "/:searchValue/:id/cast",
           element: <CrewPage />,
         },
         {

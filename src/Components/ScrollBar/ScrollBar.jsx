@@ -11,7 +11,7 @@ import IMG1 from "../../Images/posters/better-call-saul_poster.jpeg";
 import IMG2 from "../../Images/posters/the-sopranos_poster.jpg";
 import LandscapeIcon from "@mui/icons-material/Landscape";
 
-export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
+export default function ScrollBar({ scrollbarType, id, requestType }) {
   const [indexPageTrendingItemsDay, setIndexPageTrendingItemsDay] =
     React.useState([]);
   const [indexPageTrendingItemsWeek, setIndexPageTrendingItemsWeek] =
@@ -79,7 +79,8 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
   const TV_credits_url =
     process.env.REACT_APP_BASE_URL + `tv/${id}/credits?language=en-US`;
   const Movie_credits_url =
-    process.env.REACT_APP_BASE_URL + `movie/${id}/credits?language=en-US`;
+    process.env.REACT_APP_BASE_URL +
+    `${requestType}/${id}/credits?language=en-US`;
 
   const options = {
     method: "GET",
@@ -251,18 +252,28 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
                           </div>
                         </div>
                       ) : (
-                        <img
-                          className="scroll-item-image"
-                          src={
-                            process.env.REACT_APP_IMAGE_URL +
-                            `w200` +
-                            item.poster_path
-                          }
-                          alt=""
-                          getid={item.id}
-                          gettitle={item.name}
-                          onClick={(e) => HandleRedirectToMovie(item)}
-                        />
+                        <div className="scrollbar-item">
+                          <img
+                            className="scroll-item-image"
+                            src={
+                              process.env.REACT_APP_IMAGE_URL +
+                              `w200` +
+                              item.poster_path
+                            }
+                            alt=""
+                            getid={item.id}
+                            gettitle={item.name}
+                            onClick={(e) => HandleRedirectToTv(item)}
+                          />
+                          <PendingIcon className="card-icon" />
+                          <div className="user-score-chart">
+                            <span className="outer-circle">
+                              <span className="outer-circle-number">
+                                71 <span>%</span>{" "}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
                       )}
                       <div className="scroll-item-text">
                         <span className="scroll-item-title">
@@ -317,7 +328,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
                           alt=""
                           getid={item.id}
                           gettitle={item.name}
-                          onClick={(e) => HandleRedirectToMovie(item)}
+                          onClick={(e) => HandleRedirectToTv(item)}
                         />
                       )}
                       <div className="scroll-item-text">
@@ -512,18 +523,28 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
                           </div>
                         </div>
                       ) : (
-                        <img
-                          className="scroll-item-image"
-                          src={
-                            process.env.REACT_APP_IMAGE_URL +
-                            `w200` +
-                            item.poster_path
-                          }
-                          alt=""
-                          getid={item.id}
-                          gettitle={item.name}
-                          onClick={(e) => HandleRedirectToMovie(item)}
-                        />
+                        <div className="scrollbar-item">
+                          <img
+                            className="scroll-item-image"
+                            src={
+                              process.env.REACT_APP_IMAGE_URL +
+                              `w200` +
+                              item.poster_path
+                            }
+                            alt=""
+                            getid={item.id}
+                            gettitle={item.name}
+                            onClick={(e) => HandleRedirectToTv(item)}
+                          />
+                          <PendingIcon className="card-icon" />
+                          <div className="user-score-chart">
+                            <span className="outer-circle">
+                              <span className="outer-circle-number">
+                                71 <span>%</span>{" "}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
                       )}
                       <div className="scroll-item-text">
                         <span className="scroll-item-title">
@@ -578,7 +599,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
                           alt=""
                           getid={item.id}
                           gettitle={item.name}
-                          onClick={(e) => HandleRedirectToMovie(item)}
+                          onClick={(e) => HandleRedirectToTv(item)}
                         />
                       )}
                       <div className="scroll-item-text">
@@ -717,7 +738,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
               className="scrollbar-card-cast-item"
               key={item.id}
               value={item.id}
-              onClick={(e) => handlePersonId(item.id)}
+              onClick={(e) => handlePersonId(item)}
             >
               <img
                 className="scrollbar-card-cast-photo"
@@ -751,6 +772,7 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
                   process.env.REACT_APP_IMAGE_URL + "w200" + item.poster_path
                 }
                 alt=""
+                onClick={(e) => HandleRedirectToMovie(item)}
               />
             ) : (
               <div className="scrollbar-card-type-four-no-image">
@@ -768,7 +790,14 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
 
   const handlePersonId = (e) => {
     console.log(e);
-    return navigate(`/person/${e}`);
+
+    const actorName = e.name.replace(/-/g, "").toLowerCase();
+
+    const actorId = e.id;
+
+    //  console.log(title.replace(/[^a-zA-Z]/g, "-"));
+    // console.log(title.replace(/ /g, "-").toLowerCase());
+    return navigate(`/person/${actorId}-${actorName}`);
   };
 
   const ScrollbarIndexPageSecondType = () => {
@@ -966,15 +995,13 @@ export default function ScrollBar({ scrollbarType, id, cleanedId, movieOrTv }) {
     return navigate(`/movie/${e.id}-${title}`);
   };
 
-  // const SortingByYear = () => {
-  //   let list = personFilmArray;
+  const HandleRedirectToTv = (e) => {
+    console.log(e);
 
-  //   console.log(list);
-  // };
+    let name = e.name.replace(/ /g, "-").toLowerCase();
 
-  // React.useEffect(() => {
-  //   SortingByYear();
-  // });
+    return navigate(`/tv/${e.id}-${name}`);
+  };
 
   const ScrollbarLogic = () => {
     if (scrollbarType === "index-page-trending-day") {

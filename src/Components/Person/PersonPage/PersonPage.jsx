@@ -1,6 +1,6 @@
 import React from "react";
 import "./PersonPage.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
 import Navbar from "../../Navbar/Navbar";
 import ScrollBar from "../../ScrollBar/ScrollBar";
@@ -11,6 +11,8 @@ export default function PersonPage() {
   const { id } = useParams();
   const onlyId = id.slice(0, 3);
   const pageType = "person";
+
+  const navigate = useNavigate();
 
   const scrollbarPeoplePage = "people-page";
 
@@ -81,12 +83,32 @@ export default function PersonPage() {
   }, []);
 
   const PeopleWrapper = () => {
-    const actingMovieAndTv = personMovieActingCast.concat(personTvActingCast);
-    const crewMovieAndTv = personMovieActingCrew.concat(personTvActingCrew);
-    console.log(actingMovieAndTv);
-    console.log(crewMovieAndTv);
-    // console.log(personMovieActingCast);
-    // console.log(personMovieActingCrew);
+    const actingMovieYearArray = personMovieActingCast.sort(
+      (a, b) =>
+        a.release_date.replace(/-/g, "") - b.release_date.replace(/-/g, "")
+    );
+    const actingTvYearArray = personTvActingCast.sort(
+      (a, b) =>
+        a.first_air_date.replace(/-/g, "") - b.first_air_date.replace(/-/g, "")
+    );
+    const actingMovieAndTvYearArray =
+      actingMovieYearArray.concat(actingTvYearArray);
+
+    const crewMovieYearArray = personMovieActingCrew.sort(
+      (a, b) =>
+        a.release_date.replace(/-/g, "") - b.release_date.replace(/-/g, "")
+    );
+    const crewTvYearArray = personTvActingCrew.sort(
+      (a, b) =>
+        a.first_air_date.replace(/-/g, "") - b.first_air_date.replace(/-/g, "")
+    );
+    const crewMovieAndTvYearArray = crewMovieYearArray.concat(crewTvYearArray);
+
+    const HandleRedirectToMovie = (e) => {
+      let title = e.title.replace(/ /g, "-").toLowerCase();
+
+      return navigate(`/movie/${e.id}-${title}`);
+    };
 
     return (
       <div className="pp-wrapper">
@@ -142,7 +164,6 @@ export default function PersonPage() {
             <div className="pp-biography-title">biography</div>
             <div className="pp-biography-text">{personValue.biography}</div>
           </div>
-          {/* <ScrollBar pageType={pageType} id={personValue.id} /> */}
           <div className="pp-section">
             <h2>Known For</h2>
             <ScrollBar scrollbarType={scrollbarPeoplePage} id={id} />
@@ -163,76 +184,64 @@ export default function PersonPage() {
               </div>
             </div>
             <div className="pp-acting-content">
-              {personMovieActingCast
-                .sort(
-                  (a, b) =>
-                    a.release_date.replace(/-/g, "") -
-                    b.release_date.replace(/-/g, "")
-                )
-                .sort(
-                  (a, b) =>
-                    a.first_air_date.replace(/-/g, "") -
-                    b.first_air_date.replace(/-/g, "")
-                )
-                .map((item) => (
-                  <div className="person-page-acting-wrapper" key={item.id}>
-                    <div className="acting-year-wrapper">
-                      {item.release_date ? (
-                        <div className="acting-year">
-                          {item.release_date.replace(/-/g, "").slice(0, 4)}
-                        </div>
-                      ) : (
-                        <div className="acting-year">_</div>
-                      )}
-                      <div className="acting-circle">
-                        <PanoramaFishEyeIcon />
+              {actingMovieAndTvYearArray.map((item) => (
+                <div className="person-page-acting-wrapper" key={item.id}>
+                  <div className="acting-year-wrapper">
+                    {item.release_date ? (
+                      <div className="acting-year">
+                        {item.release_date.replace(/-/g, "").slice(0, 4)}
                       </div>
-                    </div>
-                    <div className="acting-text">
-                      <h4 className="acting-title">{item.title}</h4>
-                      <div className="acting-character">
-                        <p>as</p>
-
-                        {item.character}
-                      </div>
+                    ) : (
+                      <div className="acting-year">_</div>
+                    )}
+                    <div className="acting-circle">
+                      <PanoramaFishEyeIcon />
                     </div>
                   </div>
-                ))}{" "}
+                  <div className="acting-text">
+                    <h4
+                      onClick={(e) => HandleRedirectToMovie(item)}
+                      className="acting-title"
+                    >
+                      {item.title}
+                    </h4>
+                    <div className="acting-character">
+                      <p>as</p>
+
+                      {item.character}
+                    </div>
+                  </div>
+                </div>
+              ))}{" "}
             </div>
           </div>
           <div className="pp-section">
-            <h2>Acting</h2>
+            <h2>Production</h2>
             <div className="pp-acting-content">
-              {personMovieActingCrew
-                .sort(
-                  (a, b) =>
-                    b.release_date.replace(/-/g, "") -
-                    a.release_date.replace(/-/g, "")
-                )
-                .map((item) => (
-                  <div className="person-page-acting-wrapper" key={item.id}>
-                    <div className="acting-year-wrapper">
-                      {item.release_date ? (
-                        <div className="acting-year">
-                          {item.release_date.replace(/-/g, "").slice(0, 4)}
-                        </div>
-                      ) : (
-                        <div className="acting-year">_</div>
-                      )}
-                      <div className="acting-circle">
-                        <PanoramaFishEyeIcon />
+              {crewMovieAndTvYearArray.map((item) => (
+                <div className="person-page-acting-wrapper" key={item.id}>
+                  <div className="acting-year-wrapper">
+                    {item.release_date ? (
+                      <div className="acting-year">
+                        {item.release_date.replace(/-/g, "").slice(0, 4)}
                       </div>
-                    </div>
-                    <div className="acting-text">
-                      <h4 className="acting-title">{item.title}</h4>
-                      <div className="acting-character">
-                        <p>as</p>
-
-                        {item.job}
-                      </div>
+                    ) : (
+                      <div className="acting-year">_</div>
+                    )}
+                    <div className="acting-circle">
+                      <PanoramaFishEyeIcon />
                     </div>
                   </div>
-                ))}{" "}
+                  <div className="acting-text">
+                    <h4 className="acting-title">{item.title}</h4>
+                    <div className="acting-character">
+                      <p>as</p>
+
+                      {item.job}
+                    </div>
+                  </div>
+                </div>
+              ))}{" "}
             </div>
           </div>
         </div>

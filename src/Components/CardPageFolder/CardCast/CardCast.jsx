@@ -1,7 +1,7 @@
 import React from "react";
 import "./CardCast.css";
 import Loading from "../../Loading/Loading";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import ScrollBar from "../../ScrollBar/ScrollBar";
 // import CrewPage from "../../Crew/CastPage/CastPage";
 
@@ -16,6 +16,7 @@ export default function CardCast() {
   const { id } = useParams();
   const { requestType } = useParams();
   const fetch = require("node-fetch");
+  const navigate = useNavigate();
 
   const url = `https://api.themoviedb.org/3/${requestType}/${id}/credits?language=en-US`;
   const options = {
@@ -42,15 +43,18 @@ export default function CardCast() {
     request();
   }, []);
 
-  const handlePersonId = (e) => {
-    const personId = e.target.getAttribute("value");
-    console.log(personId);
-  };
+  // const handleRedirectToCardCast = (e) => {
+  //   return navigate(`/${requestType}/${id}`);
+  // };
 
   return (
     <div>
       {isLoading === true ? (
-        <ScrollBar scrollbarType={scrollbarCarsCast} id={castValue.id} />
+        <ScrollBar
+          scrollbarType={scrollbarCarsCast}
+          id={castValue.id}
+          requestType={requestType}
+        />
       ) : (
         <div className="tcast-wrapper">
           <h1>
@@ -68,11 +72,18 @@ export default function CardCast() {
       )}
 
       <Link
-        to={`/search/${searchValue}/${id}/cast`}
+        to={`/${requestType}/${id}/cast`}
         className="full-cast-and-crew-link"
       >
         full cast & crew
       </Link>
+      {/* 
+      <div
+        onClick={(e) => handleRedirectToCardCast()}
+        className="full-cast-and-crew-link"
+      >
+        full cast & crew
+      </div> */}
     </div>
   );
 }

@@ -127,6 +127,50 @@ export default function CrewPage() {
     );
   };
 
+  const handleDuplicate = () => {
+    // const testArray = [
+    //   { id: 1, title: "First Title" },
+    //   { id: 2, title: "Second Title" },
+    //   { id: 2, title: "Another Title" },
+    //   { id: 1, title: "Third Title" },
+    // ];
+
+    const array = {};
+
+    crew.forEach((item) => {
+      if (array[item.id]) {
+        array[item.id].job.push(item.job);
+      } else {
+        array[item.id] = { id: item.id, job: [item.job] };
+      }
+    });
+    console.log(Object.values(array));
+  };
+
+  handleDuplicate();
+
+  // const handleDuplicate = () => {
+  //   const testArray = [
+  //     { id: 1, title: "First Title" },
+  //     { id: 2, title: "Second Title" },
+  //     { id: 2, title: "Another Title" },
+  //     { id: 1, title: "Third Title" },
+  //   ];
+
+  //   const result = {};
+
+  //   testArray.forEach((item) => {
+  //     if (result[item.id]) {
+  //       result[item.id].titles.push(item.title);
+  //     } else {
+  //       result[item.id] = { id: item.id, titles: [item.title] };
+  //     }
+  //   });
+
+  //   console.log(Object.values(result));
+  //   // return Object.values(result);
+  // };
+
   const handleRedirectToPerson = (e) => {
     const itemId = e.target.getAttribute("value");
     return navigate(<PersonPage id={id} />);

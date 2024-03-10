@@ -30,17 +30,13 @@ export default function CardPageCard() {
     return onlyId;
   };
 
-  // React.useState(() => {
-  //   console.log(id);
-  // }, []);
-
   React.useEffect(() => {
     handleId(id);
   }, [id]);
 
   const fetch = require("node-fetch");
 
-  const url = `https://api.themoviedb.org/3/movie/${handleId(
+  const url = `https://api.themoviedb.org/3/${requestType}/${handleId(
     id
   )}?language=en-US`;
   const options = {
