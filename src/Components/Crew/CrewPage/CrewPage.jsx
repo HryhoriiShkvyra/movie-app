@@ -8,11 +8,19 @@ import Navbar from "../../Navbar/Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import PersonPage from "../../Person/PersonPage/PersonPage";
 import CastItem from "../CrewItem/CrewItem";
+import CrewItem from "../CrewItem/CrewItem";
 
 export default function CrewPage() {
   const [itemValue, setItemValue] = React.useState();
   const [actors, setActors] = React.useState([]);
+  // const [crew, setCrew] = React.useState([]);
+  // const [updatedCrew, setUpdatedCrew] = React.useState([]);
   const [crew, setCrew] = React.useState([]);
+  const [updatedCrewById, setUpdatedCrewById] = React.useState({});
+  const [updatedCrewByDepartment, setUpdatedCrewByDepartment] = React.useState(
+    {}
+  );
+  const [newUpdatedCrew, setNewUpdatedCrew] = React.useState({});
   const [releasedDate, setReleasedDate] = React.useState();
   const [isLoading, setIsLoading] = React.useState(false);
   const { id } = useParams();
@@ -38,6 +46,10 @@ export default function CrewPage() {
     },
   };
 
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchData = async () => {
     try {
       const promise_0 = fetch(film_url, options).then((response) =>
@@ -51,6 +63,7 @@ export default function CrewPage() {
 
       const data = request;
 
+      console.log(data[1]);
       setItemValue(data[0]);
       setActors(data[1].cast);
       setCrew(data[1].crew);
@@ -62,8 +75,114 @@ export default function CrewPage() {
   };
 
   React.useEffect(() => {
-    fetchData();
-  }, []);
+    if (crew.length > 0) {
+      handleDuplicate();
+      // crewByIdObject();
+    }
+  }, [crew]);
+
+  const handleDuplicate = () => {
+    // const crewByIdObject = {};
+    // crew.forEach((item) => {
+    //   if (crewByIdObject[item.id]) {
+    //     crewByIdObject[item.id].job.push(item.job);
+    //   } else {
+    //     crewByIdObject[item.id] = {
+    //       id: item.id,
+    //       name: [item.name],
+    //       job: [item.job],
+    //       photo: item.profile_path,
+    //       department: item.known_for_department,
+    //       popularity: item.popularity,
+    //     };
+    //   }
+    // });
+    // const updatedCrewByIdObject = JSON.parse(JSON.stringify(crewByIdObject));
+    // setUpdatedCrewById((prevState) => ({
+    //   ...prevState,
+    //   crewByIdObject: updatedCrewByIdObject,
+    // }));
+
+    const crewByDepartmentObject = {};
+    crew.forEach((item) => {
+      const department = item.known_for_department;
+
+      if (crewByDepartmentObject[department]) {
+        crewByDepartmentObject[department].push({
+          id: item.id,
+          name: [item.name],
+          job: [item.job],
+          photo: item.profile_path,
+          department: item.known_for_department,
+          popularity: item.popularity,
+        });
+      } else {
+        crewByDepartmentObject[item.department] = [
+          {
+            id: item.id,
+            name: [item.name],
+            job: [item.job],
+            photo: item.profile_path,
+            department: item.known_for_department,
+            popularity: item.popularity,
+          },
+        ];
+      }
+    });
+
+    const updatedCrewByDepartmentObject = JSON.parse(
+      JSON.stringify(crewByDepartmentObject)
+    );
+    setUpdatedCrewByDepartment((prevState) => ({
+      ...prevState,
+      crewByDepartmentObject: updatedCrewByDepartmentObject,
+    }));
+
+    // Object.values(updatedCrewByDepartment.crewByDepartmentObject).flat();
+
+    // Object.values(updatedCrewByDepartment.crewByDepartmentObject);
+    // console.log(Object.entries(crewByDepartmentObject));
+
+    console.log(crewByDepartmentObject);
+  };
+
+  // const crewByIdObject = () => {
+  //   console.log(updatedCrewByDepartment);
+  //   const crewByIdObject = {};
+
+  //   console.log(
+  //     "Check if updatedCrewByDepartment and crewByDepartmentObject are not undefined or null"
+  //   );
+  //   if (updatedCrewByDepartment?.crewByDepartmentObject) {
+  //     const crewData = Object.values(
+  //       updatedCrewByDepartment.crewByDepartmentObject
+  //     ).flat();
+
+  //     console.log(crewData);
+
+  //     crewData.forEach((item) => {
+  //       if (crewByIdObject[item.id]) {
+  //         crewByIdObject[item.id].job.push(item.job);
+  //       } else {
+  //         crewByIdObject[item.id] = {
+  //           id: item.id,
+  //           name: item.name,
+  //           job: item.job,
+  //           photo: item.profile_path,
+  //           department: item.known_for_department,
+  //           popularity: item.popularity,
+  //         };
+  //       }
+  //     });
+
+  //     const updatedCrewByIdObject = JSON.parse(JSON.stringify(crewByIdObject));
+  //     setUpdatedCrewById((prevState) => ({
+  //       ...prevState,
+  //       crewByIdObject: updatedCrewByIdObject,
+  //     }));
+  //   }
+  //   console.log(crewByIdObject);
+  // };
 
   const CastPageWrapper = () => {
     return (
@@ -104,8 +223,8 @@ export default function CrewPage() {
               <div className="cast-peoples-label">Cast </div>
               {/* <div className="cast-peoples-label">Cast {actors.length}</div> */}
               <div className="cast-peoples">
-                {actors.map((item) => (
-                  <CastItem key={item.id} item={item} />
+                {actors.map((actor, index) => (
+                  <CastItem key={`${actor.id}-${index}`} member={actor} />
                 ))}
               </div>
             </div>
@@ -113,11 +232,64 @@ export default function CrewPage() {
             <div className="crew">
               <div className="cast-peoples-wrapper">
                 <div className="cast-peoples-label">Crew</div>
+                {/* {updatedCrewById && updatedCrewById.crewByIdObject
+                  ? Object.values(updatedCrewById.crewByIdObject || {}).map(
+                      (crewMember, index) => (
+                        <div key={`${crewMember}-${index}`}>
+                          <CrewItem crewMember={crewMember} />
+                        </div>
+                      )
+                    )
+                  : null} */}
                 {/* <div className="cast-peoples-label">Crew {crew.length}</div> */}
+
                 <div className="cast-peoples">
-                  {crew.map((item) => (
-                    <CastItem key={item.id} item={item} />
-                  ))}
+                  {updatedCrewByDepartment &&
+                  updatedCrewByDepartment.crewByDepartmentObject
+                    ? Object.entries(
+                        updatedCrewByDepartment.crewByDepartmentObject || {}
+                      )
+                        .sort()
+                        .map(([department, crewMembers], index) => (
+                          <div
+                            key={`${department}-${index}`}
+                            className="crewMembers-wrapper"
+                          >
+                            <h2>{department}</h2>
+                            <div className="crewMember">
+                              {crewMembers
+                                // .sort((a, b) => b.popularity - a.popularity) need to understand how to sort this items by popularity in top level
+                                .map(
+                                  (member, memberIndex) => (
+                                    <CrewItem
+                                      key={`${member}-${memberIndex}`}
+                                      member={member}
+                                    />
+                                  )
+                                  // Array.isArray(member) ? (
+                                  //   <li key={`${department}-${memberIndex}`}>
+                                  //     Array: {member.length} items
+                                  //   </li>
+                                  // ) : (
+                                  //   <li key={`${department}-${memberIndex}`}>
+                                  //     {member.name ||
+                                  //       member.title ||
+                                  //       `Object ${memberIndex + 1}`}
+                                  //   </li>
+                                  // )
+                                )}
+                            </div>
+                          </div>
+                        ))
+                    : null}
+                  {/* {updatedCrewByDepartment &&
+                  updatedCrewByDepartment.crewByDepartmentObject
+                    ? Object.entries(
+                        updatedCrewByDepartment.crewByDepartmentObject || {}
+                      ).map((crewByDepartment, category, index) => (
+                        <div key={`${crewByDepartment} - ${index}`}></div>
+                      ))
+                    : null} */}
                 </div>
               </div>
             </div>
@@ -127,49 +299,19 @@ export default function CrewPage() {
     );
   };
 
-  const handleDuplicate = () => {
-    // const testArray = [
-    //   { id: 1, title: "First Title" },
-    //   { id: 2, title: "Second Title" },
-    //   { id: 2, title: "Another Title" },
-    //   { id: 1, title: "Third Title" },
-    // ];
-
-    const array = {};
-
-    crew.forEach((item) => {
-      if (array[item.id]) {
-        array[item.id].job.push(item.job);
-      } else {
-        array[item.id] = { id: item.id, job: [item.job] };
-      }
-    });
-    console.log(Object.values(array));
-  };
-
-  handleDuplicate();
-
-  // const handleDuplicate = () => {
-  //   const testArray = [
-  //     { id: 1, title: "First Title" },
-  //     { id: 2, title: "Second Title" },
-  //     { id: 2, title: "Another Title" },
-  //     { id: 1, title: "Third Title" },
-  //   ];
-
-  //   const result = {};
-
-  //   testArray.forEach((item) => {
-  //     if (result[item.id]) {
-  //       result[item.id].titles.push(item.title);
-  //     } else {
-  //       result[item.id] = { id: item.id, titles: [item.title] };
-  //     }
-  //   });
-
-  //   console.log(Object.values(result));
-  //   // return Object.values(result);
-  // };
+  {
+    /* {updatedCrewById.map((item) => (
+                            <div>{item.job}</div>
+                          ))} */
+  }
+  {
+    /* {crewDepartment.map((departmentItems, index) => (
+                            <div key={`${departmentItems}-${index}`}>
+                              <CrewItem crewMember={departmentItems} />
+                              {departmentItems.department}
+                            </div>
+                          ))} */
+  }
 
   const handleRedirectToPerson = (e) => {
     const itemId = e.target.getAttribute("value");

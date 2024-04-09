@@ -77,13 +77,6 @@ export default function CardCast() {
       >
         full cast & crew
       </Link>
-      {/* 
-      <div
-        onClick={(e) => handleRedirectToCardCast()}
-        className="full-cast-and-crew-link"
-      >
-        full cast & crew
-      </div> */}
     </div>
   );
 }
