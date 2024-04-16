@@ -240,7 +240,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                             alt=""
                             getid={item.id}
                             gettitle={item.title}
-                            onClick={(e) => HandleRedirectToMovie(item)}
+                            onClick={(e) => MovieOrTvItem(item)}
                           />
                           <PendingIcon className="card-icon" />
                           <div className="user-score-chart">
@@ -263,7 +263,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                             alt=""
                             getid={item.id}
                             gettitle={item.name}
-                            onClick={(e) => HandleRedirectToTv(item)}
+                            onClick={(e) => MovieOrTvItem(item)}
                           />
                           <PendingIcon className="card-icon" />
                           <div className="user-score-chart">
@@ -306,7 +306,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                             alt=""
                             getid={item.id}
                             gettitle={item.title}
-                            onClick={(e) => HandleRedirectToMovie(item)}
+                            onClick={(e) => MovieOrTvItem(item)}
                           />
                           <PendingIcon className="card-icon" />
                           <div className="user-score-chart">
@@ -328,7 +328,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                           alt=""
                           getid={item.id}
                           gettitle={item.name}
-                          onClick={(e) => HandleRedirectToTv(item)}
+                          onClick={(e) => MovieOrTvItem(item)}
                         />
                       )}
                       <div className="scroll-item-text">
@@ -511,7 +511,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                             alt=""
                             getid={item.id}
                             gettitle={item.title}
-                            onClick={(e) => HandleRedirectToMovie(item)}
+                            onClick={(e) => MovieOrTvItem(item)}
                           />
                           <PendingIcon className="card-icon" />
                           <div className="user-score-chart">
@@ -534,7 +534,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                             alt=""
                             getid={item.id}
                             gettitle={item.name}
-                            onClick={(e) => HandleRedirectToTv(item)}
+                            onClick={(e) => MovieOrTvItem(item)}
                           />
                           <PendingIcon className="card-icon" />
                           <div className="user-score-chart">
@@ -577,7 +577,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                             alt=""
                             getid={item.id}
                             gettitle={item.title}
-                            onClick={(e) => HandleRedirectToMovie(item)}
+                            onClick={(e) => MovieOrTvItem(item)}
                           />
                           <PendingIcon className="card-icon" />
                           <div className="user-score-chart">
@@ -599,7 +599,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                           alt=""
                           getid={item.id}
                           gettitle={item.name}
-                          onClick={(e) => HandleRedirectToTv(item)}
+                          onClick={(e) => MovieOrTvItem(item)}
                         />
                       )}
                       <div className="scroll-item-text">
@@ -740,13 +740,15 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
               value={item.id}
               onClick={(e) => handlePersonId(item)}
             >
-              <img
-                className="scrollbar-card-cast-photo"
-                src={
-                  process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
-                }
-                alt=""
-              />
+              <div className="scrollbar-card-cast-photo-wrapper">
+                <img
+                  className="scrollbar-card-cast-photo"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + "w200" + item.profile_path
+                  }
+                  alt=""
+                />
+              </div>
               <div className="scrollbar-card-cast-text">
                 <div className="scrollbar-card-cast-name">{item.name}</div>
                 <div className="scrollbar-card-cast-character">
@@ -772,7 +774,8 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                   process.env.REACT_APP_IMAGE_URL + "w200" + item.poster_path
                 }
                 alt=""
-                onClick={(e) => HandleRedirectToMovie(item)}
+                // onClick={(e) => HandleRedirectToMovie(item)}
+                onClick={(e) => MovieOrTvItem(item)}
               />
             ) : (
               <div className="scrollbar-card-type-four-no-image">
@@ -818,7 +821,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                     alt=""
                     getid={item.id}
                     gettitle={item.title}
-                    onClick={(e) => HandleRedirectToMovie(item)}
+                    onClick={(e) => MovieOrTvItem(item)}
                   />
                   <PendingIcon className="card-icon" />
                   <div className="user-score-chart">
@@ -862,7 +865,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                     alt=""
                     getid={item.id}
                     gettitle={item.title}
-                    onClick={(e) => HandleRedirectToMovie(item)}
+                    onClick={(e) => MovieOrTvItem(item)}
                   />
                   <PendingIcon className="card-icon" />
                   <div className="user-score-chart">
@@ -906,7 +909,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                     alt=""
                     getid={item.id}
                     gettitle={item.title}
-                    onClick={(e) => HandleRedirectToMovie(item)}
+                    onClick={(e) => MovieOrTvItem(item)}
                   />
                   <PendingIcon className="card-icon" />
                   <div className="user-score-chart">
@@ -950,7 +953,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                     alt=""
                     getid={item.id}
                     gettitle={item.title}
-                    onClick={(e) => HandleRedirectToMovie(item)}
+                    onClick={(e) => MovieOrTvItem(item)}
                   />
                   <PendingIcon className="card-icon" />
                   <div className="user-score-chart">
@@ -980,27 +983,45 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
     }
   };
 
-  const HandleRedirectToMovie = (e) => {
-    console.log(e);
+  const HandleRedirectToMovie = (value) => {
+    let movieTitle = value.title;
 
-    let title = e.title.replace(/ /g, "-").toLowerCase();
+    let movieTitleOnlyLetter = movieTitle
+      .replace(/[0-9]/g, "")
+      .trim()
+      .replace(/ /g, "-")
+      .toLowerCase();
 
-    // console.log(title.replace(/[^a-zA-Z]/g, "-"));
-    // console.log(title.replace(/ /g, "-").toLowerCase());
-    // console
-    // const titleForRedirect =
-
-    // const itemId = e.target.getAttribute("getid");
-    // return console.log(itemId);
-    return navigate(`/movie/${e.id}-${title}`);
+    if (/\d/.test(value.title) === true) {
+      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
+    } else
+      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
   };
 
-  const HandleRedirectToTv = (e) => {
-    console.log(e);
+  const HandleRedirectToTv = (value) => {
+    console.log("tv");
 
-    let name = e.name.replace(/ /g, "-").toLowerCase();
+    let tvName = value.name;
 
-    return navigate(`/tv/${e.id}-${name}`);
+    let tvNameOnlyLetter = tvName
+      .replace(/[0-9]/g, "")
+      .trim()
+      .replace(/ /g, "-")
+      .toLowerCase();
+
+    if (/\d/.test(value.title) === true) {
+      return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+    } else return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+  };
+
+  const MovieOrTvItem = (value) => {
+    console.log(value);
+
+    if (value.title) {
+      return HandleRedirectToMovie(value);
+    } else if (value.name) {
+      return HandleRedirectToTv(value);
+    } else return console.log("error");
   };
 
   const ScrollbarLogic = () => {

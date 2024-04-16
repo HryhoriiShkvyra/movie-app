@@ -32,6 +32,8 @@ export default function CardPageCard() {
 
   React.useEffect(() => {
     handleId(id);
+    console.log(id);
+    console.log(requestType);
   }, [id]);
 
   const fetch = require("node-fetch");
@@ -58,6 +60,7 @@ export default function CardPageCard() {
           setCardReleaseDate(data.release_date);
           setCardOverview(data.overview);
           setIsLoading((prev) => !prev);
+          console.log(data);
         })
         .catch((err) => console.error("error:" + err));
     }

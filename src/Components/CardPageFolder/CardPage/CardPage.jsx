@@ -11,15 +11,17 @@ import CardCast from "../CardCast/CardCast";
 export default function CardPage() {
   const { requestType } = useParams();
   const { id } = useParams();
+  // const handleId = (id) => {
+  //   let idWithLetters = id;
+  //   const onlyId = idWithLetters.replace(/\D/g, "");
+  //   return onlyId;
+  // };
 
-  const handleId = (id) => {
-    let idWithLetters = id;
-    const onlyId = idWithLetters.replace(/\D/g, "");
-    return onlyId;
-  };
+  const HandleOnlyID = id.split("-")[0];
 
   React.useEffect(() => {
-    handleId(id);
+    // handleId(id);
+    console.log(id);
   }, [id]);
 
   const pageType = "mtv-actors";
@@ -37,7 +39,7 @@ export default function CardPage() {
   return (
     <div className="card-page">
       <Navbar />
-      <CardPageCard requestType={requestType} id={handleId(id)} />
+      <CardPageCard requestType={requestType} id={HandleOnlyID} />
       <div className="container">
         <div className="about-card">
           <div className="about-main">

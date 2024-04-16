@@ -206,7 +206,7 @@ export default function CrewPage() {
                   </div>
                   <div className="cast-year">({releasedDate.slice(0, 4)})</div>
                 </div>
-                <Link className="cast-btn" to={`/search/${searchValue}/${id}`}>
+                <Link className="cast-btn" to={`/${searchValue}/${id}`}>
                   <div className="cast-btn-icon">
                     <ArrowBackRoundedIcon />
                   </div>
