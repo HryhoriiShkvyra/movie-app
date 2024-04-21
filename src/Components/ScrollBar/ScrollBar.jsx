@@ -226,98 +226,32 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
             {indexPageTrendingBtn === "day" ? (
               <div className="scrollbar">
                 {indexPageTrendingItemsDay.map((item) => (
-                  <div key={item.id}>
-                    <div className="scroll-item-">
-                      {item.title ? (
-                        <div className="scrollbar-item">
-                          <img
-                            className="scroll-item-image"
-                            src={
-                              process.env.REACT_APP_IMAGE_URL +
-                              `w200` +
-                              item.poster_path
-                            }
-                            alt=""
-                            getid={item.id}
-                            gettitle={item.title}
-                            onClick={(e) => MovieOrTvItem(item)}
-                          />
-                          <PendingIcon className="card-icon" />
-                          <div className="user-score-chart">
-                            <span className="outer-circle">
-                              <span className="outer-circle-number">
-                                71 <span>%</span>{" "}
-                              </span>
+                  <div className="scrollbar-item" key={item.id}>
+                    {item.title ? (
+                      <div className="scrollbar-item-content">
+                        <img
+                          className="scroll-item-image"
+                          src={
+                            process.env.REACT_APP_IMAGE_URL +
+                            `w200` +
+                            item.poster_path
+                          }
+                          alt=""
+                          getid={item.id}
+                          gettitle={item.title}
+                          onClick={(e) => MovieOrTvItem(item)}
+                        />
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
                             </span>
-                          </div>
+                          </span>
                         </div>
-                      ) : (
-                        <div className="scrollbar-item">
-                          <img
-                            className="scroll-item-image"
-                            src={
-                              process.env.REACT_APP_IMAGE_URL +
-                              `w200` +
-                              item.poster_path
-                            }
-                            alt=""
-                            getid={item.id}
-                            gettitle={item.name}
-                            onClick={(e) => MovieOrTvItem(item)}
-                          />
-                          <PendingIcon className="card-icon" />
-                          <div className="user-score-chart">
-                            <span className="outer-circle">
-                              <span className="outer-circle-number">
-                                71 <span>%</span>{" "}
-                              </span>
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                      <div className="scroll-item-text">
-                        <span className="scroll-item-title">
-                          {item.name ? item.name : item.title}
-                        </span>
-                        <span className="scroll-item-date-release">
-                          {item.release_date
-                            ? item.release_date
-                            : item.first_air_date}{" "}
-                        </span>
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="scrollbar">
-                {indexPageTrendingItemsWeek.map((item) => (
-                  <div key={item.id}>
-                    <div className="scroll-item-">
-                      {item.title ? (
-                        <div className="scrollbar-item">
-                          <img
-                            className="scroll-item-image"
-                            src={
-                              process.env.REACT_APP_IMAGE_URL +
-                              `w200` +
-                              item.poster_path
-                            }
-                            alt=""
-                            getid={item.id}
-                            gettitle={item.title}
-                            onClick={(e) => MovieOrTvItem(item)}
-                          />
-                          <PendingIcon className="card-icon" />
-                          <div className="user-score-chart">
-                            <span className="outer-circle">
-                              <span className="outer-circle-number">
-                                71 <span>%</span>{" "}
-                              </span>
-                            </span>
-                          </div>
-                        </div>
-                      ) : (
+                    ) : (
+                      <div className="scrollbar-item-content">
                         <img
                           className="scroll-item-image"
                           src={
@@ -330,17 +264,89 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                           gettitle={item.name}
                           onClick={(e) => MovieOrTvItem(item)}
                         />
-                      )}
-                      <div className="scroll-item-text">
-                        <span className="scroll-item-title">
-                          {item.name ? item.name : item.title}
-                        </span>
-                        <span className="scroll-item-date-release">
-                          {item.release_date
-                            ? item.release_date
-                            : item.first_air_date}{" "}
-                        </span>
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
+                            </span>
+                          </span>
+                        </div>
                       </div>
+                    )}
+                    <div className="scroll-item-text">
+                      <span className="scroll-item-title">
+                        {item.name ? item.name : item.title}
+                      </span>
+                      <span className="scroll-item-date-release">
+                        {item.release_date
+                          ? item.release_date
+                          : item.first_air_date}{" "}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="scrollbar">
+                {indexPageTrendingItemsWeek.map((item) => (
+                  <div className="scrollbar-item" key={item.id}>
+                    {item.title ? (
+                      <div className="scrollbar-item-content">
+                        <img
+                          className="scroll-item-image"
+                          src={
+                            process.env.REACT_APP_IMAGE_URL +
+                            `w200` +
+                            item.poster_path
+                          }
+                          alt=""
+                          getid={item.id}
+                          gettitle={item.title}
+                          onClick={(e) => MovieOrTvItem(item)}
+                        />
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="scrollbar-item-content">
+                        <img
+                          className="scroll-item-image"
+                          src={
+                            process.env.REACT_APP_IMAGE_URL +
+                            `w200` +
+                            item.poster_path
+                          }
+                          alt=""
+                          getid={item.id}
+                          gettitle={item.name}
+                          onClick={(e) => MovieOrTvItem(item)}
+                        />
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    <div className="scroll-item-text">
+                      <span className="scroll-item-title">
+                        {item.name ? item.name : item.title}
+                      </span>
+                      <span className="scroll-item-date-release">
+                        {item.release_date
+                          ? item.release_date
+                          : item.first_air_date}{" "}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -497,98 +503,32 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
             {indexPageTrendingBtn === "day" ? (
               <div className="scrollbar">
                 {indexPageTrendingItemsDay.map((item) => (
-                  <div key={item.id}>
-                    <div className="scroll-item-">
-                      {item.title ? (
-                        <div className="scrollbar-item">
-                          <img
-                            className="scroll-item-image"
-                            src={
-                              process.env.REACT_APP_IMAGE_URL +
-                              `w200` +
-                              item.poster_path
-                            }
-                            alt=""
-                            getid={item.id}
-                            gettitle={item.title}
-                            onClick={(e) => MovieOrTvItem(item)}
-                          />
-                          <PendingIcon className="card-icon" />
-                          <div className="user-score-chart">
-                            <span className="outer-circle">
-                              <span className="outer-circle-number">
-                                71 <span>%</span>{" "}
-                              </span>
+                  <div className="scrollbar-item" key={item.id}>
+                    {item.title ? (
+                      <div className="scrollbar-item-content">
+                        <img
+                          className="scroll-item-image"
+                          src={
+                            process.env.REACT_APP_IMAGE_URL +
+                            `w200` +
+                            item.poster_path
+                          }
+                          alt=""
+                          getid={item.id}
+                          gettitle={item.title}
+                          onClick={(e) => MovieOrTvItem(item)}
+                        />
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
                             </span>
-                          </div>
+                          </span>
                         </div>
-                      ) : (
-                        <div className="scrollbar-item">
-                          <img
-                            className="scroll-item-image"
-                            src={
-                              process.env.REACT_APP_IMAGE_URL +
-                              `w200` +
-                              item.poster_path
-                            }
-                            alt=""
-                            getid={item.id}
-                            gettitle={item.name}
-                            onClick={(e) => MovieOrTvItem(item)}
-                          />
-                          <PendingIcon className="card-icon" />
-                          <div className="user-score-chart">
-                            <span className="outer-circle">
-                              <span className="outer-circle-number">
-                                71 <span>%</span>{" "}
-                              </span>
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                      <div className="scroll-item-text">
-                        <span className="scroll-item-title">
-                          {item.name ? item.name : item.title}
-                        </span>
-                        <span className="scroll-item-date-release">
-                          {item.release_date
-                            ? item.release_date
-                            : item.first_air_date}{" "}
-                        </span>
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="scrollbar">
-                {indexPageTrendingItemsWeek.map((item) => (
-                  <div key={item.id}>
-                    <div className="scroll-item-">
-                      {item.title ? (
-                        <div className="scrollbar-item">
-                          <img
-                            className="scroll-item-image"
-                            src={
-                              process.env.REACT_APP_IMAGE_URL +
-                              `w200` +
-                              item.poster_path
-                            }
-                            alt=""
-                            getid={item.id}
-                            gettitle={item.title}
-                            onClick={(e) => MovieOrTvItem(item)}
-                          />
-                          <PendingIcon className="card-icon" />
-                          <div className="user-score-chart">
-                            <span className="outer-circle">
-                              <span className="outer-circle-number">
-                                71 <span>%</span>{" "}
-                              </span>
-                            </span>
-                          </div>
-                        </div>
-                      ) : (
+                    ) : (
+                      <div className="scrollbar-item-content">
                         <img
                           className="scroll-item-image"
                           src={
@@ -601,17 +541,89 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
                           gettitle={item.name}
                           onClick={(e) => MovieOrTvItem(item)}
                         />
-                      )}
-                      <div className="scroll-item-text">
-                        <span className="scroll-item-title">
-                          {item.name ? item.name : item.title}
-                        </span>
-                        <span className="scroll-item-date-release">
-                          {item.release_date
-                            ? item.release_date
-                            : item.first_air_date}{" "}
-                        </span>
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
+                            </span>
+                          </span>
+                        </div>
                       </div>
+                    )}
+                    <div className="scroll-item-text">
+                      <span className="scroll-item-title">
+                        {item.name ? item.name : item.title}
+                      </span>
+                      <span className="scroll-item-date-release">
+                        {item.release_date
+                          ? item.release_date
+                          : item.first_air_date}{" "}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="scrollbar">
+                {indexPageTrendingItemsWeek.map((item) => (
+                  <div className="scrollbar-item" key={item.id}>
+                    {item.title ? (
+                      <div className="scrollbar-item-content">
+                        <img
+                          className="scroll-item-image"
+                          src={
+                            process.env.REACT_APP_IMAGE_URL +
+                            `w200` +
+                            item.poster_path
+                          }
+                          alt=""
+                          getid={item.id}
+                          gettitle={item.title}
+                          onClick={(e) => MovieOrTvItem(item)}
+                        />
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="scrollbar-item-content">
+                        <img
+                          className="scroll-item-image"
+                          src={
+                            process.env.REACT_APP_IMAGE_URL +
+                            `w200` +
+                            item.poster_path
+                          }
+                          alt=""
+                          getid={item.id}
+                          gettitle={item.name}
+                          onClick={(e) => MovieOrTvItem(item)}
+                        />
+                        <PendingIcon className="card-icon" />
+                        <div className="user-score-chart">
+                          <span className="outer-circle">
+                            <span className="outer-circle-number">
+                              71 <span>%</span>{" "}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    <div className="scroll-item-text">
+                      <span className="scroll-item-title">
+                        {item.name ? item.name : item.title}
+                      </span>
+                      <span className="scroll-item-date-release">
+                        {item.release_date
+                          ? item.release_date
+                          : item.first_air_date}{" "}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -808,41 +820,35 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
       return (
         <div className="scrollbar">
           {indexPageTrendingItemsDay.map((item) => (
-            <div key={item.id}>
-              <div className="scroll-item-">
-                <div className="scrollbar-item">
-                  <img
-                    className="scroll-item-image"
-                    src={
-                      process.env.REACT_APP_IMAGE_URL +
-                      `w200` +
-                      item.poster_path
-                    }
-                    alt=""
-                    getid={item.id}
-                    gettitle={item.title}
-                    onClick={(e) => MovieOrTvItem(item)}
-                  />
-                  <PendingIcon className="card-icon" />
-                  <div className="user-score-chart">
-                    <span className="outer-circle">
-                      <span className="outer-circle-number">
-                        71 <span>%</span>{" "}
-                      </span>
+            <div className="scrollbar-item" key={item.id}>
+              <div className="scrollbar-item-content">
+                <img
+                  className="scroll-item-image"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path
+                  }
+                  alt=""
+                  getid={item.id}
+                  gettitle={item.title}
+                  onClick={(e) => MovieOrTvItem(item)}
+                />
+                <PendingIcon className="card-icon" />
+                <div className="user-score-chart">
+                  <span className="outer-circle">
+                    <span className="outer-circle-number">
+                      71 <span>%</span>{" "}
                     </span>
-                  </div>
+                  </span>
                 </div>
+              </div>
 
-                <div className="scroll-item-text">
-                  <span className="scroll-item-title">
-                    {item.name ? item.name : item.title}
-                  </span>
-                  <span className="scroll-item-date-release">
-                    {item.release_date
-                      ? item.release_date
-                      : item.first_air_date}{" "}
-                  </span>
-                </div>
+              <div className="scroll-item-text">
+                <span className="scroll-item-title">
+                  {item.name ? item.name : item.title}
+                </span>
+                <span className="scroll-item-date-release">
+                  {item.release_date ? item.release_date : item.first_air_date}{" "}
+                </span>
               </div>
             </div>
           ))}
@@ -852,41 +858,35 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
       return (
         <div className="scrollbar">
           {indexPageTrendingItemsWeek.map((item) => (
-            <div key={item.id}>
-              <div className="scroll-item-">
-                <div className="scrollbar-item">
-                  <img
-                    className="scroll-item-image"
-                    src={
-                      process.env.REACT_APP_IMAGE_URL +
-                      `w200` +
-                      item.poster_path
-                    }
-                    alt=""
-                    getid={item.id}
-                    gettitle={item.title}
-                    onClick={(e) => MovieOrTvItem(item)}
-                  />
-                  <PendingIcon className="card-icon" />
-                  <div className="user-score-chart">
-                    <span className="outer-circle">
-                      <span className="outer-circle-number">
-                        71 <span>%</span>{" "}
-                      </span>
+            <div className="scrollbar-item" key={item.id}>
+              <div className="scrollbar-item-content">
+                <img
+                  className="scroll-item-image"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path
+                  }
+                  alt=""
+                  getid={item.id}
+                  gettitle={item.title}
+                  onClick={(e) => MovieOrTvItem(item)}
+                />
+                <PendingIcon className="card-icon" />
+                <div className="user-score-chart">
+                  <span className="outer-circle">
+                    <span className="outer-circle-number">
+                      71 <span>%</span>{" "}
                     </span>
-                  </div>
+                  </span>
                 </div>
+              </div>
 
-                <div className="scroll-item-text">
-                  <span className="scroll-item-title">
-                    {item.name ? item.name : item.title}
-                  </span>
-                  <span className="scroll-item-date-release">
-                    {item.release_date
-                      ? item.release_date
-                      : item.first_air_date}{" "}
-                  </span>
-                </div>
+              <div className="scroll-item-text">
+                <span className="scroll-item-title">
+                  {item.name ? item.name : item.title}
+                </span>
+                <span className="scroll-item-date-release">
+                  {item.release_date ? item.release_date : item.first_air_date}{" "}
+                </span>
               </div>
             </div>
           ))}
@@ -896,41 +896,35 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
       return (
         <div className="scrollbar">
           {indexPageTrendingItemsDay.map((item) => (
-            <div key={item.id}>
-              <div className="scroll-item-">
-                <div className="scrollbar-item">
-                  <img
-                    className="scroll-item-image"
-                    src={
-                      process.env.REACT_APP_IMAGE_URL +
-                      `w200` +
-                      item.poster_path
-                    }
-                    alt=""
-                    getid={item.id}
-                    gettitle={item.title}
-                    onClick={(e) => MovieOrTvItem(item)}
-                  />
-                  <PendingIcon className="card-icon" />
-                  <div className="user-score-chart">
-                    <span className="outer-circle">
-                      <span className="outer-circle-number">
-                        71 <span>%</span>{" "}
-                      </span>
+            <div className="scrollbar-item" key={item.id}>
+              <div className="scrollbar-item-content">
+                <img
+                  className="scroll-item-image"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path
+                  }
+                  alt=""
+                  getid={item.id}
+                  gettitle={item.title}
+                  onClick={(e) => MovieOrTvItem(item)}
+                />
+                <PendingIcon className="card-icon" />
+                <div className="user-score-chart">
+                  <span className="outer-circle">
+                    <span className="outer-circle-number">
+                      71 <span>%</span>{" "}
                     </span>
-                  </div>
+                  </span>
                 </div>
+              </div>
 
-                <div className="scroll-item-text">
-                  <span className="scroll-item-title">
-                    {item.name ? item.name : item.title}
-                  </span>
-                  <span className="scroll-item-date-release">
-                    {item.release_date
-                      ? item.release_date
-                      : item.first_air_date}{" "}
-                  </span>
-                </div>
+              <div className="scroll-item-text">
+                <span className="scroll-item-title">
+                  {item.name ? item.name : item.title}
+                </span>
+                <span className="scroll-item-date-release">
+                  {item.release_date ? item.release_date : item.first_air_date}{" "}
+                </span>
               </div>
             </div>
           ))}
@@ -940,41 +934,35 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
       return (
         <div className="scrollbar">
           {indexPageTrendingItemsWeek.map((item) => (
-            <div key={item.id}>
-              <div className="scroll-item-">
-                <div className="scrollbar-item">
-                  <img
-                    className="scroll-item-image"
-                    src={
-                      process.env.REACT_APP_IMAGE_URL +
-                      `w200` +
-                      item.poster_path
-                    }
-                    alt=""
-                    getid={item.id}
-                    gettitle={item.title}
-                    onClick={(e) => MovieOrTvItem(item)}
-                  />
-                  <PendingIcon className="card-icon" />
-                  <div className="user-score-chart">
-                    <span className="outer-circle">
-                      <span className="outer-circle-number">
-                        71 <span>%</span>{" "}
-                      </span>
+            <div className="scrollbar-item" key={item.id}>
+              <div className="scrollbar-item-content">
+                <img
+                  className="scroll-item-image"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL + `w200` + item.poster_path
+                  }
+                  alt=""
+                  getid={item.id}
+                  gettitle={item.title}
+                  onClick={(e) => MovieOrTvItem(item)}
+                />
+                <PendingIcon className="card-icon" />
+                <div className="user-score-chart">
+                  <span className="outer-circle">
+                    <span className="outer-circle-number">
+                      71 <span>%</span>{" "}
                     </span>
-                  </div>
+                  </span>
                 </div>
+              </div>
 
-                <div className="scroll-item-text">
-                  <span className="scroll-item-title">
-                    {item.name ? item.name : item.title}
-                  </span>
-                  <span className="scroll-item-date-release">
-                    {item.release_date
-                      ? item.release_date
-                      : item.first_air_date}{" "}
-                  </span>
-                </div>
+              <div className="scroll-item-text">
+                <span className="scroll-item-title">
+                  {item.name ? item.name : item.title}
+                </span>
+                <span className="scroll-item-date-release">
+                  {item.release_date ? item.release_date : item.first_air_date}{" "}
+                </span>
               </div>
             </div>
           ))}
