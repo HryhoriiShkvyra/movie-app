@@ -104,10 +104,44 @@ export default function PersonPage() {
     );
     const crewMovieAndTvYearArray = crewMovieYearArray.concat(crewTvYearArray);
 
-    const HandleRedirectToMovie = (e) => {
-      let title = e.title.replace(/ /g, "-").toLowerCase();
+    const HandleRedirectToMovie = (value) => {
+      console.log(value);
 
-      return navigate(`/movie/${e.id}-${title}`);
+      const redirectToMovie = (movie) => {
+        if (/\d/.test(movie.title) === true) {
+          // I do not know why it is not working when I add "original title"
+          // for being able to have same url like in original cite.
+          // for example it is not works with "1-900" movie
+          // this is why here we have only id
+
+          // return navigate(`/movie/${movie.id}-${movie.title}`);
+          return navigate(`/movie/${movie.id}`);
+        } else if (/\d/.test(movie.title) === false) {
+          return navigate(`/movie/${movie.id}-${movie.title}`);
+        } else return console.log("looks like an error");
+      };
+
+      const redirectToTv = (tv) => {
+        if (/\d/.test(tv.name) === true) {
+          // I EXPECTING SAME ISSUE HERE THIS IS WHY I DID NOT REMOVE THE COMMENT
+
+          // I do not know why it is not working when I add "original title"
+          // for being able to have same url like in original cite.
+          // for example it is not works with "1-900" movie
+          // this is why here we have only id
+
+          // return navigate(`/tv/${tv.id}-${tv.title}`);
+          return navigate(`/tv/${tv.id}`);
+        } else if (/\d/.test(tv.name) === false) {
+          return navigate(`/tv/${tv.id}-${tv.name}`);
+        } else return console.log("looks like an error");
+      };
+
+      if (value.title) {
+        return redirectToMovie(value);
+      } else if (value.name) {
+        return redirectToTv(value);
+      } else return console.error("looks like an error");
     };
 
     return (

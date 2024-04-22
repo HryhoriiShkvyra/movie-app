@@ -7,6 +7,7 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
+import LandscapeRoundedIcon from "@mui/icons-material/LandscapeRounded";
 
 export default function CardPageCard() {
   const [cardValue, setCardValue] = React.useState();
@@ -32,7 +33,6 @@ export default function CardPageCard() {
 
   React.useEffect(() => {
     handleId(id);
-    console.log(id);
     console.log(requestType);
   }, [id]);
 
@@ -62,6 +62,7 @@ export default function CardPageCard() {
           setIsLoading((prev) => !prev);
           console.log(data);
         })
+
         .catch((err) => console.error("error:" + err));
     }
     response();
@@ -74,12 +75,25 @@ export default function CardPageCard() {
           <Loading />
         ) : (
           <div className="card-page-card-wrapper">
-            <img
-              className="card-page-card-poster"
-              src={
-                process.env.REACT_APP_IMAGE_URL + `w300` + cardValue.poster_path
-              }
-            />
+            {cardValue.poster_path ? (
+              <div>
+                <img
+                  className="card-page-card-poster"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL +
+                    `w300` +
+                    cardValue.poster_path
+                  }
+                />
+              </div>
+            ) : (
+              <div className="card-page-no-poster">
+                <div className="card-page-no-poster-icon">
+                  <LandscapeRoundedIcon />
+                </div>
+              </div>
+            )}
+
             <div className="card-page-card-header-poster">
               <div className="card-page-card-title">
                 <div className="card-page-card-title-cols">
