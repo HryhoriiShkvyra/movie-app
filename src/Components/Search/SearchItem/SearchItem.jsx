@@ -22,39 +22,52 @@ export default function SearchItem({ item, stateTypeRequest }) {
     handleOverviewLength();
   }, []);
 
-  // function typeRequest() {
-  //   const type = () => {
-  //     if (item.title === undefined) {
-  //       return item.name;
-  //     } else {
-  //       return item.title;
-  //     }
-  //   };
-  //   console.log(type);
-  //   return type;
-  // }
+  const HandleRedirectToMovie = (value) => {
+    let movieTitle = value.title;
 
-  function HandleUrlValue() {
-    const url = `${item.id}-${item.title}`;
-    const fixedUrl = url.replace(/ /g, "-").toLowerCase();
-    return fixedUrl;
-  }
+    let movieTitleOnlyLetter = movieTitle
+      .replace(/[0-9]/g, "")
+      .trim()
+      .replace(/ /g, "-")
+      .toLowerCase();
 
-  const ProperUlr = HandleUrlValue();
+    if (/\d/.test(value.title) === true) {
+      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
+    } else
+      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
+  };
 
-  function HandleRedirectToItem() {
-    return navigate(`/${stateTypeRequest}/${ProperUlr}`);
-  }
+  const HandleRedirectToTv = (value) => {
+    let tvName = value.name;
+
+    let tvNameOnlyLetter = tvName
+      .replace(/[0-9]/g, "")
+      .trim()
+      .replace(/ /g, "-")
+      .toLowerCase();
+
+    if (/\d/.test(value.title) === true) {
+      return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+    } else return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+  };
+
+  const MovieOrTvItem = (value) => {
+    if (value.title) {
+      return HandleRedirectToMovie(value);
+    } else if (value.name) {
+      return HandleRedirectToTv(value);
+    } else return console.log("error");
+  };
+
   const SearchItem = () => {
     React.useEffect(() => {
-      console.log(stateTypeRequest);
-      console.log(item.name);
-      HandleUrlValue();
+      // console.log(stateTypeRequest);
+      // console.log(item.name);
     }, []);
 
     if (stateTypeRequest === "movie") {
       return (
-        <div className="searchItem" onClick={HandleRedirectToItem}>
+        <div className="searchItem" onClick={(e) => MovieOrTvItem(item)}>
           {item.poster_path === null ? (
             <div className="searchItem-null-wrapper">
               <LandscapeIcon className="searchItem-null-icon" />
@@ -97,7 +110,7 @@ export default function SearchItem({ item, stateTypeRequest }) {
       );
     } else if (stateTypeRequest === "tv") {
       return (
-        <div className="searchItem" onClick={HandleRedirectToItem}>
+        <div className="searchItem" onClick={(e) => MovieOrTvItem(item)}>
           {item.poster_path === null ? (
             <div className="searchItem-null-wrapper">
               <LandscapeIcon className="searchItem-null-icon" />
@@ -143,7 +156,7 @@ export default function SearchItem({ item, stateTypeRequest }) {
     } else if (stateTypeRequest === "collection") {
       return (
         <div>
-          <div className="searchItem" onClick={HandleRedirectToItem}>
+          <div className="searchItem" onClick={(e) => MovieOrTvItem(item)}>
             {item.poster_path === null ? (
               <div className="searchItem-null-wrapper">
                 <LandscapeIcon className="searchItem-null-icon" />

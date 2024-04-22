@@ -33,7 +33,7 @@ export default function CardPageCard() {
 
   React.useEffect(() => {
     handleId(id);
-    console.log(requestType);
+    // console.log(requestType);
   }, [id]);
 
   const fetch = require("node-fetch");

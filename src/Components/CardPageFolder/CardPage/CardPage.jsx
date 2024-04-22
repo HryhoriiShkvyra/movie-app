@@ -21,7 +21,7 @@ export default function CardPage() {
 
   React.useEffect(() => {
     // handleId(id);
-    console.log(id);
+    // console.log(id);
   }, [id]);
 
   const pageType = "mtv-actors";
