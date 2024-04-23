@@ -33,7 +33,8 @@ export default function CardPageCard() {
 
   React.useEffect(() => {
     handleId(id);
-    // console.log(requestType);
+    console.log(requestType);
+    console.log(id);
   }, [id]);
 
   const fetch = require("node-fetch");
@@ -68,6 +69,118 @@ export default function CardPageCard() {
     response();
   }, []);
 
+  const RequestTypeValue = () => {
+    if (requestType === "movie") {
+      return (
+        <div className="card-page-card-title">
+          <div className="card-page-card-title-cols">
+            <span className="card-page-card-name">{cardValue.title}</span>
+            <span className="card-page-card-release-year">
+              <>({cardReleaseDate.slice(0, 4)})</>
+            </span>
+          </div>
+          <div className="card-page-card-facts">
+            {cardValue.release_date === undefined ? null : (
+              <span className="card-page-card-release-date">
+                {cardValue.release_date}
+              </span>
+            )}
+            <div className="card-genres">
+              {cardGenres.map((item) => (
+                <span className="card-page-card-genre" key={item.id}>
+                  {item.name}
+                </span>
+              ))}
+            </div>
+            {cardValue.runtime === undefined ? null : (
+              <span className="card-page-card-runtime">
+                {cardValue.runtime} min
+              </span>
+            )}
+          </div>
+        </div>
+      );
+    } else if (requestType === "tv") {
+      return (
+        <div className="card-page-card-title">
+          <div className="card-page-card-title-cols">
+            <span className="card-page-card-name">{cardValue.name}</span>
+            <span className="card-page-card-release-year">
+              <>({cardValue.first_air_date.slice(0, 4)})</>
+            </span>
+          </div>
+          <div className="card-page-card-facts">
+            {cardValue.release_date === undefined ? null : (
+              <span className="card-page-card-release-date">
+                {cardValue.release_date}
+              </span>
+            )}
+            <div className="card-genres">
+              {cardGenres.map((item) => (
+                <span className="card-page-card-genre" key={item.id}>
+                  {item.name}
+                </span>
+              ))}
+            </div>
+            {cardValue.runtime === undefined ? null : (
+              <span className="card-page-card-runtime">
+                {cardValue.runtime} min
+              </span>
+            )}
+          </div>
+        </div>
+      );
+    } else if (requestType === "collection") {
+      return (
+        <div className="card-page-card-title">
+          <div className="card-page-card-title-cols">
+            <span className="card-page-card-name">{cardValue.name}</span>
+          </div>
+        </div>
+      );
+    } else return console.log("error");
+  };
+
+  const infoAboutTitle = () => {
+    return (
+      <div className="card-page-card-title">
+        <div className="card-page-card-title-cols">
+          {cardValue.title ? (
+            <span className="card-page-card-name">{cardValue.title}</span>
+          ) : (
+            <span className="card-page-card-name">{cardValue.name}</span>
+          )}
+          <span className="card-page-card-release-year">
+            {cardReleaseDate === undefined ? (
+              <>({cardValue.first_air_date.slice(0, 4)})</>
+            ) : (
+              <>({cardReleaseDate.slice(0, 4)})</>
+            )}
+          </span>
+        </div>
+        <div className="card-page-card-facts">
+          {cardValue.release_date === undefined ? null : (
+            <span className="card-page-card-release-date">
+              {cardValue.release_date}
+            </span>
+          )}
+          <div className="card-genres">
+            {cardGenres.map((item) => (
+              <span className="card-page-card-genre" key={item.id}>
+                {item.name}
+              </span>
+            ))}
+          </div>
+          {cardValue.runtime === undefined ? null : (
+            <span className="card-page-card-runtime">
+              {cardValue.runtime} min
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="card-page-card">
       <div className="container">
@@ -95,7 +208,8 @@ export default function CardPageCard() {
             )}
 
             <div className="card-page-card-header-poster">
-              <div className="card-page-card-title">
+              <RequestTypeValue />
+              {/* <div className="card-page-card-title">
                 <div className="card-page-card-title-cols">
                   {cardValue.title ? (
                     <span className="card-page-card-name">
@@ -106,7 +220,6 @@ export default function CardPageCard() {
                       {cardValue.name}
                     </span>
                   )}
-                  <span className="card-page-card-name">{cardValue.name}</span>
                   <span className="card-page-card-release-year">
                     {cardReleaseDate === undefined ? (
                       <>({cardValue.first_air_date.slice(0, 4)})</>
@@ -134,7 +247,7 @@ export default function CardPageCard() {
                     </span>
                   )}
                 </div>
-              </div>
+              </div> */}
 
               <div className="card-page-card-actions">
                 <div className="card-page-card-chart">

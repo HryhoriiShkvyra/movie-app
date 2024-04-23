@@ -19,11 +19,6 @@ export default function CardPage() {
 
   const HandleOnlyID = id.split("-")[0];
 
-  React.useEffect(() => {
-    // handleId(id);
-    // console.log(id);
-  }, [id]);
-
   const pageType = "mtv-actors";
 
   // function cleanId(str, symbol) {
@@ -46,7 +41,7 @@ export default function CardPage() {
             <CardCast requestType={requestType} />
           </div>
           <div className="about-else">
-            <CardPageAdditionalInfo requestType={requestType} />
+            {/* <CardPageAdditionalInfo requestType={requestType} /> */}
           </div>
         </div>
       </div>

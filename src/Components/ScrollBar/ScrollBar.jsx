@@ -806,7 +806,7 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
   const handlePersonId = (e) => {
     console.log(e);
 
-    const actorName = e.name.replace(/-/g, "").toLowerCase();
+    const actorName = e.name.replace(/ /g, "-").toLowerCase();
 
     const actorId = e.id;
 

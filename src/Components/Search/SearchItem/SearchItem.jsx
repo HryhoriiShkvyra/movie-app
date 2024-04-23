@@ -28,6 +28,7 @@ export default function SearchItem({ item, stateTypeRequest }) {
     let movieTitleOnlyLetter = movieTitle
       .replace(/[0-9]/g, "")
       .trim()
+      .replace(/:/g, "")
       .replace(/ /g, "-")
       .toLowerCase();
 
@@ -43,24 +44,50 @@ export default function SearchItem({ item, stateTypeRequest }) {
     let tvNameOnlyLetter = tvName
       .replace(/[0-9]/g, "")
       .trim()
+      .replace(/:/g, "")
       .replace(/ /g, "-")
       .toLowerCase();
 
     if (/\d/.test(value.title) === true) {
       return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+      // return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
     } else return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
   };
 
+  const HandleRedirectToCollection = (value) => {
+    let collectionName = value.name;
+
+    let collectionNameOnlyLetter = collectionName
+      .replace(/[0-9]/g, "")
+      .trim()
+      .replace(/:/g, "")
+      .replace(/ /g, "-")
+      .toLowerCase();
+
+    if (/\d/.test(value.name) === true) {
+      return navigate(
+        `/collection/${value.id}` + "-" + `${collectionNameOnlyLetter}`
+      );
+      // return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+    } else
+      return navigate(
+        `/collection/${value.id}` + "-" + `${collectionNameOnlyLetter}`
+      );
+  };
+
   const MovieOrTvItem = (value) => {
-    if (value.title) {
+    if (stateTypeRequest === "movie") {
       return HandleRedirectToMovie(value);
-    } else if (value.name) {
+    } else if (stateTypeRequest === "tv") {
       return HandleRedirectToTv(value);
+    } else if (stateTypeRequest === "collection") {
+      return HandleRedirectToCollection(value);
     } else return console.log("error");
   };
 
   const SearchItem = () => {
     React.useEffect(() => {
+      console.log(stateTypeRequest);
       // console.log(stateTypeRequest);
       // console.log(item.name);
     }, []);

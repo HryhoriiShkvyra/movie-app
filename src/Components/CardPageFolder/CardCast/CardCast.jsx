@@ -18,7 +18,16 @@ export default function CardCast() {
   const fetch = require("node-fetch");
   const navigate = useNavigate();
 
-  const url = `https://api.themoviedb.org/3/${requestType}/${id}/credits?language=en-US`;
+  const handleId = (id) => {
+    let idWithLetters = id;
+    const onlyId = idWithLetters.replace(/\D/g, "");
+
+    return onlyId;
+  };
+
+  const url = `https://api.themoviedb.org/3/${requestType}/${handleId(
+    id
+  )}/credits?language=en-US`;
   const options = {
     method: "GET",
     headers: {
@@ -27,6 +36,8 @@ export default function CardCast() {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTY0Y2JiNDFkYzdjODI4NjJmZTJhMDg3YmU4OWFhOSIsInN1YiI6IjY0NTNjNWRmODdhMjdhMDBlMzhmOWVlOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.h7-VNMO3GMdqdtKdSv5NXwZEJL9BIQeAbDKOTLFhtB0",
     },
   };
+
+  React.useEffect(() => {}, []);
 
   React.useEffect(() => {
     function request() {
