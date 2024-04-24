@@ -41,7 +41,7 @@ export default function CardPage() {
             <CardCast requestType={requestType} />
           </div>
           <div className="about-else">
-            {/* <CardPageAdditionalInfo requestType={requestType} /> */}
+            <CardPageAdditionalInfo requestType={requestType} />
           </div>
         </div>
       </div>

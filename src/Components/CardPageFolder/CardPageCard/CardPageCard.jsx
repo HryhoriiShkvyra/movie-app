@@ -69,93 +69,23 @@ export default function CardPageCard() {
     response();
   }, []);
 
-  const RequestTypeValue = () => {
+  const CardTypeDependsOnRequest = () => {
     if (requestType === "movie") {
-      return (
-        <div className="card-page-card-title">
-          <div className="card-page-card-title-cols">
-            <span className="card-page-card-name">{cardValue.title}</span>
-            <span className="card-page-card-release-year">
-              <>({cardReleaseDate.slice(0, 4)})</>
-            </span>
-          </div>
-          <div className="card-page-card-facts">
-            {cardValue.release_date === undefined ? null : (
-              <span className="card-page-card-release-date">
-                {cardValue.release_date}
-              </span>
-            )}
-            <div className="card-genres">
-              {cardGenres.map((item) => (
-                <span className="card-page-card-genre" key={item.id}>
-                  {item.name}
-                </span>
-              ))}
-            </div>
-            {cardValue.runtime === undefined ? null : (
-              <span className="card-page-card-runtime">
-                {cardValue.runtime} min
-              </span>
-            )}
-          </div>
-        </div>
-      );
+      return <CardTypeMovie />;
     } else if (requestType === "tv") {
-      return (
-        <div className="card-page-card-title">
-          <div className="card-page-card-title-cols">
-            <span className="card-page-card-name">{cardValue.name}</span>
-            <span className="card-page-card-release-year">
-              <>({cardValue.first_air_date.slice(0, 4)})</>
-            </span>
-          </div>
-          <div className="card-page-card-facts">
-            {cardValue.release_date === undefined ? null : (
-              <span className="card-page-card-release-date">
-                {cardValue.release_date}
-              </span>
-            )}
-            <div className="card-genres">
-              {cardGenres.map((item) => (
-                <span className="card-page-card-genre" key={item.id}>
-                  {item.name}
-                </span>
-              ))}
-            </div>
-            {cardValue.runtime === undefined ? null : (
-              <span className="card-page-card-runtime">
-                {cardValue.runtime} min
-              </span>
-            )}
-          </div>
-        </div>
-      );
+      return <CardTypeTV />;
     } else if (requestType === "collection") {
-      return (
-        <div className="card-page-card-title">
-          <div className="card-page-card-title-cols">
-            <span className="card-page-card-name">{cardValue.name}</span>
-          </div>
-        </div>
-      );
-    } else return console.log("error");
+      return <CardTypeCollection />;
+    } else return <div>CardType ====> ERROR</div>;
   };
 
-  const infoAboutTitle = () => {
+  const CardTypeMovie = () => {
     return (
       <div className="card-page-card-title">
         <div className="card-page-card-title-cols">
-          {cardValue.title ? (
-            <span className="card-page-card-name">{cardValue.title}</span>
-          ) : (
-            <span className="card-page-card-name">{cardValue.name}</span>
-          )}
+          <span className="card-page-card-name">{cardValue.title}</span>
           <span className="card-page-card-release-year">
-            {cardReleaseDate === undefined ? (
-              <>({cardValue.first_air_date.slice(0, 4)})</>
-            ) : (
-              <>({cardReleaseDate.slice(0, 4)})</>
-            )}
+            <>({cardReleaseDate.slice(0, 4)})</>
           </span>
         </div>
         <div className="card-page-card-facts">
@@ -176,6 +106,48 @@ export default function CardPageCard() {
               {cardValue.runtime} min
             </span>
           )}
+        </div>
+      </div>
+    );
+  };
+
+  const CardTypeTV = () => {
+    return (
+      <div className="card-page-card-title">
+        <div className="card-page-card-title-cols">
+          <span className="card-page-card-name">{cardValue.name}</span>
+          <span className="card-page-card-release-year">
+            <>({cardValue.first_air_date.slice(0, 4)})</>
+          </span>
+        </div>
+        <div className="card-page-card-facts">
+          {cardValue.release_date === undefined ? null : (
+            <span className="card-page-card-release-date">
+              {cardValue.release_date}
+            </span>
+          )}
+          <div className="card-genres">
+            {cardGenres.map((item) => (
+              <span className="card-page-card-genre" key={item.id}>
+                {item.name}
+              </span>
+            ))}
+          </div>
+          {cardValue.runtime === undefined ? null : (
+            <span className="card-page-card-runtime">
+              {cardValue.runtime} min
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const CardTypeCollection = () => {
+    return (
+      <div className="card-page-card-title">
+        <div className="card-page-card-title-cols">
+          <span className="card-page-card-name">{cardValue.name}</span>
         </div>
       </div>
     );
@@ -208,46 +180,7 @@ export default function CardPageCard() {
             )}
 
             <div className="card-page-card-header-poster">
-              <RequestTypeValue />
-              {/* <div className="card-page-card-title">
-                <div className="card-page-card-title-cols">
-                  {cardValue.title ? (
-                    <span className="card-page-card-name">
-                      {cardValue.title}
-                    </span>
-                  ) : (
-                    <span className="card-page-card-name">
-                      {cardValue.name}
-                    </span>
-                  )}
-                  <span className="card-page-card-release-year">
-                    {cardReleaseDate === undefined ? (
-                      <>({cardValue.first_air_date.slice(0, 4)})</>
-                    ) : (
-                      <>({cardReleaseDate.slice(0, 4)})</>
-                    )}
-                  </span>
-                </div>
-                <div className="card-page-card-facts">
-                  {cardValue.release_date === undefined ? null : (
-                    <span className="card-page-card-release-date">
-                      {cardValue.release_date}
-                    </span>
-                  )}
-                  <div className="card-genres">
-                    {cardGenres.map((item) => (
-                      <span className="card-page-card-genre" key={item.id}>
-                        {item.name}
-                      </span>
-                    ))}
-                  </div>
-                  {cardValue.runtime === undefined ? null : (
-                    <span className="card-page-card-runtime">
-                      {cardValue.runtime} min
-                    </span>
-                  )}
-                </div>
-              </div> */}
+              <CardTypeDependsOnRequest />
 
               <div className="card-page-card-actions">
                 <div className="card-page-card-chart">
