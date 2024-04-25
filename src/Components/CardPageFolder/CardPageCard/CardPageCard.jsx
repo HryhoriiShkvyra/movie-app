@@ -20,21 +20,20 @@ export default function CardPageCard() {
 
   const handleId = (id) => {
     let idWithLetters = id;
-    const onlyId = idWithLetters.replace(/\D/g, "");
-    // let newId = onlyId;
 
-    // for (let i = 0; i < id.length; i++) {
-    //   if (!id[i].replace(/\D/g, "")) {
-    //     newId += id[i];
-    //   }
-    // }
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?~]/g;
+
+    const onlyId = idWithLetters
+      .replace(/\D/g, "")
+      .trim()
+      .replace(/ /g, "-")
+      .replace(specialChars, "-");
+
     return onlyId;
   };
 
   React.useEffect(() => {
     handleId(id);
-    console.log(requestType);
-    console.log(id);
   }, [id]);
 
   const fetch = require("node-fetch");

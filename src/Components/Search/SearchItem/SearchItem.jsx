@@ -23,55 +23,46 @@ export default function SearchItem({ item, stateTypeRequest }) {
   }, []);
 
   const HandleRedirectToMovie = (value) => {
-    let movieTitle = value.title;
-
-    let movieTitleOnlyLetter = movieTitle
-      .replace(/[0-9]/g, "")
-      .trim()
-      .replace(/:/g, "")
-      .replace(/ /g, "-")
-      .toLowerCase();
+    const cleanString = (title) => {
+      const cleanedString = title.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+    const properMovieTitle = cleanString(value.title);
 
     if (/\d/.test(value.title) === true) {
-      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
-    } else
-      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
+      return navigate(`/movie/${value.id}` + "-" + `${properMovieTitle}`);
+    } else return navigate(`/movie/${value.id}` + "-" + `${properMovieTitle}`);
   };
 
   const HandleRedirectToTv = (value) => {
-    let tvName = value.name;
+    const cleanString = (name) => {
+      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+    const properTvName = cleanString(value.name);
 
-    let tvNameOnlyLetter = tvName
-      .replace(/[0-9]/g, "")
-      .trim()
-      .replace(/:/g, "")
-      .replace(/ /g, "-")
-      .toLowerCase();
-
-    if (/\d/.test(value.title) === true) {
-      return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
-      // return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
-    } else return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+    if (/\d/.test(value.name) === true) {
+      return navigate(`/tv/${value.id}` + "-" + `${properTvName}`);
+    } else return navigate(`/tv/${value.id}` + "-" + `${properTvName}`);
   };
 
   const HandleRedirectToCollection = (value) => {
-    let collectionName = value.name;
-
-    let collectionNameOnlyLetter = collectionName
-      .replace(/[0-9]/g, "")
-      .trim()
-      .replace(/:/g, "")
-      .replace(/ /g, "-")
-      .toLowerCase();
+    const cleanString = (name) => {
+      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+    const properCollectionName = cleanString(value.name);
 
     if (/\d/.test(value.name) === true) {
       return navigate(
-        `/collection/${value.id}` + "-" + `${collectionNameOnlyLetter}`
+        `/collection/${value.id}` + "-" + `${properCollectionName}`
       );
-      // return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
     } else
       return navigate(
-        `/collection/${value.id}` + "-" + `${collectionNameOnlyLetter}`
+        `/collection/${value.id}` + "-" + `${properCollectionName}`
       );
   };
 

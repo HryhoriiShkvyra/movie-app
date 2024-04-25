@@ -972,34 +972,29 @@ export default function ScrollBar({ scrollbarType, id, requestType }) {
   };
 
   const HandleRedirectToMovie = (value) => {
-    let movieTitle = value.title;
-
-    let movieTitleOnlyLetter = movieTitle
-      .replace(/[0-9]/g, "")
-      .trim()
-      .replace(/ /g, "-")
-      .toLowerCase();
+    const cleanString = (title) => {
+      const cleanedString = title.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+    const properTitle = cleanString(value.title);
 
     if (/\d/.test(value.title) === true) {
-      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
-    } else
-      return navigate(`/movie/${value.id}` + "-" + `${movieTitleOnlyLetter}`);
+      return navigate(`/movie/${value.id}` + "-" + `${properTitle}`);
+    } else return navigate(`/movie/${value.id}` + "-" + `${properTitle}`);
   };
 
   const HandleRedirectToTv = (value) => {
-    console.log("tv");
+    const cleanString = (name) => {
+      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+    const properName = cleanString(value.name);
 
-    let tvName = value.name;
-
-    let tvNameOnlyLetter = tvName
-      .replace(/[0-9]/g, "")
-      .trim()
-      .replace(/ /g, "-")
-      .toLowerCase();
-
-    if (/\d/.test(value.title) === true) {
-      return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
-    } else return navigate(`/tv/${value.id}` + "-" + `${tvNameOnlyLetter}`);
+    if (/\d/.test(value.name) === true) {
+      return navigate(`/tv/${value.id}` + "-" + `${properName}`);
+    } else return navigate(`/tv/${value.id}` + "-" + `${properName}`);
   };
 
   const MovieOrTvItem = (value) => {

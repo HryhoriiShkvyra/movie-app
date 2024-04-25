@@ -12,6 +12,17 @@ export default function CardPageAdditionalInfo({ requestType }) {
   const { id } = useParams();
   // const { requestType } = useParams();
 
+  const handleId = (id) => {
+    let idWithLetters = id;
+    const onlyId = idWithLetters.replace(/\D/g, "");
+
+    return onlyId;
+  };
+
+  React.useEffect(() => {
+    console.log(handleId(id));
+  }, []);
+
   const [cardValue, setCardValue] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [networksArray, setNetworksArray] = React.useState();
@@ -19,9 +30,15 @@ export default function CardPageAdditionalInfo({ requestType }) {
 
   const fetch = require("node-fetch");
 
-  const url_0 = `https://api.themoviedb.org/3/${requestType}/${id}?language=en-US`;
-  const url_1 = `https://api.themoviedb.org/3/${requestType}/${id}/keywords`;
-  // const url_1 = `https://api.themoviedb.org/3/${requestType}/${id}/keywords`;
+  const main_url = `https://api.themoviedb.org/3/${requestType}/${handleId(
+    id
+  )}?language=en-US`;
+  const keywords_url = `https://api.themoviedb.org/3/${requestType}/${handleId(
+    id
+  )}/keywords`;
+  const collection_url = `https://api.themoviedb.org/3/${requestType}/${handleId(
+    id
+  )}/keywords`;
   const options = {
     method: "GET",
     headers: {
@@ -32,58 +49,336 @@ export default function CardPageAdditionalInfo({ requestType }) {
   };
 
   const FetchData = async () => {
+    setIsLoading(true);
+
     try {
-      const promise_0 = fetch(url_0, options).then((response) =>
-        response.json()
-      );
-      const promise_1 = fetch(url_1, options).then((response) =>
-        response.json()
-      );
+      let promises = [];
 
-      const request = await Promise.all([promise_0, promise_1]);
+      if (requestType === "movie") {
+        promises = [fetch(main_url, options)];
+      } else if (requestType === "tv") {
+        promises = [fetch(main_url, options)];
+      }
 
-      const data = request;
+      const results = await Promise.all(promises);
 
-      setCardValue(data[0]);
-      setNetworksArray(data[0].networks);
-      setKeywordsArray(data[1].keywords);
+      const data = await handleFetchResults(results);
 
-      setIsLoading(true);
+      if (requestType === "movie") {
+        console.log("requestType ===> " + requestType);
+        console.log(data);
+
+        // setCardValue(data[0]);
+        // setKeywordsArray(data[1].keywords);
+      } else if (requestType === "tv") {
+        // setCardValue(data);
+        // setNetworksArray(data.networks);
+        console.log("requestType ===> " + requestType);
+        console.log(data);
+      }
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  const handleFetchResults = async (results) => {
+    const dataArr = await Promise.all(
+      results.map(async (result) => {
+        if (!result.ok) {
+          throw new Error("Fetch failed");
+        }
+        return result.json();
+      })
+    );
+    return dataArr.map((data) => {
+      if (requestType === "movie") {
+        return data.results;
+      }
+      if (requestType === "tv") {
+        return data.results;
+      }
+    });
+  };
+
+  // const handleFetchResults = async (results) => {
+  //   return Promise.all(
+  //     results.map(async (results) => {
+  //       if (!results.ok) {
+  //         throw new Error("Fetch failed");
+  //       }
+  //     })
+  //   ).then((dataArr) => {
+  //     return dataArr.map((data) => {
+  //       if (requestType === "movie") {
+  //         return data.results;
+  //       }
+  //       if (requestType === "tv") {
+  //         return data.results;
+  //       }
+  //     });
+  //   });
+  // };
+
   const NetworksLength = () => {
-    if (networksArray.length > 1) {
-      return (
-        <div className="card-additional-info-col">
-          <h4>networks</h4>
-          {networksArray.map((item) => (
-            <img
-              className="card-additional-info-networks"
-              key={item.id}
-              src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
-              alt=""
-            />
-          ))}
+    // if (networksArray.length > 1) {
+    //   return (
+    //     <div className="card-additional-info-col">
+    //       <h4>networks</h4>
+    //       {networksArray.map((item) => (
+    //         <img
+    //           className="card-additional-info-networks"
+    //           key={item.id}
+    //           src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
+    //           alt=""
+    //         />
+    //       ))}
+    //     </div>
+    //   );
+    // } else {
+    return (
+      <div className="card-additional-info-col">
+        <h4>networks</h4>
+        {networksArray.map((item) => (
+          <img
+            className="card-additional-info-img"
+            key={item.id}
+            src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
+            alt=""
+          />
+        ))}
+      </div>
+    );
+    // }
+  };
+
+  const CardPageAdditionalInfoType = () => {
+    if (requestType === "movie") {
+      return <CardPageAdditionalInfoMovie />;
+    } else if (requestType === "tv") {
+      return <CardPageAdditionalInfoTV />;
+    } else if (requestType === "collection") {
+      return <CardPageAdditionalInfoCollection />;
+    } else return console.log("error");
+  };
+
+  const CardPageAdditionalInfoMovie = () => {
+    return (
+      <>
+        <div className="card-additional-info">
+          <div className="card-additional-info-cols">
+            <div className="card-additional-info-social">
+              <FacebookRounded />
+              <div className="plank"></div>
+              <ChangeHistoryRounded />
+              <div className="plank"></div>
+              <WebAssetRounded />
+            </div>
+          </div>
+          <div className="card-additional-info-cols">
+            <div className="card-additional-info-col">
+              <h4>status</h4>
+              <div className="card-additional-info-second">
+                {cardValue.status}
+              </div>
+            </div>
+            <div className="card-additional-info-col">
+              <h4>original language</h4>
+              <div className="card-additional-info-second">
+                {cardValue.original_language}
+              </div>
+            </div>
+            <div className="card-additional-info-col">
+              <h4>budget</h4>
+              <div className="card-additional-info-second">
+                ${cardValue.budget}.00
+              </div>
+            </div>
+            <div className="card-additional-info-col">
+              <h4>revenue</h4>
+              <div className="card-additional-info-second">
+                ${cardValue.revenue}.00
+              </div>
+            </div>
+          </div>
+          {keywordsArray === undefined ? (
+            <div className="card-additional-info-col-no-words">
+              <h4>keywords</h4>
+              <div className="card-additional-info-words">
+                <span className="card-additional-info-no-word">
+                  No keywords have been added
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="card-additional-info-col">
+              <h4>keywords</h4>
+              <div className="card-additional-info-words">
+                {keywordsArray.map((item) => (
+                  <div className="card-additional-info-word" key={item.id}>
+                    {item.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      );
-    } else {
-      return (
-        <div className="card-additional-info-col">
-          <h4>networks</h4>
-          {networksArray.map((item) => (
-            <img
-              className="card-additional-info-img"
-              key={item.id}
-              src={process.env.REACT_APP_IMAGE_URL + "w200" + item.logo_path}
-              alt=""
-            />
-          ))}
+
+        <div className="content-score-wrapper">
+          <h4>content score</h4>
+          <div className="content-score">100</div>
+          <h6>yes! looking good!</h6>
         </div>
-      );
-    }
+
+        <div className="leaderboard MTVAdditional">
+          <h4>Top Contributors</h4>
+          <div className="leaders">
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+          </div>
+          <div className="edit-history">view edit history</div>
+        </div>
+      </>
+    );
+  };
+
+  const CardPageAdditionalInfoTV = () => {
+    return (
+      <>
+        <div className="card-additional-info">
+          <div className="card-additional-info-cols">
+            <div className="card-additional-info-social">
+              <FacebookRounded />
+              <div className="plank"></div>
+              <ChangeHistoryRounded />
+              <div className="plank"></div>
+              <WebAssetRounded />
+            </div>
+          </div>
+
+          <div className="card-additional-info-cols">
+            <div className="card-additional-info-col">
+              <h4>facts</h4>
+              <div className="card-additional-info-second">
+                {/* {cardValue.status} */}
+              </div>
+            </div>
+            <div className="card-additional-info-col">
+              <h4>original name</h4>
+              <div className="card-additional-info-second">
+                {cardValue.original_name}
+              </div>
+            </div>
+            {/* <NetworksLength /> */}
+            <div className="card-additional-info-col">
+              <h4>type</h4>
+              <div className="card-additional-info-second">
+                {cardValue.type}
+              </div>
+            </div>
+            <div className="card-additional-info-col">
+              <h4>original language</h4>
+              <div className="card-additional-info-second">
+                {cardValue.original_language}
+              </div>
+            </div>
+          </div>
+          {keywordsArray === undefined ? (
+            <div className="card-additional-info-col-no-words">
+              <h4>keywords</h4>
+              <div className="card-additional-info-words">
+                <span className="card-additional-info-no-word">
+                  No keywords have been added
+                </span>
+              </div>
+            </div>
+          ) : (
+            <div className="card-additional-info-col">
+              <h4>keywords</h4>
+              <div className="card-additional-info-words">
+                {keywordsArray.map((item) => (
+                  <div className="card-additional-info-word" key={item.id}>
+                    {item.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="content-score-wrapper">
+          <h4>content score</h4>
+          <div className="content-score">100</div>
+          <h6>yes! looking good!</h6>
+        </div>
+
+        <div className="leaderboard MTVAdditional">
+          <h4>Top Contributors</h4>
+          <div className="leaders">
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+            <div className="leader">
+              <div className="leader-img"></div>
+              <div className="leader-text">
+                <div className="leader-score">100</div>
+                <div className="leader-name">leader-nickname</div>
+              </div>
+            </div>
+          </div>
+          <div className="edit-history">view edit history</div>
+        </div>
+      </>
+    );
+  };
+
+  const CardPageAdditionalInfoCollection = () => {
+    return <div>collection</div>;
   };
 
   React.useEffect(() => {
@@ -91,49 +386,6 @@ export default function CardPageAdditionalInfo({ requestType }) {
   }, []);
 
   return (
-    <>
-      {isLoading === false ? <Loading /> : null}
-
-      <div className="content-score-wrapper">
-        <h4>content score</h4>
-        <div className="content-score">100</div>
-        <h6>yes! looking good!</h6>
-      </div>
-
-      <div className="leaderboard MTVAdditional">
-        <h4>Top Contributors</h4>
-        <div className="leaders">
-          <div className="leader">
-            <div className="leader-img"></div>
-            <div className="leader-text">
-              <div className="leader-score">100</div>
-              <div className="leader-name">leader-nickname</div>
-            </div>
-          </div>
-          <div className="leader">
-            <div className="leader-img"></div>
-            <div className="leader-text">
-              <div className="leader-score">100</div>
-              <div className="leader-name">leader-nickname</div>
-            </div>
-          </div>
-          <div className="leader">
-            <div className="leader-img"></div>
-            <div className="leader-text">
-              <div className="leader-score">100</div>
-              <div className="leader-name">leader-nickname</div>
-            </div>
-          </div>
-          <div className="leader">
-            <div className="leader-img"></div>
-            <div className="leader-text">
-              <div className="leader-score">100</div>
-              <div className="leader-name">leader-nickname</div>
-            </div>
-          </div>
-        </div>
-        <div className="edit-history">view edit history</div>
-      </div>
-    </>
+    <>{isLoading === true ? <Loading /> : <CardPageAdditionalInfoType />}</>
   );
 }
