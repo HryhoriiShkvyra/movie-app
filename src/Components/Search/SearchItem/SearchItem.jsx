@@ -24,11 +24,15 @@ export default function SearchItem({ item, stateTypeRequest }) {
 
   const HandleRedirectToMovie = (value) => {
     const cleanString = (title) => {
-      const cleanedString = title.replace(/[^a-zA-Z0-9]/g, "-");
+      const cleanedString = title
+        .replace(/[^a-zA-Z0-9]/g, "-")
+        .replace(/[0-9]/g, "");
       const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
       return words.join("-");
     };
     const properMovieTitle = cleanString(value.title);
+
+    console.log(properMovieTitle);
 
     if (/\d/.test(value.title) === true) {
       return navigate(`/movie/${value.id}` + "-" + `${properMovieTitle}`);
@@ -37,7 +41,9 @@ export default function SearchItem({ item, stateTypeRequest }) {
 
   const HandleRedirectToTv = (value) => {
     const cleanString = (name) => {
-      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const cleanedString = name
+        .replace(/[^a-zA-Z0-9]/g, "-")
+        .replace(/[0-9]/g, "");
       const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
       return words.join("-");
     };
@@ -50,7 +56,9 @@ export default function SearchItem({ item, stateTypeRequest }) {
 
   const HandleRedirectToCollection = (value) => {
     const cleanString = (name) => {
-      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const cleanedString = name
+        .replace(/[^a-zA-Z0-9]/g, "-")
+        .replace(/[0-9]/g, "");
       const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
       return words.join("-");
     };
@@ -97,33 +105,45 @@ export default function SearchItem({ item, stateTypeRequest }) {
               alt=""
             />
           )}
-          <div className="searchItem-text">
-            <div className="searchItem-text-main">
-              {item.title ? (
+          {item.overview ? (
+            <div className="searchItem-text">
+              <div className="searchItem-text-main">
                 <div className="searchItem-title">{item.title}</div>
-              ) : (
-                <div className="searchItem-title">{item.name}</div>
-              )}
-              {item.release_date ? (
                 <div className="searchItem-release-date">
                   {item.release_date}
                 </div>
-              ) : (
-                <div className="searchItem-release-date">
-                  {item.first_air_date}
-                </div>
-              )}
+              </div>
+              {item.overview ? (
+                <>
+                  {item.overview.length > 230 ? (
+                    <div>{overview} ...</div>
+                  ) : (
+                    <div className="searchItem-overview">{item.overview}</div>
+                  )}
+                </>
+              ) : null}
             </div>
-            {item.overview ? (
-              <>
-                {item.overview.length > 230 ? (
-                  <div>{overview} ...</div>
-                ) : (
-                  <div className="searchItem-overview">{item.overview}</div>
-                )}
-              </>
-            ) : null}
-          </div>
+          ) : (
+            <div className="searchItem-text">
+              <div className="searchItem-text-main">
+                <div className="searchItem-title">
+                  {item.title} <p>({item.original_title})</p>
+                </div>
+                <div className="searchItem-release-date">
+                  {item.release_date}
+                </div>
+              </div>
+              {item.overview ? (
+                <>
+                  {item.overview.length > 230 ? (
+                    <div>{overview} ...</div>
+                  ) : (
+                    <div className="searchItem-overview">{item.overview}</div>
+                  )}
+                </>
+              ) : null}
+            </div>
+          )}
         </div>
       );
     } else if (stateTypeRequest === "tv") {
@@ -140,33 +160,45 @@ export default function SearchItem({ item, stateTypeRequest }) {
               alt=""
             />
           )}
-          <div className="searchItem-text">
-            <div className="searchItem-text-main">
-              {item.title ? (
-                <div className="searchItem-title">{item.title}</div>
-              ) : (
+          {item.overview ? (
+            <div className="searchItem-text">
+              <div className="searchItem-text-main">
                 <div className="searchItem-title">{item.name}</div>
-              )}
-              {item.release_date ? (
-                <div className="searchItem-release-date">
-                  {item.release_date}
-                </div>
-              ) : (
                 <div className="searchItem-release-date">
                   {item.first_air_date}
                 </div>
-              )}
+              </div>
+              {item.overview ? (
+                <>
+                  {item.overview.length > 230 ? (
+                    <div>{overview} ...</div>
+                  ) : (
+                    <div className="searchItem-overview">{item.overview}</div>
+                  )}
+                </>
+              ) : null}
             </div>
-            {item.overview ? (
-              <>
-                {item.overview.length > 230 ? (
-                  <div>{overview} ...</div>
-                ) : (
-                  <div className="searchItem-overview">{item.overview}</div>
-                )}
-              </>
-            ) : null}
-          </div>
+          ) : (
+            <div className="searchItem-text">
+              <div className="searchItem-text-main">
+                <div className="searchItem-title">
+                  {item.name} <p>({item.original_name})</p>
+                </div>
+                <div className="searchItem-release-date">
+                  {item.first_air_date}
+                </div>
+              </div>
+              {item.overview ? (
+                <>
+                  {item.overview.length > 230 ? (
+                    <div>{overview} ...</div>
+                  ) : (
+                    <div className="searchItem-overview">{item.overview}</div>
+                  )}
+                </>
+              ) : null}
+            </div>
+          )}
         </div>
       );
     } else if (stateTypeRequest === "people") {

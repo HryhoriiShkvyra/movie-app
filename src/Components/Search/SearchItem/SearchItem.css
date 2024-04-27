@@ -24,6 +24,7 @@
 .searchItem-text {
   display: flex;
   flex-direction: column;
+  margin: auto 0;
   gap: 15px;
   padding: 15px 15px;
 }
@@ -35,10 +36,12 @@
   justify-content: center;
   align-items: start;
   padding: 15px 15px;
-
 }
 
 .searchItem-title {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
   font-size: 17px;
   font-weight: 700;
 }

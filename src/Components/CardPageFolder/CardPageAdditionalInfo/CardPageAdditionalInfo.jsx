@@ -21,6 +21,7 @@ export default function CardPageAdditionalInfo({ requestType }) {
 
   React.useEffect(() => {
     console.log(handleId(id));
+    console.log(main_url);
   }, []);
 
   const [cardValue, setCardValue] = React.useState([]);
@@ -57,7 +58,9 @@ export default function CardPageAdditionalInfo({ requestType }) {
       if (requestType === "movie") {
         promises = [fetch(main_url, options)];
       } else if (requestType === "tv") {
-        promises = [fetch(main_url, options)];
+        promises = [fetch(keywords_url, options)];
+      } else if (requestType === "collection") {
+        promises = [fetch(collection_url, options)];
       }
 
       const results = await Promise.all(promises);
@@ -89,9 +92,10 @@ export default function CardPageAdditionalInfo({ requestType }) {
         if (!result.ok) {
           throw new Error("Fetch failed");
         }
-        return result.json();
+        return await result.json();
       })
     );
+
     return dataArr.map((data) => {
       if (requestType === "movie") {
         return data.results;
@@ -99,8 +103,55 @@ export default function CardPageAdditionalInfo({ requestType }) {
       if (requestType === "tv") {
         return data.results;
       }
+      if (requestType === "collection") {
+        return data.results;
+      }
     });
   };
+
+  // const handleFetchResults = async (results) => {
+  //   return Promise.all(
+  //     results
+  //       .map(async (result) => {
+  //         if (!result.ok) {
+  //           throw new Error("Fetch failed");
+  //         }
+
+  //         return result.json();
+  //       })
+  //       .then((dataArr) => {
+  //         return dataArr.map((data) => {
+  //           if (requestType === "movie") {
+  //             return data.results;
+  //           }
+  //           if (requestType === "tv") {
+  //             return data.results;
+  //           }
+  //           if (requestType === "collection") {
+  //             return data.results;
+  //           }
+  //         });
+  //       })
+  //   );
+  // };
+
+  // const dataArr = await Promise.all(
+  //   results.map(async (result) => {
+  //     if (!result.ok) {
+  //       throw new Error("Fetch failed");
+  //     }
+  //     return result.json();
+  //   })
+  // );
+  // return dataArr.map((data) => {
+  //   if (requestType === "movie") {
+  //     return data.results;
+  //   }
+  //   if (requestType === "tv") {
+  //     return data.results;
+  //   }
+  // });
+  // };
 
   // const handleFetchResults = async (results) => {
   //   return Promise.all(
