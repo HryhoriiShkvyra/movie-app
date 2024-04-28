@@ -31,6 +31,16 @@ export default function CardPage() {
 
   // const cleanedId = cleanId(id, "-");
 
+  const ScrollbarBehavior = () => {
+    if (requestType === "movie") {
+      return <CardCast requestType={requestType} />;
+    } else if (requestType === "tv") {
+      return <CardCast requestType={requestType} />;
+    } else if (requestType === "collection") {
+      return null;
+    }
+  };
+
   return (
     <div className="card-page">
       <Navbar />
@@ -38,7 +48,7 @@ export default function CardPage() {
       <div className="container">
         <div className="about-card">
           <div className="about-main">
-            <CardCast requestType={requestType} />
+            <ScrollbarBehavior />
           </div>
           <div className="about-else">
             <CardPageAdditionalInfo requestType={requestType} />

@@ -7,6 +7,7 @@ import {
 } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import Loading from "../../Loading/Loading";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 
 export default function CardPageAdditionalInfo({ requestType }) {
   const { id } = useParams();
@@ -25,9 +26,11 @@ export default function CardPageAdditionalInfo({ requestType }) {
   }, []);
 
   const [cardValue, setCardValue] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [networksArray, setNetworksArray] = React.useState();
   const [keywordsArray, setKeywordsArray] = React.useState();
+  const [featuredCast, setFeaturedCast] = React.useState();
+  const [fightClub, setFightClub] = React.useState();
 
   const fetch = require("node-fetch");
 
@@ -39,7 +42,12 @@ export default function CardPageAdditionalInfo({ requestType }) {
   )}/keywords`;
   const collection_url = `https://api.themoviedb.org/3/${requestType}/${handleId(
     id
-  )}/keywords`;
+  )}?language=en-US`;
+  const fightClub_url =
+    "https://api.themoviedb.org/3/movie/603/credits?language=en-US";
+
+  const url = "https://api.themoviedb.org/3/movie/550?language=en-US";
+
   const options = {
     method: "GET",
     headers: {
@@ -53,31 +61,50 @@ export default function CardPageAdditionalInfo({ requestType }) {
     setIsLoading(true);
 
     try {
-      let promises = [];
-
       if (requestType === "movie") {
-        promises = [fetch(main_url, options)];
-      } else if (requestType === "tv") {
-        promises = [fetch(keywords_url, options)];
-      } else if (requestType === "collection") {
-        promises = [fetch(collection_url, options)];
+        const main_promise = fetch(main_url, options).then((response) =>
+          response.json()
+        );
+        const keywords_promise = fetch(keywords_url, options).then((response) =>
+          response.json()
+        );
+
+        const request = await Promise.all([main_promise, keywords_promise]);
+        const data = request;
+
+        console.log(data);
+        setCardValue(data[0]);
+        setKeywordsArray(data[1].keywords);
       }
+      if (requestType === "collection") {
+        const collections_promise = fetch(collection_url, options).then(
+          (response) => response.json()
+        );
+        const featuredCast_promise = fetch(main_url, options).then((response) =>
+          response.json()
+        );
 
-      const results = await Promise.all(promises);
+        const fightClub_promise = fetch(fightClub_url, options).then(
+          (response) => response.json()
+        );
 
-      const data = await handleFetchResults(results);
+        const url_promise = fetch(url, options).then((response) =>
+          response.json()
+        );
 
-      if (requestType === "movie") {
-        console.log("requestType ===> " + requestType);
+        // const request = Promise.all([collections_promise]);
+        const request = await Promise.all([
+          collections_promise,
+          featuredCast_promise,
+          fightClub_promise,
+          url_promise,
+        ]);
+        const data = request;
+
         console.log(data);
 
-        // setCardValue(data[0]);
-        // setKeywordsArray(data[1].keywords);
-      } else if (requestType === "tv") {
-        // setCardValue(data);
-        // setNetworksArray(data.networks);
-        console.log("requestType ===> " + requestType);
-        console.log(data);
+        setCardValue(data[3]);
+        setFightClub(data[2].cast);
       }
     } catch (error) {
       console.error(error);
@@ -85,92 +112,6 @@ export default function CardPageAdditionalInfo({ requestType }) {
       setIsLoading(false);
     }
   };
-
-  const handleFetchResults = async (results) => {
-    const dataArr = await Promise.all(
-      results.map(async (result) => {
-        if (!result.ok) {
-          throw new Error("Fetch failed");
-        }
-        return await result.json();
-      })
-    );
-
-    return dataArr.map((data) => {
-      if (requestType === "movie") {
-        return data.results;
-      }
-      if (requestType === "tv") {
-        return data.results;
-      }
-      if (requestType === "collection") {
-        return data.results;
-      }
-    });
-  };
-
-  // const handleFetchResults = async (results) => {
-  //   return Promise.all(
-  //     results
-  //       .map(async (result) => {
-  //         if (!result.ok) {
-  //           throw new Error("Fetch failed");
-  //         }
-
-  //         return result.json();
-  //       })
-  //       .then((dataArr) => {
-  //         return dataArr.map((data) => {
-  //           if (requestType === "movie") {
-  //             return data.results;
-  //           }
-  //           if (requestType === "tv") {
-  //             return data.results;
-  //           }
-  //           if (requestType === "collection") {
-  //             return data.results;
-  //           }
-  //         });
-  //       })
-  //   );
-  // };
-
-  // const dataArr = await Promise.all(
-  //   results.map(async (result) => {
-  //     if (!result.ok) {
-  //       throw new Error("Fetch failed");
-  //     }
-  //     return result.json();
-  //   })
-  // );
-  // return dataArr.map((data) => {
-  //   if (requestType === "movie") {
-  //     return data.results;
-  //   }
-  //   if (requestType === "tv") {
-  //     return data.results;
-  //   }
-  // });
-  // };
-
-  // const handleFetchResults = async (results) => {
-  //   return Promise.all(
-  //     results.map(async (results) => {
-  //       if (!results.ok) {
-  //         throw new Error("Fetch failed");
-  //       }
-  //     })
-  //   ).then((dataArr) => {
-  //     return dataArr.map((data) => {
-  //       if (requestType === "movie") {
-  //         return data.results;
-  //       }
-  //       if (requestType === "tv") {
-  //         return data.results;
-  //       }
-  //     });
-  //   });
-  // };
 
   const NetworksLength = () => {
     // if (networksArray.length > 1) {
@@ -429,7 +370,108 @@ export default function CardPageAdditionalInfo({ requestType }) {
   };
 
   const CardPageAdditionalInfoCollection = () => {
-    return <div>collection</div>;
+    return (
+      <div className="card-page-cast-wrapper">
+        <div className="card-page-section">
+          <h2>Featured Cast</h2>
+          <div className="card-page-cast-items">
+            {fightClub.map((actor, index) => (
+              <div
+                key={index + "-" + actor.id + "-" + actor.cast_id}
+                className="card-page-cast-item"
+              >
+                {actor.profile_path ? (
+                  <div className="card-page-cast-photo-wrapper">
+                    <img
+                      className="card-page-cast-photo"
+                      src={
+                        process.env.REACT_APP_IMAGE_URL +
+                        "w200" +
+                        `${actor.profile_path}`
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div className="card-page-cast-no-photo">
+                    <PersonRoundedIcon className="" />
+                  </div>
+                )}
+                <div className="card-page-cast-text">
+                  <h4>{actor.name}</h4>
+                  <span className="card-page-cast-character">
+                    {actor.character}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="card-page-black-blank"></div>
+
+        <div className="card-page-section">
+          <h2>Featured Cast</h2>
+          <div className="card-page-cast-items">
+            {fightClub.map((actor, index) => (
+              <div
+                key={index + "-" + actor.id + "-" + actor.cast_id}
+                className="card-page-cast-item"
+              >
+                {actor.profile_path ? (
+                  <div className="card-page-cast-photo-wrapper">
+                    <img
+                      className="card-page-cast-photo"
+                      src={
+                        process.env.REACT_APP_IMAGE_URL +
+                        "w200" +
+                        `${actor.profile_path}`
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div className="card-page-cast-no-photo">
+                    <PersonRoundedIcon className="" />
+                  </div>
+                )}
+                <div className="card-page-cast-text">
+                  <h4>{actor.name}</h4>
+                  <span className="card-page-cast-character">
+                    {actor.character}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="card-page-black-blank"></div>
+
+        <div className="card-page-section">
+          <h2>Featured Cast</h2>
+          <div className="card-page-firms">
+            <div className="card-page-film">
+              <div className="card-page-film-poster-wrapper">
+                <img
+                  className="card-page-film-poster"
+                  src={
+                    process.env.REACT_APP_IMAGE_URL +
+                    "w200" +
+                    `${cardValue.poster_path}`
+                  }
+                />
+              </div>
+              <div className="card-page-film-text">
+                <div className="card-page-film-title">
+                  <h2>{cardValue.original_title}</h2>
+                  <p>{cardValue.release_date}</p>
+                </div>
+                <div className="card-page-film-about">
+                  <h3>{cardValue.overview}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   React.useEffect(() => {
