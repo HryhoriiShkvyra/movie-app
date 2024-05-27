@@ -59,7 +59,7 @@ export default function CardPageCard() {
           setCardGenres(data.genres);
           setCardReleaseDate(data.release_date);
           setCardOverview(data.overview);
-          setIsLoading((prev) => !prev);
+          setIsLoading(true);
           console.log(data);
         })
 
@@ -75,7 +75,7 @@ export default function CardPageCard() {
       return <CardTypeTV />;
     } else if (requestType === "collection") {
       return <CardTypeCollection />;
-    } else return <div>CardType ====> ERROR</div>;
+    } else return <div>CardType ==== ERROR</div>;
   };
 
   const CardTypeMovie = () => {
@@ -84,7 +84,8 @@ export default function CardPageCard() {
         <div className="card-page-card-title-cols">
           <span className="card-page-card-name">{cardValue.title}</span>
           <span className="card-page-card-release-year">
-            <>({cardReleaseDate.slice(0, 4)})</>
+            {/* <>({cardReleaseDate.slice(0, 4)})</> */}
+            {/* <>({cardReleaseDate.slice(0, 4)})</> */}
           </span>
         </div>
         <div className="card-page-card-facts">
@@ -94,11 +95,11 @@ export default function CardPageCard() {
             </span>
           )}
           <div className="card-genres">
-            {cardGenres.map((item) => (
+            {/* {cardGenres.map((item) => (
               <span className="card-page-card-genre" key={item.id}>
                 {item.name}
               </span>
-            ))}
+            ))} */}
           </div>
           {cardValue.runtime === undefined ? null : (
             <span className="card-page-card-runtime">
