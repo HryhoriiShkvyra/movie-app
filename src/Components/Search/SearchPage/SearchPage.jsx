@@ -71,7 +71,7 @@ export default function SearchPage() {
 
     const data = request;
 
-    // console.log(data);
+    console.log(data);
 
     setMovieArray(data[0].results);
     setTvArray(data[1].results);

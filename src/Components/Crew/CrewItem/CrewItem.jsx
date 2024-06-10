@@ -110,7 +110,7 @@ export default function CrewItem({ member }) {
   return (
     <div>
       <div className="cast-people">
-        <Link
+        {/* <Link
           to={`/person/${member.id}-${member.name}`}
           value={member.id}
           onClick={handleRedirectToPerson}
@@ -141,7 +141,7 @@ export default function CrewItem({ member }) {
               )}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

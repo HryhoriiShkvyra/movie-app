@@ -1,11 +1,9 @@
 import React from "react";
 import "./CardPage.css";
 import CardPageCard from "../CardPageCard/CardPageCard";
-// import CardCast from "../CardCast/CardCast";
 import CardPageAdditionalInfo from "../CardPageAdditionalInfo/CardPageAdditionalInfo";
 import Navbar from "../../Navbar/Navbar";
-import { Link, useParams } from "react-router-dom";
-import ScrollBar from "../../ScrollBar/ScrollBar";
+import { useParams } from "react-router-dom";
 import CardCast from "../CardCast/CardCast";
 
 export default function CardPage() {
@@ -17,9 +15,9 @@ export default function CardPage() {
   //   return onlyId;
   // };
 
-  const HandleOnlyID = id.split("-")[0];
+  console.log(requestType);
 
-  const pageType = "mtv-actors";
+  const HandleOnlyID = id.split("-")[0];
 
   // function cleanId(str, symbol) {
   //   const index = str.indexOf(symbol);

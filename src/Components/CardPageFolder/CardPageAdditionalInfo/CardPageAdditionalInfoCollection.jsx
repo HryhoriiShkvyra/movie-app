@@ -47,8 +47,6 @@ export default function CardPageAdditionalInfoCollection(
     const properTitle = cleanString(value.title);
 
     if (/\d/.test(value.title) === false) {
-      //   return console.log("value =====>" + `${properTitle}`);
-      // } else return console.log(value.title);
       return navigate(`/movie/${value.id}` + "-" + `${properTitle}`);
     } else return navigate(`/movie/${value.id}` + "-" + `${properTitle}`);
   };

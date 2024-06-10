@@ -1,9 +1,9 @@
 import React from "react";
 import "./SearchItem.css";
 import LandscapeIcon from "@mui/icons-material/Landscape";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import CrewItem from "../../Crew/CrewItem/CrewItem";
-import CardPage from "../../CardPageFolder/CardPage/CardPage";
+import { useNavigate } from "react-router-dom";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function SearchItem({ item, stateTypeRequest }) {
   const [overview, setOverview] = React.useState([]);
@@ -20,7 +20,7 @@ export default function SearchItem({ item, stateTypeRequest }) {
 
   React.useEffect(() => {
     handleOverviewLength();
-  }, []);
+  }, [handleOverviewLength]);
 
   const HandleRedirectToMovie = (value) => {
     const cleanString = (title) => {
@@ -72,6 +72,64 @@ export default function SearchItem({ item, stateTypeRequest }) {
       return navigate(
         `/collection/${value.id}` + "-" + `${properCollectionName}`
       );
+  };
+
+  function HandleOriginalName(item) {
+    if (item.known_for && item.known_for.length > 0) {
+      if (item.known_for[0].original_name) {
+        return (
+          <div className="searchItem-people-role">
+            {item.known_for.map((name, index) => (
+              <div key={name.id + "-" + index}>{name.original_name}</div>
+            ))}
+          </div>
+        );
+      } else {
+        return (
+          <div className="searchItem-people-role">
+            {item.known_for.map((title, index) => (
+              <div key={title.id + "-" + index}>{title.title}</div>
+            ))}
+          </div>
+        );
+      }
+    } else {
+      return null;
+    }
+  }
+
+  function HandlePosterPath(item) {
+    if (item.profile_path) {
+      return (
+        <div className="searchItem-people-photo-wrapper">
+          <img
+            className="searchItem-people-photo"
+            src={process.env.REACT_APP_IMAGE_URL + "/w200" + item.profile_path}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="searchItem-people-no-photo">
+          <div className="searchItem-people-icon">
+            <PersonIcon />
+          </div>
+        </div>
+      );
+    }
+  }
+
+  const HandleRedirectToPeople = (person) => {
+    let name = person.name;
+
+    const cleanString = (name) => {
+      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+    const properName = cleanString(name);
+
+    navigate(`/person/${person.id}` + "-" + `${properName}`);
   };
 
   const MovieOrTvItem = (value) => {
@@ -202,7 +260,48 @@ export default function SearchItem({ item, stateTypeRequest }) {
         </div>
       );
     } else if (stateTypeRequest === "people") {
-      return <CrewItem item={item} />;
+      // return <CrewItem item={item} />;
+      return (
+        <div className="searchItem-people-item">
+          <div className="searchItem-people-photo-wrapper">
+            {HandlePosterPath(item)}
+            {/* <div className="searchItem-people-photo">
+              <img
+                src={
+                  process.env.REACT_APP_IMAGE_URL + "/w200" + item.profile_path
+                }
+              />
+            </div>
+            <div className="searchItem-people-no-photo">
+              <div className="searchItem-people-icon">
+                <PersonIcon />
+              </div>
+            </div> */}
+          </div>
+          <div className="searchItem-people-text">
+            <div
+              onClick={(e) => HandleRedirectToPeople(item)}
+              className="searchItem-people-title"
+            >
+              <h2>{item.name}</h2>
+            </div>
+            <div className="searchItem-people-sup-title-wrapper">
+              <div className="searchItem-people-position">
+                {item.known_for_department}
+              </div>
+              <div className="searchItem-people-sub-icon">
+                <FiberManualRecordIcon />
+              </div>
+              {HandleOriginalName(item)}
+              {/* <div className="searchItem-people-role">
+                {item.known_for.map((item, index) => (
+                  <div key={item.id + "-" + index}>{item.original_name}</div>
+                ))}
+              </div> */}
+            </div>
+          </div>
+        </div>
+      );
     } else if (stateTypeRequest === "collection") {
       return (
         <div>

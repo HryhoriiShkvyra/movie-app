@@ -8,6 +8,7 @@ import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import LandscapeRoundedIcon from "@mui/icons-material/LandscapeRounded";
+import PersonPage from "../../Person/PersonPage/PersonPage";
 
 export default function CardPageCard() {
   const [cardValue, setCardValue] = React.useState();
@@ -35,6 +36,8 @@ export default function CardPageCard() {
   React.useEffect(() => {
     handleId(id);
   }, [id]);
+
+  console.log(requestType);
 
   const fetch = require("node-fetch");
 
@@ -75,6 +78,8 @@ export default function CardPageCard() {
       return <CardTypeTV />;
     } else if (requestType === "collection") {
       return <CardTypeCollection />;
+    } else if (requestType === "people") {
+      return <PersonPage />;
     } else return <div>CardType ==== ERROR</div>;
   };
 
@@ -182,7 +187,7 @@ export default function CardPageCard() {
             <div className="card-page-card-header-poster">
               <CardTypeDependsOnRequest />
 
-              <div className="card-page-card-actions">
+              {/* <div className="card-page-card-actions">
                 <div className="card-page-card-chart">
                   <div className="card-page-card-chart-wrapper">
                     <div className="card-page-card-chart-line">
@@ -247,7 +252,7 @@ export default function CardPageCard() {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         )}

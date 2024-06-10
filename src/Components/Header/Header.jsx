@@ -123,12 +123,14 @@ const Header = () => {
               {x.map((item) => (
                 <div key={item.btnTitle}>
                   <div
+                    onMouseLeave={(e) => setIsHovered("")}
                     onMouseEnter={(e) => setIsHovered(item.btnTitle)}
                     className="header col"
                   >
                     {item.btnTitle}
                   </div>
                   <div
+                    onMouseLeave={(e) => setIsHovered("")}
                     className={
                       isHovered === item.btnTitle
                         ? "header nav links "

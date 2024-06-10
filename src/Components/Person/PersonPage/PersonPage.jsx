@@ -6,6 +6,7 @@ import Navbar from "../../Navbar/Navbar";
 import ScrollBar from "../../ScrollBar/ScrollBar";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 
 export default function PersonPage() {
   const { id } = useParams();
@@ -104,6 +105,30 @@ export default function PersonPage() {
     );
     const crewMovieAndTvYearArray = crewMovieYearArray.concat(crewTvYearArray);
 
+    function HandleProfilePath() {
+      if (personValue.profile_path) {
+        return (
+          <img
+            className="pp-photo"
+            src={
+              process.env.REACT_APP_IMAGE_URL +
+              "w300" +
+              personValue.profile_path
+            }
+            alt=""
+          />
+        );
+      } else {
+        return (
+          <div className="pp-no-photo">
+            <div className="pp-no-photo-icon">
+              <PersonRoundedIcon />
+            </div>
+          </div>
+        );
+      }
+    }
+
     const HandleRedirectToMovie = (value) => {
       console.log(value);
 
@@ -147,15 +172,7 @@ export default function PersonPage() {
     return (
       <div className="pp-wrapper">
         <div className="pp-left">
-          <img
-            className="pp-photo"
-            src={
-              process.env.REACT_APP_IMAGE_URL +
-              "w300" +
-              personValue.profile_path
-            }
-            alt=""
-          />
+          <HandleProfilePath />
           <div className="pp-cols-title">personal info</div>
           <div className="pp-cols">
             <div className="pp-col">

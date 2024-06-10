@@ -64,3 +64,85 @@
 .searchItem-null-icon {
   transform: scale(2);
 }
+
+/* =================================================== */
+
+.searchItem-people-item {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.searchItem-people-title {
+  cursor: pointer;
+}
+
+.searchItem-people-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 65px;
+  overflow: hidden;
+  color: var(--accountSilver);
+  background-color: var(--darkerGrey);
+  border-radius: var(--imageBorderRadius);
+
+  cursor: pointer;
+}
+
+.searchItem-people-photo {
+  height: 100px;
+  width: 100px;
+}
+
+.searchItem-people-photo {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 65px;
+  color: var(--accountSilver);
+  background-color: var(--darkerGrey);
+  border-radius: var(--imageBorderRadius); */
+}
+
+.searchItem-people-no-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 65px;
+  color: var(--accountSilver);
+  background-color: var(--darkerGrey);
+  border-radius: var(--imageBorderRadius);
+
+  cursor: pointer;
+}
+
+.searchItem-people-icon {
+  transform: scale(1.3);
+}
+
+.searchItem-people-text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 5px;
+}
+
+.searchItem-people-sup-title-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.searchItem-people-sub-icon {
+  transform: scale(0.3);
+}
+
+.searchItem-people-role {
+  display: flex;
+  flex-direction: row;
+}

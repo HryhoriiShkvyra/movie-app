@@ -100,10 +100,10 @@ function App() {
           path: "/:requestType/:id",
           element: <CardPage />,
         },
-        {
-          path: "/people/:searchValue/:id",
-          element: <CardPage />,
-        },
+        // {
+        //   path: "/people/:searchValue/:id",
+        //   element: <PersonPage />,
+        // },
         {
           path: "/:searchValue/:id/cast",
           element: <CrewPage />,
