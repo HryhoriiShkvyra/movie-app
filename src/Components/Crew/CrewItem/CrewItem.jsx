@@ -2,7 +2,6 @@ import React from "react";
 import "./CrewItem.css";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import PersonPage from "../../Person/PersonPage/PersonPage";
 
 export default function CrewItem({ member }) {

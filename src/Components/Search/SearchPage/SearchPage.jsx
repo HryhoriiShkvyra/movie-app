@@ -2,7 +2,6 @@ import React from "react";
 import "./SearchPage.css";
 import SearchItem from "../SearchItem/SearchItem";
 import { useParams } from "react-router-dom";
-import ErrorIcon from "@mui/icons-material/Error";
 import Loading from "../../Loading/Loading";
 import SearchTab from "../SearchTab/SearchTab";
 export default function SearchPage() {
@@ -142,7 +141,7 @@ export default function SearchPage() {
       );
     } else if (stateTypeRequest === "keywords") {
       return (
-        <div className="search-page-result">
+        <div className="search-page-result-keywords">
           {keywordsArray.map((item) => (
             <SearchItem
               key={item.id}

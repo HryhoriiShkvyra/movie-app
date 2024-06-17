@@ -132,6 +132,28 @@ export default function SearchItem({ item, stateTypeRequest }) {
     navigate(`/person/${person.id}` + "-" + `${properName}`);
   };
 
+  const HandleRedirectToKeywords = (item) => {
+    console.log(item);
+    console.log(stateTypeRequest);
+
+    let id = item.id;
+    let name = item.name;
+
+    const cleanString = (name) => {
+      const cleanedString = name.replace(/[^a-zA-Z0-9]/g, "-");
+      const words = cleanedString.toLowerCase().match(/\b\w+\b/g);
+      return words.join("-");
+    };
+
+    const properName = cleanString(name);
+
+    console.log(`/keyword/${id}-${properName}`);
+    // console.log(`/keyword/${id}-${cleanString()}`);
+
+    // navigate(`/keyword/${id}-${name}`);
+    navigate(`/keyword/${id}/movie`);
+  };
+
   const MovieOrTvItem = (value) => {
     if (stateTypeRequest === "movie") {
       return HandleRedirectToMovie(value);
@@ -144,6 +166,7 @@ export default function SearchItem({ item, stateTypeRequest }) {
 
   const SearchItem = () => {
     React.useEffect(() => {
+      console.log(item);
       console.log(stateTypeRequest);
       // console.log(stateTypeRequest);
       // console.log(item.name);
@@ -341,7 +364,14 @@ export default function SearchItem({ item, stateTypeRequest }) {
         </div>
       );
     } else if (stateTypeRequest === "keywords") {
-      return <div className="searchItem-title">{item.name}</div>;
+      return (
+        <div
+          onClick={(e) => HandleRedirectToKeywords(item)}
+          className="searchItem-keyword"
+        >
+          <h5>{item.name}</h5>
+        </div>
+      );
     } else if (stateTypeRequest === "company") {
       return (
         <div className="searchItem-company">

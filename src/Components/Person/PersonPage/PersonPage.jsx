@@ -121,7 +121,7 @@ export default function PersonPage() {
       } else {
         return (
           <div className="pp-no-photo">
-            <div className="pp-no-photo-icon">
+            <div className="pp-no-photo-icons">
               <PersonRoundedIcon />
             </div>
           </div>

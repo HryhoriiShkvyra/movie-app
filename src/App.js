@@ -19,6 +19,7 @@ import TVPopular from "./Components/Pages/TV/TVPopular/TVPopular";
 import TVAiringToday from "./Components/Pages/TV/TVAiringToday/TVAiringToday";
 import TVOnTV from "./Components/Pages/TV/TVOnTV/TVOnTV";
 import TVTopRated from "./Components/Pages/TV/TVTopRated/TVTopRated";
+import KeywordPage from "./Components/KeywordPage/KeywordPage";
 
 function App() {
   const Layout = () => {
@@ -111,6 +112,10 @@ function App() {
         {
           path: "/person/:id",
           element: <PersonPage />,
+        },
+        {
+          path: "/keyword/:id/:requestType",
+          element: <KeywordPage />,
         },
       ],
     },

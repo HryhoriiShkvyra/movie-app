@@ -188,71 +188,71 @@ export default function CardPageCard() {
               <CardTypeDependsOnRequest />
 
               {/* <div className="card-page-card-actions">
-                <div className="card-page-card-chart">
-                  <div className="card-page-card-chart-wrapper">
-                    <div className="card-page-card-chart-line">
-                      <span className="card-page-card-chart-score">100</span>
-                      <span className="card-page-card-chart-symbol">%</span>
+                  <div className="card-page-card-chart">
+                    <div className="card-page-card-chart-wrapper">
+                      <div className="card-page-card-chart-line">
+                        <span className="card-page-card-chart-score">100</span>
+                        <span className="card-page-card-chart-symbol">%</span>
+                      </div>
+                    </div>
+                    <div className="card-page-card-chart-text">
+                      <span>user</span>
+                      <span>score</span>
                     </div>
                   </div>
-                  <div className="card-page-card-chart-text">
-                    <span>user</span>
-                    <span>score</span>
+                  <div className="card-page-card-add-to-value">
+                    <FormatListBulletedRoundedIcon />
+                  </div>
+                  <div className="card-page-card-add-to-value">
+                    <FavoriteRoundedIcon />
+                  </div>
+                  <div className="card-page-card-add-to-value">
+                    <BookmarkRoundedIcon />
+                  </div>
+                  <div className="card-page-card-add-to-value">
+                    <StarRoundedIcon />
+                  </div>
+                  <div className="card-page-card-trailer">
+                    <PlayArrowRoundedIcon />
+                    play trailer
                   </div>
                 </div>
-                <div className="card-page-card-add-to-value">
-                  <FormatListBulletedRoundedIcon />
-                </div>
-                <div className="card-page-card-add-to-value">
-                  <FavoriteRoundedIcon />
-                </div>
-                <div className="card-page-card-add-to-value">
-                  <BookmarkRoundedIcon />
-                </div>
-                <div className="card-page-card-add-to-value">
-                  <StarRoundedIcon />
-                </div>
-                <div className="card-page-card-trailer">
-                  <PlayArrowRoundedIcon />
-                  play trailer
-                </div>
-              </div>
-              <div className="card-page-card-header-info">
-                <div className="card-page-card-tagline">
-                  {cardValue.tagline}
-                </div>
-                <div className="card-page-card-overview-wrapper">
-                  <div className="card-page-card-overview-title">Overview</div>
-                  <div className="card-page-card-overview-text">
-                    {cardValue.overview}
+                <div className="card-page-card-header-info">
+                  <div className="card-page-card-tagline">
+                    {cardValue.tagline}
+                  </div>
+                  <div className="card-page-card-overview-wrapper">
+                    <div className="card-page-card-overview-title">Overview</div>
+                    <div className="card-page-card-overview-text">
+                      {cardValue.overview}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {cardValue.created_by === undefined ? (
-                <div className="card-page-card-no-image">
-                  <div className="card-page-card-profile">
-                    David Fincher
-                    <span className="card-page-card-character">Director</span>
-                  </div>
-                  <div className="card-page-card-profile">
-                    Chuck Palahniuk
-                    <span className="card-page-card-character">Novel</span>
-                  </div>
-                  <div className="card-page-card-profile">
-                    Jim Uhls
-                    <span className="card-page-card-character">Screenplay</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="card-page-card-no-image">
-                  {cardValue.created_by.map((item) => (
-                    <div className="card-page-card-profile" key={item.id}>
-                      {item.name}
+                {cardValue.created_by === undefined ? (
+                  <div className="card-page-card-no-image">
+                    <div className="card-page-card-profile">
+                      David Fincher
                       <span className="card-page-card-character">Director</span>
                     </div>
-                  ))}
-                </div>
-              )} */}
+                    <div className="card-page-card-profile">
+                      Chuck Palahniuk
+                      <span className="card-page-card-character">Novel</span>
+                    </div>
+                    <div className="card-page-card-profile">
+                      Jim Uhls
+                      <span className="card-page-card-character">Screenplay</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="card-page-card-no-image">
+                    {cardValue.created_by.map((item) => (
+                      <div className="card-page-card-profile" key={item.id}>
+                        {item.name}
+                        <span className="card-page-card-character">Director</span>
+                      </div>
+                    ))}
+                  </div>
+                )} */}
             </div>
           </div>
         )}

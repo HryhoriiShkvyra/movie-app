@@ -24,11 +24,11 @@ const Header = () => {
     }
   }
 
-  const redirectToMoviePage = (e) => {
-    // e.preventDefault();
-    console.log(e);
-    navigate(`{e}`);
-  };
+  // const redirectToMoviePage = (e) => {
+  //   // e.preventDefault();
+  //   console.log(e);
+  //   navigate(`{e}`);
+  // };
 
   const btns = ["Movie", "TV Shows", "People", "More"];
   const x = [
@@ -105,8 +105,6 @@ const Header = () => {
       ],
     },
   ];
-
-  // console.log(x);
 
   return (
     <>

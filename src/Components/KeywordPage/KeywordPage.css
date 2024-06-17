@@ -1,0 +1,45 @@
+.top-bar {
+  width: 100%;
+  height: 72px;
+
+  display: flex;
+
+  background-image: url("../../Images/light_blue.svg");
+  background-position: 50% 33%;
+  background-repeat: no-repeat;
+  background-color: var(--bDarkBlue);
+}
+
+.top-bar-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 150px;
+}
+
+.top-bar-type {
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+}
+
+.top-bar-count-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-size: 25px;
+
+  color: grey;
+}
+
+/* ======================== keywordPage ====================== */
+
+.keyword-page-search-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 50px;
+}
